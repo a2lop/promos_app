@@ -10,7 +10,10 @@ export default {
         viewTitle: 'Detalle',
         otherOffersOf: 'Otras promociones en {{establishmentName}}'
     },
-    establishment: { viewTitle: 'Establecimiento' },
+    establishment: { viewTitle: 'Establecimiento', offers: 'Promociones' },
+
+    searchText: { viewTitle: 'Busqueda' },
+    searchCategories: { viewTitle: 'Categorias' },
 
     sidebar: {
         sidebarTitle: 'MENU',

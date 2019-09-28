@@ -5,10 +5,20 @@ import { wsGetOffers } from '../services/data'
 export function fnGetOffers() {
     return dispatch => {
         wsGetOffers().then(d => {
-            console.log(d)
             dispatch({
                 type: Actions.GET_OFFERS,
                 payload: { offers: d }
+            })
+        })
+    }
+}
+
+export function fnGetCategories() {
+    return dispatch => {
+        wsGetOffers().then(d => {
+            dispatch({
+                type: Actions.GET_CATEGORIES,
+                payload: { categories: d }
             })
         })
     }

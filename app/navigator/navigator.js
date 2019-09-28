@@ -30,6 +30,9 @@ import Profile from '../views/Profile'
 import OfferDetail from '../views/OfferDetail'
 import Establishment from '../views/Establishment'
 
+import SearchText from '../views/SearchText'
+import SearchCategories from '../views/SearchCategories'
+
 import { colors } from '../utils/constants'
 import DefaultFooterTabBar from '../components/DefaultFooterTabBar'
 import HeaderGeneric from '../components/HeaderGeneric'
@@ -103,6 +106,27 @@ const OfferStack = createMaterialTopTabNavigator(
     }
 )
 
+const SearchStack = createMaterialTopTabNavigator(
+    {
+        SearchText: {
+            screen: SearchText,
+            navigationOptions: {
+                title: 'searchText.viewTitle'
+            }
+        },
+        SearchCategories: {
+            screen: SearchCategories,
+            navigationOptions: {
+                title: 'searchCategories.viewTitle'
+            }
+        }
+    },
+    {
+        initialRouteName: 'SearchCategories',
+        tabBarComponent: TabBarDefault
+    }
+)
+
 const SessionStack = createStackNavigator(
     {
         Main: {
@@ -110,6 +134,18 @@ const SessionStack = createStackNavigator(
         },
         Offer: {
             screen: OfferStack,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'offerDetail.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
+        },
+        Search: {
+            screen: SearchStack,
             navigationOptions: ({ navigation }) => ({
                 header: (
                     <HeaderGeneric
@@ -128,7 +164,7 @@ const SessionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Offer'
+        initialRouteName: 'Search'
     }
 )
 

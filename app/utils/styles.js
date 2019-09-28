@@ -14,6 +14,9 @@ const globalStyles = StyleSheet.create({
     mb5: { marginBottom: 5 },
     mb10: { marginBottom: 10 },
     mb15: { marginBottom: 15 },
+    mr5: { marginRight: 5 },
+    mr10: { marginRight: 10 },
+    mr15: { marginRight: 15 },
     //HEADER
     barSafeArea: { backgroundColor: colors.RED },
     headerContainer: {

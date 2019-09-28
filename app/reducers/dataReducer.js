@@ -1,7 +1,7 @@
 import { constants } from '../utils/constants'
 import { concat } from 'lodash'
 
-import { GET_OFFERS } from '../actions/actionTypes'
+import { GET_OFFERS, GET_CATEGORIES } from '../actions/actionTypes'
 
 let initialState = {
     homeOffers: [
@@ -191,7 +191,8 @@ let initialState = {
             },
             memberships: ['wY5maOuicbGXgQh8zkNz']
         }
-    ]
+    ],
+    categories: []
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -201,7 +202,11 @@ const dataReducer = (state = initialState, action) => {
                 homeOffers: action.payload.offers
             })
             return state
-
+        case GET_CATEGORIES:
+            state = Object.assign({}, state, {
+                categories: action.payload.categories
+            })
+            return state
         default:
             return state
     }
