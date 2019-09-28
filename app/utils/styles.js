@@ -3,6 +3,7 @@ import { colors } from './constants'
 
 const globalStyles = StyleSheet.create({
     //COMMON
+    jcCenter: { justifyContent: 'center' },
     fdRow: {
         flexDirection: 'row'
     },
@@ -10,6 +11,9 @@ const globalStyles = StyleSheet.create({
         flex: 1
     },
     dfSafeArea: { flex: 1 },
+    mb5: { marginBottom: 5 },
+    mb10: { marginBottom: 10 },
+    mb15: { marginBottom: 15 },
     //HEADER
     barSafeArea: { backgroundColor: colors.RED },
     headerContainer: {
@@ -27,7 +31,15 @@ const globalStyles = StyleSheet.create({
         height: 40,
         resizeMode: 'contain'
     },
-
+    headerTextContainer: { flex: 1, alignItems: 'center' },
+    headerText: {
+        color: colors.WHITE,
+        fontSize: 17,
+        fontFamily: fonts.LatoBold
+    },
+    headerFakeIcon: {
+        width: 40
+    },
     //LIST ITEMS
     liContentContainer: {
         paddingHorizontal: 15,
@@ -66,6 +78,61 @@ const globalStyles = StyleSheet.create({
         fontStyle: 'italic'
     },
     liDescription: {
+        fontSize: 15
+    },
+    //VIEW
+    mainImageContainer: {
+        // alignItems: 'center',
+        alignContent: 'flex-start',
+        backgroundColor: 'red'
+    },
+    mainImage: {
+        width: 150,
+        height: 100,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+    dfTitle: {
+        fontSize: 22,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    dfSectionTitle: {
+        fontSize: 20
+    },
+
+    dfSubtitle: { fontSize: 18, textAlign: 'center' },
+    dfLongText: {
+        fontSize: 16
+    },
+    dfPageContainer: {
+        backgroundColor: colors.SILVER_LIGHT
+        // paddingHorizontal: 15,
+        // paddingVertical: 10
+    },
+    dfMainContainer: {
+        marginHorizontal: 15,
+        backgroundColor: colors.WHITE,
+        borderColor: colors.SILVER,
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        marginBottom: 15
+    },
+    dfGenericContainer: {
+        borderColor: colors.SILVER,
+        backgroundColor: colors.WHITE,
+        borderWidth: 1,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        marginBottom: 15
+    },
+    dfSimpleTitle: {
+        fontSize: 17
+    },
+    dfSimpleSubtitle: {
         fontSize: 15
     }
 })

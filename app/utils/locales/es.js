@@ -3,9 +3,14 @@ export default {
         tabs: {
             footerHome: 'Inicio',
             footerDiscover: 'Descubrir',
-            footerProfile: 'Perfil',
-        },
+            footerProfile: 'Perfil'
+        }
     },
+    offerDetail: {
+        viewTitle: 'Detalle',
+        otherOffersOf: 'Otras promociones en {{establishmentName}}'
+    },
+    establishment: { viewTitle: 'Establecimiento' },
 
     sidebar: {
         sidebarTitle: 'MENU',
@@ -30,7 +35,7 @@ export default {
         txtShareApp:
             'Baja la aplicación de Babelio, para descubrir mis libros, organizar tu biblioteca y compartir con otros lectores tus recomendaciones. Para android: https://play.google.com/store/apps/details?id=com.babelio.babelio Para iphone: https://itunes.apple.com/es/app/babelio/id1449315145',
         txtShareAppTitle: 'Baja la aplicación de Babelio',
-        recommendedBooks: 'Recomendaciones',
+        recommendedBooks: 'Recomendaciones'
     },
-    home: {},
+    home: {}
 }

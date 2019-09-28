@@ -27,8 +27,13 @@ import Home from '../views/Home'
 import Discover from '../views/Discover'
 import Profile from '../views/Profile'
 
+import OfferDetail from '../views/OfferDetail'
+import Establishment from '../views/Establishment'
+
 import { colors } from '../utils/constants'
 import DefaultFooterTabBar from '../components/DefaultFooterTabBar'
+import HeaderGeneric from '../components/HeaderGeneric'
+import TabBarDefault from '../components/TabBarDefault'
 // import Txt from '../components/Txt'
 // import TabBarDefault from '../components/TabBarDefault'
 
@@ -77,10 +82,43 @@ const MainStack = createMaterialTopTabNavigator(
     }
 )
 
+const OfferStack = createMaterialTopTabNavigator(
+    {
+        OfferDetail: {
+            screen: OfferDetail,
+            navigationOptions: {
+                title: 'offerDetail.viewTitle'
+            }
+        },
+        Establishment: {
+            screen: Establishment,
+            navigationOptions: {
+                title: 'establishment.viewTitle'
+            }
+        }
+    },
+    {
+        initialRouteName: 'OfferDetail',
+        tabBarComponent: TabBarDefault
+    }
+)
+
 const SessionStack = createStackNavigator(
     {
         Main: {
             screen: MainStack
+        },
+        Offer: {
+            screen: OfferStack,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'offerDetail.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
         },
         Wizard: {
             screen: Wizard,
@@ -90,7 +128,7 @@ const SessionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Main'
+        initialRouteName: 'Offer'
     }
 )
 
