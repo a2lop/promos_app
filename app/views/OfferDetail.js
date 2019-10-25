@@ -22,11 +22,12 @@ class OfferDetail extends React.Component {
                 {/* <View style={gs.mainImageContainer}> */}
                 <View style={gs.dfMainContainer}>
                     <Image
-                        source={require('../assets/c4Logo.png')}
+                        source={{ uri: this.props.offer.logoBanner }}
+                        resizeMode={'stretch'}
                         style={[gs.mainImage, gs.mb15]}
                     />
                     <Txt style={[gs.dfTitle, gs.mb5]}>
-                        Lunes de 2x1 para chicas
+                        {this.props.offer.name}
                     </Txt>
                     <TouchableOpacity style={gs.mb15}>
                         <Txt style={gs.dfSubtitle}>Campo 4</Txt>
@@ -34,15 +35,7 @@ class OfferDetail extends React.Component {
                 </View>
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfLongText, gs.mb10]}>
-                        Contrary to popular belief, Lorem Ipsum is not simply
-                        random text. It has roots in a piece of classical Latin
-                        literature from 45 BC, making it over 2000 years old.
-                        Richard McClintock, a Latin professor at Hampden-Sydney
-                        College in Virginia, looked up one of the more obscure
-                        Latin words, consectetur, from a Lorem Ipsum passage,
-                        and going through the cites of the word in classical
-                        literature, discovered the undoubtable source. Lorem
-                        Ipsum
+                        {this.props.offer.description}
                     </Txt>
 
                     <View style={[gs.fdRow]}>
@@ -93,7 +86,7 @@ let st = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-    return {}
+    return { offer: state.dataReducer.offer }
 }
 
 const mapDispatchToProps = {}

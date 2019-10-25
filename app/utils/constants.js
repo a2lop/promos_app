@@ -1,5 +1,5 @@
 export const colors = {
-    RED: '#FF6600',
+    RED: '#C4362A',
     WHITE: '#fff',
     // BLUE: '#0465b2',
     // BLUE_TRANSPARENT: 'rgba(50,56,73,0.9)',
@@ -9,7 +9,10 @@ export const colors = {
     SILVER: '#CCC',
     SILVER_LIGHT: '#ECECEC',
     DARK: '#454545',
-    BLACK: '#000'
+    BLACK: '#000',
+    YELLOW: '#F5CF94',
+    PINK: '#E9A6A0',
+    TRANSPARENT: 'rgba(0,0,0,0)'
 }
 
 export const constants = {

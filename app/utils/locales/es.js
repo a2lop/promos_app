@@ -6,6 +6,17 @@ export default {
             footerProfile: 'Perfil'
         }
     },
+    components: {
+        daySelector: {
+            1: 'Lu',
+            2: 'Ma',
+            3: 'Mi',
+            4: 'Ju',
+            5: 'Vi',
+            6: 'Sa',
+            0: 'Do'
+        }
+    },
     offerDetail: {
         viewTitle: 'Detalle',
         otherOffersOf: 'Otras promociones en {{establishmentName}}'
@@ -14,31 +25,19 @@ export default {
 
     searchText: { viewTitle: 'Busqueda' },
     searchCategories: { viewTitle: 'Categorias' },
-
+    profile: {
+        phEmail: 'Correo electrónico',
+        phPassword: 'Contraseña',
+        login: 'Iniciar sesión',
+        noAccount: '¿No tienes una cuenta? ',
+        register: 'Registrate',
+        or: ' O ',
+        loginWith: 'Inicia con tus redes sociales:'
+    },
     sidebar: {
-        sidebarTitle: 'MENU',
         home: 'Inicio',
-        myBooks: 'Mis libros',
-        wishlist: 'Recordatorio',
-        profile: 'Perfil',
-        friends: 'Amigos',
-        messages: 'Mensajes',
-        discover: 'Descubrir',
-        scanner: 'Escaner',
-        contactUs: 'Contáctanos',
-        contactUsLink: 'https://babelio.freshdesk.com/',
-        recommendApp: 'Recomienda la aplicación',
-        changeLanguage: 'Babelio en français ?',
-        logout: 'CERRAR SESIÓN',
-        shareApp:
-            'Baja la aplicación de Babelio, para descubrir mis libros, organizar tu biblioteca y compartir con otros lectores tus recomendaciones. Para android: https://play.google.com/store/apps/details?id=com.babelio.babelio Para iphone: https://itunes.apple.com/es/app/babelio/id1449315145',
-        shareAppTitle: "Rejoins-moi sur l'application Babelio",
-        openWebsite: 'Ir al sitio web',
-        linkPrix: 'Prix Babelio 2019',
-        txtShareApp:
-            'Baja la aplicación de Babelio, para descubrir mis libros, organizar tu biblioteca y compartir con otros lectores tus recomendaciones. Para android: https://play.google.com/store/apps/details?id=com.babelio.babelio Para iphone: https://itunes.apple.com/es/app/babelio/id1449315145',
-        txtShareAppTitle: 'Baja la aplicación de Babelio',
-        recommendedBooks: 'Recomendaciones'
+        establishments: 'Establecimientos',
+        login: 'Iniciar sesión'
     },
     home: {}
 }

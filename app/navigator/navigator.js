@@ -14,7 +14,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 
-import I18n from '../utils/i18n'
+// import I18n from '../utils/i18n'
 
 import HeaderLogo from '../components/HeaderLogo'
 import dataReducer from '../reducers/dataReducer'
@@ -77,10 +77,6 @@ const MainStack = createMaterialTopTabNavigator(
             tabStyle: {
                 height: 40
             }
-        },
-        navigationOptions: {
-            swipeEnabled: true,
-            header: <HeaderLogo />
         }
     }
 )
@@ -130,7 +126,11 @@ const SearchStack = createMaterialTopTabNavigator(
 const SessionStack = createStackNavigator(
     {
         Main: {
-            screen: MainStack
+            screen: MainStack,
+            navigationOptions: ({ navigation }) => ({
+                swipeEnabled: true,
+                header: <HeaderLogo navigation={navigation} />
+            })
         },
         Offer: {
             screen: OfferStack,

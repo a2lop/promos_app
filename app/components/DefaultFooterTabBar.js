@@ -44,7 +44,7 @@ const DefaultFooterTabBar = props => {
                                     size={20}
                                     color={
                                         navigationState.index == index
-                                            ? colors.DARK
+                                            ? colors.YELLOW
                                             : colors.WHITE
                                     }
                                     style={gs.iconFooter}
@@ -53,7 +53,7 @@ const DefaultFooterTabBar = props => {
                                     style={{
                                         color:
                                             navigationState.index == index
-                                                ? colors.DARK
+                                                ? colors.YELLOW
                                                 : colors.WHITE,
                                         fontSize: 14
                                     }}>

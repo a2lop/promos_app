@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { colors } from './constants'
 
 const globalStyles = StyleSheet.create({
@@ -38,7 +38,7 @@ const globalStyles = StyleSheet.create({
     headerText: {
         color: colors.WHITE,
         fontSize: 17,
-        fontFamily: fonts.LatoBold
+        fontWeight: 'bold'
     },
     headerFakeIcon: {
         width: 40
@@ -90,9 +90,8 @@ const globalStyles = StyleSheet.create({
         backgroundColor: 'red'
     },
     mainImage: {
-        width: 150,
-        height: 100,
-        resizeMode: 'contain',
+        aspectRatio: 2,
+        width: '100%',
         alignSelf: 'center'
     },
     dfTitle: {

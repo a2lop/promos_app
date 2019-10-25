@@ -1,5 +1,5 @@
 import * as Actions from './actionTypes'
-import { wsGetOffers } from '../services/data'
+import { wsGetOffers, wsGetOffer, wsGetCategories } from '../services/data'
 
 //#region DATA
 export function fnGetOffers() {
@@ -13,9 +13,30 @@ export function fnGetOffers() {
     }
 }
 
+export function fnSetOffer(offer) {
+    return dispatch => {
+        dispatch({
+            type: Actions.SET_OFFER,
+            payload: { offer }
+        })
+        dispatch(fnGetOffer(offer.id))
+    }
+}
+
+export function fnGetOffer(id) {
+    return dispatch => {
+        wsGetOffer(id).then(d => {
+            dispatch({
+                type: Actions.SET_OFFER,
+                payload: { offer: d[0] }
+            })
+        })
+    }
+}
+
 export function fnGetCategories() {
     return dispatch => {
-        wsGetOffers().then(d => {
+        wsGetCategories().then(d => {
             dispatch({
                 type: Actions.GET_CATEGORIES,
                 payload: { categories: d }

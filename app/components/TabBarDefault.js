@@ -27,7 +27,7 @@ const TabBarDefault = props => {
                             borderBottomWidth: 5,
                             borderBottomColor:
                                 navigationState.index == index
-                                    ? colors.GRAY
+                                    ? colors.YELLOW
                                     : colors.RED,
                             alignItems: 'center',
                             flex: 1

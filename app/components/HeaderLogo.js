@@ -27,7 +27,7 @@ class HeaderMain extends React.Component {
                     <TouchableOpacity
                         // style={gs.headerIconContainer}
                         onPress={() => {
-                            this.props.navigation.navigate('SearchBooks')
+                            this.props.navigation.navigate('SearchText')
                         }}>
                         <Icon name={'magnify'} size={25} color={colors.WHITE} />
                     </TouchableOpacity>

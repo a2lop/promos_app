@@ -1,5 +1,6 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import CategorySimple from '../components/CategorySimple'
 import LoadingItem from '../components/Loading'
 
 import { connect } from 'react-redux'
@@ -18,19 +19,21 @@ class SearchCategories extends React.Component {
 
     render() {
         return (
-            <ScrollView style={gs.dfPageContainer}>
+            <ScrollView
+                style={[
+                    gs.dfPageContainer,
+                    { paddingVertical: 15, paddingHorizontal: 15 }
+                ]}>
                 <FlatList
                     data={this.props.categories}
+                    keyExtractor={(d, i) => i.toString()}
+                    numColumns={2}
+                    style={{ flexDirection: 'column' }}
                     renderItem={d => {
                         return (
-                            <Txt
-                                key={d.index}
-                                style={{
-                                    color: colors.GRAY,
-                                    backgroundColor: 'red'
-                                }}>
-                                {d.item.name}1234
-                            </Txt>
+                            <View style={gs.f1}>
+                                <CategorySimple item={d.item}></CategorySimple>
+                            </View>
                         )
                     }}></FlatList>
             </ScrollView>

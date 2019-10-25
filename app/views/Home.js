@@ -8,6 +8,8 @@ import { fnGetOffers } from '../actions/actions'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
 import { FlatList } from 'react-native-gesture-handler'
+import DaySelector from '../components/DaySelector'
+import { colors } from '../utils/constants'
 
 class Home extends React.Component {
     componentDidMount() {
@@ -15,12 +17,13 @@ class Home extends React.Component {
     }
 
     loadOffers() {
-        // this.props.fnGetOffers()
+        this.props.fnGetOffers()
     }
 
     render() {
         return (
-            <View>
+            <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
+                <DaySelector></DaySelector>
                 <FlatList
                     data={this.props.offers}
                     keyExtractor={(d, i) => i.toString()}
