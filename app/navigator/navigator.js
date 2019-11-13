@@ -29,9 +29,11 @@ import Profile from '../views/Profile'
 
 import OfferDetail from '../views/OfferDetail'
 import Establishment from '../views/Establishment'
+import Establishments from '../views/Establishments'
 
 import SearchText from '../views/SearchText'
 import SearchCategories from '../views/SearchCategories'
+import CategoryOffers from '../views/CategoryOffers'
 
 import { colors } from '../utils/constants'
 import DefaultFooterTabBar from '../components/DefaultFooterTabBar'
@@ -161,10 +163,46 @@ const SessionStack = createStackNavigator(
             navigationOptions: {
                 header: null
             }
+        },
+        Establishments: {
+            screen: Establishments,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'establishments.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
+        },
+        EstablishmentDetail: {
+            screen: Establishment,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'establishment.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
+        },
+        CategoryOffers: {
+            screen: CategoryOffers,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'establishment.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
         }
     },
     {
-        initialRouteName: 'Search'
+        initialRouteName: 'Main'
     }
 )
 

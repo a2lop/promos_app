@@ -7,12 +7,12 @@ import { globalStyles as gs } from '../utils/styles'
 import I18n from '../utils/i18n'
 
 import { connect } from 'react-redux'
-import { fnGetOffer, fnSetOffer } from '../actions/actions'
+import { fnSetEstablishment } from '../actions/actions'
 
-class OfferListItem extends React.Component {
-    openOffer() {
-        this.props.fnSetOffer(this.props.item)
-        this.props.navigation.navigate('OfferDetail')
+class EsteblishmentListItem extends React.Component {
+    openEstablishment() {
+        this.props.fnSetEstablishment(this.props.item)
+        this.props.navigation.navigate('EstablishmentDetail')
     }
     render() {
         return (
@@ -20,19 +20,16 @@ class OfferListItem extends React.Component {
                 <TouchableOpacity
                     style={gs.liContainer}
                     onPress={() => {
-                        this.openOffer()
+                        this.openEstablishment()
                     }}>
                     <View style={gs.liSquareImageContainer}>
                         <Image
-                            source={{ uri: this.props.item.establishmentLogo }}
+                            source={{ uri: this.props.item.logo }}
                             style={gs.liSquareImage}
                         />
                     </View>
                     <View style={gs.f1}>
                         <Txt style={gs.liTitle}>{this.props.item.name}</Txt>
-                        <Txt style={gs.liSubitle}>
-                            {this.props.item.establishmentName}
-                        </Txt>
                         <Txt style={gs.liDescription} numberOfLines={3}>
                             {this.props.item.description}
                         </Txt>
@@ -47,6 +44,9 @@ function mapStateToProps(state) {
     return {}
 }
 
-const mapDispatchToProps = { fnGetOffer, fnSetOffer }
+const mapDispatchToProps = { fnSetEstablishment }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OfferListItem)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(EsteblishmentListItem)

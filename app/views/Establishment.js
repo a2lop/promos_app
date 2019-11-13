@@ -13,57 +13,71 @@ import { colors } from '../utils/constants'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import OfferSimple from '../components/OfferSimple'
 
+import { fnGetEstablishmentOffers } from '../actions/actions'
+
 class Establishment extends React.Component {
-    componentDidMount() {}
+    componentDidMount() {
+        this.props.fnGetEstablishmentOffers(this.props.establishment.id)
+    }
 
     render() {
         return (
             <ScrollView style={gs.dfPageContainer}>
                 {/* <View style={gs.mainImageContainer}> */}
+                <Image
+                    source={{ uri: this.props.establishment.bannerImage }}
+                    style={[gs.mainImage]}
+                />
                 <View style={gs.dfMainContainer}>
-                    <Image
-                        source={require('../assets/c4Logo.png')}
-                        style={[gs.mainImage, gs.mb15]}
-                    />
-                    <Txt style={[gs.dfTitle, gs.mb5]}>Campo 4</Txt>
+                    <Txt style={[gs.dfTitle, gs.mb5]}>
+                        {this.props.establishment.name}
+                    </Txt>
                     {/* <TouchableOpacity style={gs.mb15}>
                         <Txt style={gs.dfSubtitle}></Txt>
                     </TouchableOpacity> */}
                 </View>
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfLongText, gs.mb10]}>
-                        Contrary to popular belief, Lorem Ipsum is not simply
-                        random text. It has roots in a piece of classical Latin
-                        literature from 45 BC, making it over 2000 years old.
-                        Richard McClintock, a Latin professor at Hampden-Sydney
-                        College in Virginia,
+                        {this.props.establishment.description}
                     </Txt>
 
                     {/* <View style={st.labelContainer}> */}
-                    <TouchableOpacity style={st.labelContainer}>
-                        <View style={st.labelIcon}>
-                            <Icon size={30} name={'facebook-box'} />
-                        </View>
-                        <Txt style={st.labelText}>campo4quito</Txt>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={st.labelContainer}>
-                        <View style={st.labelIcon}>
-                            <Icon size={30} name={'instagram'} />
-                        </View>
-                        <Txt style={st.labelText}>campo4quito</Txt>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={st.labelContainer}>
-                        <View style={st.labelIcon}>
-                            <Icon size={30} name={'phone-in-talk'} />
-                        </View>
-                        <Txt style={st.labelText}>02224355533</Txt>
-                    </TouchableOpacity>
+                    {this.props.establishment.facebook && (
+                        <TouchableOpacity style={st.labelContainer}>
+                            <View style={st.labelIcon}>
+                                <Icon size={30} name={'facebook-box'} />
+                            </View>
+                            <Txt style={st.labelText}>
+                                {this.props.establishment.facebook}
+                            </Txt>
+                        </TouchableOpacity>
+                    )}
+                    {this.props.establishment.instagram && (
+                        <TouchableOpacity style={st.labelContainer}>
+                            <View style={st.labelIcon}>
+                                <Icon size={30} name={'instagram'} />
+                            </View>
+                            <Txt style={st.labelText}>
+                                {this.props.establishment.instagram}
+                            </Txt>
+                        </TouchableOpacity>
+                    )}
+                    {this.props.establishment.phone && (
+                        <TouchableOpacity style={st.labelContainer}>
+                            <View style={st.labelIcon}>
+                                <Icon size={30} name={'phone-in-talk'} />
+                            </View>
+                            <Txt style={st.labelText}>
+                                {this.props.establishment.phone}
+                            </Txt>
+                        </TouchableOpacity>
+                    )}
                     <TouchableOpacity style={st.labelContainer}>
                         <View style={st.labelIcon}>
                             <Icon size={30} name={'map-marker'} />
                         </View>
                         <Txt style={st.labelText}>
-                            Baron de Carondelet OE-338 y veracruz
+                            {this.props.establishment.address}
                         </Txt>
                     </TouchableOpacity>
                 </View>
@@ -74,11 +88,15 @@ class Establishment extends React.Component {
                         })}
                     </Txt>
                     <FlatList
-                        data={[{ test: 1 }, { test: 2 }, { test: 3 }]}
+                        data={this.props.establishmentOffers}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={d => {
-                            return <OfferSimple key={d.index}></OfferSimple>
+                            return (
+                                <OfferSimple
+                                    key={d.index}
+                                    item={d.item}></OfferSimple>
+                            )
                         }}></FlatList>
                 </View>
             </ScrollView>
@@ -108,12 +126,12 @@ let st = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        establishment: state.dataReducer.establishment,
+        establishmentOffers: state.dataReducer.establishmentOffers
+    }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { fnGetEstablishmentOffers }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Establishment)
+export default connect(mapStateToProps, mapDispatchToProps)(Establishment)

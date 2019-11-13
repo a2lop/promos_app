@@ -22,6 +22,7 @@ export default {
         otherOffersOf: 'Otras promociones en {{establishmentName}}'
     },
     establishment: { viewTitle: 'Establecimiento', offers: 'Promociones' },
+    establishments: { viewTitle: 'Establecimientos' },
 
     searchText: { viewTitle: 'Busqueda' },
     searchCategories: { viewTitle: 'Categorias' },
@@ -37,6 +38,8 @@ export default {
     sidebar: {
         home: 'Inicio',
         establishments: 'Establecimientos',
+        categories: 'Categorías',
+        about: 'Acerca de',
         login: 'Iniciar sesión'
     },
     home: {}

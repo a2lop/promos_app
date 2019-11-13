@@ -1,5 +1,5 @@
 export const colors = {
-    RED: '#C4362A',
+    RED: '#EA0000',
     WHITE: '#fff',
     // BLUE: '#0465b2',
     // BLUE_TRANSPARENT: 'rgba(50,56,73,0.9)',
@@ -16,5 +16,6 @@ export const colors = {
 }
 
 export const constants = {
-    wsUrl: 'https://promos-233704.firebaseapp.com/api/v1/'
+    // wsUrl: 'https://us-central1-promos-233704.cloudfunctions.net/api/'
+    wsUrl: 'http://localhost:5000/promos-233704/us-central1/api/'
 }

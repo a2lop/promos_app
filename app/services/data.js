@@ -7,10 +7,26 @@ export function wsGetOffers() {
 
 export function wsGetOffer(id) {
     // const data = { action: 'popular_books_week' }
-    return wsCall('offer/' + id)
+    return wsCall('offers/' + id)
 }
 
 export function wsGetCategories() {
     // const data = { action: 'popular_books_week' }
     return wsCall('categories')
+}
+
+export function wsGetEstablishments() {
+    return wsCall('establishments')
+}
+
+export function wsGetEstablishmentDetail(id) {
+    return wsCall('establishments/' + id)
+}
+
+export function wsGetEstablishmentOffers(id) {
+    return wsCall('/offers/establishmentOffers/' + id)
+}
+
+export function wsGetCategoryOffers(id) {
+    return wsCall('/offers/categoryOffers/' + id)
 }

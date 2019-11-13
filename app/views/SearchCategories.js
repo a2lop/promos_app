@@ -32,7 +32,11 @@ class SearchCategories extends React.Component {
                     renderItem={d => {
                         return (
                             <View style={gs.f1}>
-                                <CategorySimple item={d.item}></CategorySimple>
+                                <CategorySimple
+                                    item={d.item}
+                                    navigation={
+                                        this.props.navigation
+                                    }></CategorySimple>
                             </View>
                         )
                     }}></FlatList>
@@ -42,7 +46,7 @@ class SearchCategories extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { categories: state.dataReducer.categories }
+    return { categories: state.dataReducer.categoriesParents }
 }
 
 const mapDispatchToProps = { fnGetCategories }

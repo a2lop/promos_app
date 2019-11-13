@@ -114,6 +114,7 @@ const globalStyles = StyleSheet.create({
     },
     dfMainContainer: {
         marginHorizontal: 15,
+        paddingVertical: 10,
         backgroundColor: colors.WHITE,
         borderColor: colors.SILVER,
         borderBottomWidth: 1,

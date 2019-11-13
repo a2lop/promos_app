@@ -1,6 +1,7 @@
 import React from 'react'
-import { ScrollView, View, Image, StyleSheet } from 'react-native'
+import { ScrollView, View, Image, StyleSheet, FlatList } from 'react-native'
 import LoadingItem from '../components/Loading'
+import EstablishmentListItem from '../components/EstablishmentListItem'
 import Txt from '../components/Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -10,14 +11,37 @@ import I18n from '../utils/i18n'
 
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
-import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
-import OfferSimple from '../components/OfferSimple'
+import { wsGetEstablishments } from '../services/data'
+// import OfferSimple from '../components/OfferSimple'
 
 class Establishment extends React.Component {
-    componentDidMount() {}
+    constructor(props) {
+        super(props)
+        this.state = {
+            establishments: []
+        }
+    }
+    componentDidMount() {
+        wsGetEstablishments().then(d => {
+            this.setState({ establishments: d })
+        })
+    }
 
     render() {
-        return <ScrollView style={gs.dfPageContainer}></ScrollView>
+        return (
+            <FlatList
+                data={this.state.establishments}
+                keyExtractor={(d, i) => i.toString()}
+                renderItem={d => {
+                    return (
+                        <EstablishmentListItem
+                            item={d.item}
+                            navigation={this.props.navigation}
+                        />
+                    )
+                }}></FlatList>
+        )
+        // <ScrollView style={gs.dfPageContainer}></ScrollView>
     }
 }
 

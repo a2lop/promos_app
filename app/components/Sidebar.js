@@ -90,10 +90,56 @@ class Sidebar extends Component {
                         })
                         this.props.navigation.dispatch(resetAction)
                     }}>
-                    <View style={st.labelContainer}>
+                    <TouchableOpacity
+                        style={st.labelContainer}
+                        onPress={() => {
+                            const resetAction = StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({
+                                        routeName: 'DrawerNavigator',
+                                        action: NavigationActions.navigate({
+                                            routeName: 'Establishments'
+                                        })
+                                    })
+                                ]
+                            })
+                            this.props.navigation.dispatch(resetAction)
+                        }}>
                         <Icon name={'domain'} size={22} style={st.labelIcon} />
                         <Txt style={st.labelText}>
                             {I18n.t('sidebar.establishments')}
+                        </Txt>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={st.labelContainer}
+                        onPress={() => {
+                            const resetAction = StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({
+                                        routeName: 'DrawerNavigator',
+                                        action: NavigationActions.navigate({
+                                            routeName: 'Search'
+                                        })
+                                    })
+                                ]
+                            })
+                            this.props.navigation.dispatch(resetAction)
+                        }}>
+                        <Icon name={'shape'} size={22} style={st.labelIcon} />
+                        <Txt style={st.labelText}>
+                            {I18n.t('sidebar.categories')}
+                        </Txt>
+                    </TouchableOpacity>
+                    <View style={st.labelContainer}>
+                        <Icon
+                            name={'information-outline'}
+                            size={22}
+                            style={st.labelIcon}
+                        />
+                        <Txt style={st.labelText}>
+                            {I18n.t('sidebar.about')}
                         </Txt>
                     </View>
                 </TouchableOpacity>

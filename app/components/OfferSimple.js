@@ -17,12 +17,12 @@ class OfferSimple extends React.Component {
                 }}>
                 <TouchableOpacity style={{ width: '100%' }}>
                     <Image
-                        source={require('../assets/c4Logo.png')}
+                        source={{ uri: this.props.item.logoBanner }}
                         resizeMode={'stretch'}
                         style={[gs.mb5, { width: '100%', height: 100 }]}
                     />
 
-                    <Txt style={gs.dfSimpleTitle}>Lunes de 2x1 para chicas</Txt>
+                    <Txt style={gs.dfSimpleTitle}>{this.props.item.name}</Txt>
                     <Txt style={gs.dfSimpleSubtitle}>Martes</Txt>
                 </TouchableOpacity>
             </View>
@@ -36,7 +36,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(OfferSimple)
+export default connect(mapStateToProps, mapDispatchToProps)(OfferSimple)

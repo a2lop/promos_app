@@ -12,6 +12,7 @@ import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import OfferSimple from '../components/OfferSimple'
+import TagSimple from '../components/TagSimple'
 
 class OfferDetail extends React.Component {
     componentDidMount() {}
@@ -20,18 +21,30 @@ class OfferDetail extends React.Component {
         return (
             <ScrollView style={gs.dfPageContainer}>
                 {/* <View style={gs.mainImageContainer}> */}
+                <Image
+                    source={{ uri: this.props.offer.logoBanner }}
+                    resizeMode={'stretch'}
+                    style={[gs.mainImage]}
+                />
                 <View style={gs.dfMainContainer}>
-                    <Image
-                        source={{ uri: this.props.offer.logoBanner }}
-                        resizeMode={'stretch'}
-                        style={[gs.mainImage, gs.mb15]}
-                    />
                     <Txt style={[gs.dfTitle, gs.mb5]}>
                         {this.props.offer.name}
                     </Txt>
                     <TouchableOpacity style={gs.mb15}>
-                        <Txt style={gs.dfSubtitle}>Campo 4</Txt>
+                        <Txt style={gs.dfSubtitle}>
+                            {this.props.establishment.name}
+                        </Txt>
                     </TouchableOpacity>
+
+                    <View
+                        style={[
+                            gs.fdRow,
+                            { marginHorizontal: 15, justifyContent: 'center' }
+                        ]}>
+                        {this.props.offer.categories.map(c => (
+                            <TagSimple item={c} key={c.id}></TagSimple>
+                        ))}
+                    </View>
                 </View>
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfLongText, gs.mb10]}>
@@ -65,11 +78,15 @@ class OfferDetail extends React.Component {
                         })}
                     </Txt>
                     <FlatList
-                        data={[{ test: 1 }, { test: 2 }, { test: 3 }]}
+                        data={this.props.establishmentOffers}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={d => {
-                            return <OfferSimple key={d.index}></OfferSimple>
+                            return (
+                                <OfferSimple
+                                    key={d.index}
+                                    item={d.item}></OfferSimple>
+                            )
                         }}></FlatList>
                 </View>
             </ScrollView>
@@ -86,12 +103,13 @@ let st = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-    return { offer: state.dataReducer.offer }
+    return {
+        offer: state.dataReducer.offer,
+        establishment: state.dataReducer.establishment,
+        establishmentOffers: state.dataReducer.establishmentOffers
+    }
 }
 
 const mapDispatchToProps = {}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(OfferDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(OfferDetail)

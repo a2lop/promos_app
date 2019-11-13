@@ -8,6 +8,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
 
 class CategoriySimple extends React.Component {
+    openCategory() {
+        this.props.navigation.navigate('CategoryOffers', {
+            categoryId: this.props.item.id
+        })
+    }
+
     render() {
         return (
             <View
@@ -20,7 +26,10 @@ class CategoriySimple extends React.Component {
                     paddingea: 10,
                     borderColor: colors.SILVER
                 }}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        this.openCategory()
+                    }}>
                     <Image
                         source={{ uri: this.props.item.iconImage }}
                         resizeMode={'stretch'}
