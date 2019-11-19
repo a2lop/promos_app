@@ -1,6 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
-import LoadingItem from '../components/Loading'
+import { View, RefreshControl } from 'react-native'
+// import LoadingItem from '../components/Loading'
 
 import { connect } from 'react-redux'
 import { fnGetOffers } from '../actions/actions'
@@ -25,6 +25,15 @@ class Home extends React.Component {
             <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
                 <DaySelector></DaySelector>
                 <FlatList
+                    refreshControl={
+                        <RefreshControl
+                            style={{ backgroundColor: 'transparent' }}
+                            refreshing={this.props.isRefreshing || false}
+                            onRefresh={() => {
+                                this.loadOffers()
+                            }}
+                        />
+                    }
                     data={this.props.offers}
                     keyExtractor={(d, i) => i.toString()}
                     renderItem={d => {
@@ -46,7 +55,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = { fnGetOffers }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

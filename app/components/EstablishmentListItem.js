@@ -24,7 +24,7 @@ class EsteblishmentListItem extends React.Component {
                     }}>
                     <View style={gs.liSquareImageContainer}>
                         <Image
-                            source={{ uri: this.props.item.logo }}
+                            source={{ uri: this.props.item.squareImage }}
                             style={gs.liSquareImage}
                         />
                     </View>

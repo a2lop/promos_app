@@ -16,6 +16,6 @@ export const colors = {
 }
 
 export const constants = {
-    // wsUrl: 'https://us-central1-promos-233704.cloudfunctions.net/api/'
-    wsUrl: 'http://localhost:5000/promos-233704/us-central1/api/'
+    wsUrl: 'https://us-central1-promos-233704.cloudfunctions.net/api/'
+    // wsUrl: 'http://localhost:5000/promos-233704/us-central1/api/'
 }

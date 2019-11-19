@@ -24,9 +24,13 @@ export function wsGetEstablishmentDetail(id) {
 }
 
 export function wsGetEstablishmentOffers(id) {
-    return wsCall('/offers/establishmentOffers/' + id)
+    return wsCall('offers/establishmentOffers/' + id)
 }
 
 export function wsGetCategoryOffers(id) {
-    return wsCall('/offers/categoryOffers/' + id)
+    return wsCall('offers/categoryOffers/' + id)
+}
+
+export function wsGetDiscoverOffers(id) {
+    return wsCall('discoverOffers')
 }

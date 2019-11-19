@@ -4,7 +4,8 @@ import {
     wsGetOffer,
     wsGetCategories,
     wsGetEstablishmentDetail,
-    wsGetEstablishmentOffers
+    wsGetEstablishmentOffers,
+    wsGetDiscoverOffers
 } from '../services/data'
 
 //#region DATA
@@ -74,7 +75,7 @@ export function fnGetEstablishment(id) {
         wsGetEstablishmentDetail(id).then(d => {
             dispatch({
                 type: Actions.SET_ESTABLISHMENT,
-                payload: { establishment: d[0] }
+                payload: { establishment: d }
             })
             // dispatch(fnGetEstablishmentOffers(id))
         })
@@ -86,6 +87,17 @@ export function fnGetEstablishmentOffers(id) {
         wsGetEstablishmentOffers(id).then(d => {
             dispatch({
                 type: Actions.GET_ESTABLISHMENT_OFFERS,
+                payload: { offers: d }
+            })
+        })
+    }
+}
+
+export function fnGetDiscoverOffers(d) {
+    return dispatch => {
+        wsGetDiscoverOffers().then(d => {
+            dispatch({
+                type: Actions.GET_DISCOVER_OFFERS,
                 payload: { offers: d }
             })
         })

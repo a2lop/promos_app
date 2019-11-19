@@ -15,7 +15,7 @@ const DefaultFooterTabBar = props => {
             <View
                 style={{
                     paddingTop: 5,
-                    height: 40,
+                    height: 50,
                     backgroundColor: colors.RED,
                     flexDirection: 'row'
                 }}>

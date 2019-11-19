@@ -3,6 +3,7 @@ import { ScrollView, View, Image, StyleSheet } from 'react-native'
 import LoadingItem from '../components/Loading'
 import Txt from '../components/Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import TagSimple from '../components/TagSimple'
 
 import { connect } from 'react-redux'
 
@@ -35,6 +36,20 @@ class Establishment extends React.Component {
                     {/* <TouchableOpacity style={gs.mb15}>
                         <Txt style={gs.dfSubtitle}></Txt>
                     </TouchableOpacity> */}
+                    {this.props.establishment.categories && (
+                        <View
+                            style={[
+                                gs.fdRow,
+                                {
+                                    marginHorizontal: 15,
+                                    justifyContent: 'center'
+                                }
+                            ]}>
+                            {this.props.establishment.categories.map(c => (
+                                <TagSimple item={c} key={c.id}></TagSimple>
+                            ))}
+                        </View>
+                    )}
                 </View>
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfLongText, gs.mb10]}>

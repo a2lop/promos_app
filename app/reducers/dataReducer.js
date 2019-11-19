@@ -7,7 +7,8 @@ import {
     GET_OFFER,
     GET_CATEGORIES,
     SET_ESTABLISHMENT,
-    GET_ESTABLISHMENT_OFFERS
+    GET_ESTABLISHMENT_OFFERS,
+    GET_DISCOVER_OFFERS
 } from '../actions/actionTypes'
 
 let initialState = {
@@ -16,7 +17,9 @@ let initialState = {
     categories: [],
     categoriesParents: [],
     establishment: {},
-    establishmentOffers: []
+    establishmentOffers: [],
+    discoverBannerOffers: [],
+    discoverOffers: []
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -41,7 +44,8 @@ const dataReducer = (state = initialState, action) => {
             return state
         case SET_ESTABLISHMENT:
             state = Object.assign({}, state, {
-                establishment: action.payload.establishment
+                establishment: action.payload.establishment,
+                establishmentOffers: []
             })
             return state
         case GET_ESTABLISHMENT_OFFERS:
@@ -49,6 +53,12 @@ const dataReducer = (state = initialState, action) => {
                 establishmentOffers: action.payload.offers
             })
             return state
+        case GET_DISCOVER_OFFERS:
+            const offers = action.payload.offers
+            state = Object.assign({}, state, {
+                discoverBannerOffers: offers.filter(o => o.isDiscoverBanner),
+                discoverOffers: offers.filter(o => o.isDiscoverOffer)
+            })
         default:
             return state
     }

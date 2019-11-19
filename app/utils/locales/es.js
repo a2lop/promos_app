@@ -42,5 +42,8 @@ export default {
         about: 'Acerca de',
         login: 'Iniciar sesión'
     },
-    home: {}
+    home: {},
+    discover: {
+        outstandingOffers: 'Promos destacadas'
+    }
 }

@@ -53,7 +53,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Establishment)
+export default connect(mapStateToProps, mapDispatchToProps)(Establishment)
