@@ -4,6 +4,8 @@ import LoadingItem from '../components/Loading'
 import Txt from '../components/Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import TagSimple from '../components/TagSimple'
+import MapView from 'react-native-maps'
+import OfferSimple from '../components/OfferSimple'
 
 import { connect } from 'react-redux'
 
@@ -12,7 +14,6 @@ import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
-import OfferSimple from '../components/OfferSimple'
 
 import { fnGetEstablishmentOffers } from '../actions/actions'
 
@@ -113,6 +114,18 @@ class Establishment extends React.Component {
                                     item={d.item}></OfferSimple>
                             )
                         }}></FlatList>
+                </View>
+
+                <View style={{ height: 200 }}>
+                    <MapView
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421
+                        }}
+                        style={{ height: '100%' }}
+                    />
                 </View>
             </ScrollView>
         )
