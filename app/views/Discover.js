@@ -106,7 +106,6 @@ class Discover extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.dataReducer.bannerOffers)
     return {
         bannerOffers: state.dataReducer.discoverBannerOffers,
         offers: state.dataReducer.discoverOffers

@@ -4,7 +4,7 @@ import LoadingItem from '../components/Loading'
 import Txt from '../components/Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import TagSimple from '../components/TagSimple'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import OfferSimple from '../components/OfferSimple'
 
 import { connect } from 'react-redux'
@@ -56,46 +56,61 @@ class Establishment extends React.Component {
                     <Txt style={[gs.dfLongText, gs.mb10]}>
                         {this.props.establishment.description}
                     </Txt>
-
-                    {/* <View style={st.labelContainer}> */}
-                    {this.props.establishment.facebook && (
-                        <TouchableOpacity style={st.labelContainer}>
-                            <View style={st.labelIcon}>
-                                <Icon size={30} name={'facebook-box'} />
-                            </View>
-                            <Txt style={st.labelText}>
-                                {this.props.establishment.facebook}
-                            </Txt>
-                        </TouchableOpacity>
-                    )}
-                    {this.props.establishment.instagram && (
-                        <TouchableOpacity style={st.labelContainer}>
-                            <View style={st.labelIcon}>
-                                <Icon size={30} name={'instagram'} />
-                            </View>
-                            <Txt style={st.labelText}>
-                                {this.props.establishment.instagram}
-                            </Txt>
-                        </TouchableOpacity>
-                    )}
+                </View>
+                <View style={gs.dfGenericContainer}>
+                    {/* <Txt style={[gs.dfSectionTitle, gs.mb5]}>Contactos</Txt> */}
                     {this.props.establishment.phone && (
                         <TouchableOpacity style={st.labelContainer}>
                             <View style={st.labelIcon}>
-                                <Icon size={30} name={'phone-in-talk'} />
+                                <Icon size={25} name={'cellphone-android'} />
                             </View>
                             <Txt style={st.labelText}>
                                 {this.props.establishment.phone}
                             </Txt>
                         </TouchableOpacity>
                     )}
-                    <TouchableOpacity style={st.labelContainer}>
-                        <View style={st.labelIcon}>
-                            <Icon size={30} name={'map-marker'} />
-                        </View>
-                        <Txt style={st.labelText}>
-                            {this.props.establishment.address}
-                        </Txt>
-                    </TouchableOpacity>
+                    {this.props.establishment.address && (
+                        <TouchableOpacity style={st.labelContainer}>
+                            <View style={st.labelIcon}>
+                                <Icon size={25} name={'map-marker'} />
+                            </View>
+                            <Txt style={st.labelText}>
+                                {this.props.establishment.address}
+                            </Txt>
+                        </TouchableOpacity>
+                    )}
+
+                    {/* <View style={st.labelContainer}> */}
+                    <View style={st.socialIconsContainer}>
+                        {this.props.establishment.facebook && (
+                            <View style={st.socialIconButton}>
+                                <TouchableOpacity>
+                                    <Icon size={30} name={'facebook-box'} />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        {this.props.establishment.instagram && (
+                            <View style={st.socialIconButton}>
+                                <TouchableOpacity>
+                                    <Icon size={30} name={'instagram'} />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        {this.props.establishment.email && (
+                            <View style={st.socialIconButton}>
+                                <TouchableOpacity>
+                                    <Icon size={30} name={'email'} />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        {this.props.establishment.website != '' && (
+                            <View style={st.socialIconButton}>
+                                <TouchableOpacity>
+                                    <Icon size={30} name={'web'} />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    </View>
                 </View>
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfSectionTitle, gs.mb5]}>
@@ -111,22 +126,40 @@ class Establishment extends React.Component {
                             return (
                                 <OfferSimple
                                     key={d.index}
-                                    item={d.item}></OfferSimple>
+                                    item={d.item}
+                                    navigation={this.props.navigation}
+                                />
                             )
                         }}></FlatList>
                 </View>
 
-                <View style={{ height: 200 }}>
-                    <MapView
-                        initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421
-                        }}
-                        style={{ height: '100%' }}
-                    />
-                </View>
+                {this.props.establishment.locations &&
+                    this.props.establishment.locations.length > 0 && (
+                        <View style={{ height: 200 }}>
+                            <MapView
+                                // initialRegion={{
+                                //     latitude: 37.78825,
+                                //     longitude: -122.4324,
+                                //     latitudeDelta: 0.0922,
+                                //     longitudeDelta: 0.0421
+                                // }}
+                                style={{ height: '100%' }}>
+                                {this.props.establishment.locations.map(
+                                    marker => (
+                                        <Marker
+                                            key={marker.lat}
+                                            coordinate={{
+                                                latitude: marker.lat,
+                                                longitude: marker.lng
+                                            }}
+                                            title={'test'}
+                                            description={'test largo'}
+                                        />
+                                    )
+                                )}
+                            </MapView>
+                        </View>
+                    )}
             </ScrollView>
         )
     }
@@ -139,18 +172,23 @@ let st = StyleSheet.create({
         alignItems: 'center'
     },
     labelIcon: {
-        flex: 1,
-        alignItems: 'flex-end',
-        marginRight: 10
+        // flex: 1,
+        // alignItems: 'flex-end',
+        marginRight: 5
     },
     labelText: {
-        flex: 2
+        flex: 1,
+        fontSize: 13
     },
-    socialIconButtonContainer: {
+    socialIconsContainer: {
+        marginTop: 10,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    socialIconButton: {
         flex: 1,
         alignItems: 'center'
-    },
-    socialIcon: {}
+    }
 })
 
 function mapStateToProps(state) {

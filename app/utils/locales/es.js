@@ -40,10 +40,17 @@ export default {
         establishments: 'Establecimientos',
         categories: 'Categorías',
         about: 'Acerca de',
-        login: 'Iniciar sesión'
+        login: 'Iniciar sesión',
+        memberships: 'Tarjetas / Afiliaciones',
+        birthday: '¿Es tu cumpleaños?'
     },
-    home: {},
+    home: {
+        noOffers: 'No hay promociones hoy 😔'
+    },
     discover: {
         outstandingOffers: 'Promos destacadas'
+    },
+    memberships: {
+        viewTitle: 'Membresias'
     }
 }

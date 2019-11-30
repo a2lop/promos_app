@@ -5,7 +5,9 @@ import {
     wsGetCategories,
     wsGetEstablishmentDetail,
     wsGetEstablishmentOffers,
-    wsGetDiscoverOffers
+    wsGetDiscoverOffers,
+    wsGetMemberships,
+    wsGetOffersByDayNumber
 } from '../services/data'
 
 //#region DATA
@@ -14,6 +16,23 @@ export function fnGetOffers() {
         wsGetOffers().then(d => {
             dispatch({
                 type: Actions.GET_OFFERS,
+                payload: { offers: d }
+            })
+        })
+    }
+}
+
+export function fnGetOffersByDayNumber(day, reset) {
+    return dispatch => {
+        dispatch({
+            type: Actions.GET_OFFERS,
+            payload: {
+                reset
+            }
+        })
+        wsGetOffersByDayNumber(day).then(d => {
+            dispatch({
+                type: Actions.GET_OFFERS_SUCCESS,
                 payload: { offers: d }
             })
         })
@@ -99,6 +118,17 @@ export function fnGetDiscoverOffers(d) {
             dispatch({
                 type: Actions.GET_DISCOVER_OFFERS,
                 payload: { offers: d }
+            })
+        })
+    }
+}
+
+export function fnGetMemberships() {
+    return dispatch => {
+        wsGetMemberships().then(d => {
+            dispatch({
+                type: Actions.GET_MEMBERSHIPS,
+                payload: { memberships: d }
             })
         })
     }

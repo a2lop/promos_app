@@ -1,18 +1,19 @@
 import React from 'react'
 import { View, TouchableOpacity, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Txt from './Txt'
 
 import { globalStyles as gs } from '../utils/styles'
 import I18n from '../utils/i18n'
 
 import { connect } from 'react-redux'
-import { fnGetOffer, fnSetOffer } from '../actions/actions'
+import { fnSetOffer } from '../actions/actions'
 
 class OfferListItem extends React.Component {
     openOffer() {
         this.props.fnSetOffer(this.props.item)
-        this.props.navigation.navigate('OfferDetail')
+        this.props.navigation.navigate('Offer', {
+            viewTitle: this.props.item.name
+        })
     }
     render() {
         return (
@@ -47,6 +48,6 @@ function mapStateToProps(state) {
     return {}
 }
 
-const mapDispatchToProps = { fnGetOffer, fnSetOffer }
+const mapDispatchToProps = { fnSetOffer }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferListItem)

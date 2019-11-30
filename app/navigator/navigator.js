@@ -35,9 +35,13 @@ import SearchText from '../views/SearchText'
 import SearchCategories from '../views/SearchCategories'
 import CategoryOffers from '../views/CategoryOffers'
 
-import { colors } from '../utils/constants'
+import Memberships from '../views/Memberships'
+import MembershipOffers from '../views/MembershipOffers'
+
+// import { colors } from '../utils/constants'
 import DefaultFooterTabBar from '../components/DefaultFooterTabBar'
 import HeaderGeneric from '../components/HeaderGeneric'
+import HeaderCustomText from '../components/HeaderCustomText'
 import TabBarDefault from '../components/TabBarDefault'
 // import Txt from '../components/Txt'
 // import TabBarDefault from '../components/TabBarDefault'
@@ -91,7 +95,7 @@ const OfferStack = createMaterialTopTabNavigator(
                 title: 'offerDetail.viewTitle'
             }
         },
-        Establishment: {
+        EstablishmentOffer: {
             screen: Establishment,
             navigationOptions: {
                 title: 'establishment.viewTitle'
@@ -138,9 +142,9 @@ const SessionStack = createStackNavigator(
             screen: OfferStack,
             navigationOptions: ({ navigation }) => ({
                 header: (
-                    <HeaderGeneric
+                    <HeaderCustomText
                         navigation={navigation}
-                        viewTitle={'offerDetail.viewTitle'}
+                        // viewTitle={'offerDetail.viewTitle'}
                     />
                 ),
                 gesturesEnabled: false
@@ -199,10 +203,34 @@ const SessionStack = createStackNavigator(
                 ),
                 gesturesEnabled: false
             })
+        },
+        Memberships: {
+            screen: Memberships,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'memberships.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
+        },
+        MembershipOffers: {
+            screen: MembershipOffers,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderCustomText
+                        navigation={navigation}
+                        // viewTitle={'memberships.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
         }
     },
     {
-        initialRouteName: 'Main'
+        initialRouteName: 'Wizard'
     }
 )
 

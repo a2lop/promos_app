@@ -31,12 +31,13 @@ class DaySelector extends React.Component {
         this.setState({ days })
     }
 
-    changeDay(id) {
+    changeDay(d) {
         let days = this.state.days
         days.forEach(day => {
-            day.isSelected = day.id == id
+            day.isSelected = day.id == d.id
         })
         this.setState({ days })
+        this.props.loadOffers(d.date.getDay(), true)
     }
 
     render() {
@@ -64,7 +65,7 @@ class DaySelector extends React.Component {
                             key={day.date.getTime()}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    this.changeDay(day.id)
+                                    this.changeDay(day)
                                 }}>
                                 <Txt style={st.dayName}>
                                     {I18n.t(
@@ -118,7 +119,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DaySelector)
+export default connect(mapStateToProps, mapDispatchToProps)(DaySelector)

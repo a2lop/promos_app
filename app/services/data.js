@@ -1,8 +1,11 @@
 import wsCall from '../utils/fetcher'
 
 export function wsGetOffers() {
-    // const data = { action: 'popular_books_week' }
     return wsCall('offers')
+}
+
+export function wsGetOffersByDayNumber(dayNumber) {
+    return wsCall('offers/offersByDayNumber/' + dayNumber)
 }
 
 export function wsGetOffer(id) {
@@ -33,4 +36,12 @@ export function wsGetCategoryOffers(id) {
 
 export function wsGetDiscoverOffers(id) {
     return wsCall('discoverOffers')
+}
+
+export function wsGetMemberships() {
+    return wsCall('memberships')
+}
+
+export function wsGetMembershipOffers(id) {
+    return wsCall('offers/membershipOffers/' + id)
 }

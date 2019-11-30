@@ -30,11 +30,18 @@ class OfferDetail extends React.Component {
                     <Txt style={[gs.dfTitle, gs.mb5]}>
                         {this.props.offer.name}
                     </Txt>
-                    <TouchableOpacity style={gs.mb15}>
+                    <TouchableOpacity
+                        style={gs.mb15}
+                        onPress={() => {
+                            this.props.navigation.navigate('EstablishmentOffer')
+                        }}>
                         <Txt style={gs.dfSubtitle}>
                             {this.props.establishment.name}
                         </Txt>
                     </TouchableOpacity>
+                    <Txt style={[gs.dfLongText, gs.mb10]}>
+                        {this.props.offer.description}
+                    </Txt>
 
                     <View
                         style={[
@@ -45,13 +52,9 @@ class OfferDetail extends React.Component {
                             <TagSimple item={c} key={c.id}></TagSimple>
                         ))}
                     </View>
-                </View>
-                <View style={gs.dfGenericContainer}>
-                    <Txt style={[gs.dfLongText, gs.mb10]}>
-                        {this.props.offer.description}
-                    </Txt>
-
-                    <View style={[gs.fdRow]}>
+                    {/* </View>
+                <View style={gs.dfGenericContainer}> */}
+                    <View style={[gs.fdRow, { marginTop: 10 }]}>
                         <View style={st.socialIconButtonContainer}>
                             <TouchableOpacity>
                                 <Icon
@@ -74,7 +77,7 @@ class OfferDetail extends React.Component {
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfSectionTitle, gs.mb5]}>
                         {I18n.t('offerDetail.otherOffersOf', {
-                            establishmentName: 'Campo4'
+                            establishmentName: this.props.establishment.name
                         })}
                     </Txt>
                     <FlatList
@@ -85,7 +88,9 @@ class OfferDetail extends React.Component {
                             return (
                                 <OfferSimple
                                     key={d.index}
-                                    item={d.item}></OfferSimple>
+                                    item={d.item}
+                                    navigation={this.props.navigation}
+                                />
                             )
                         }}></FlatList>
                 </View>

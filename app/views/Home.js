@@ -1,29 +1,52 @@
 import React from 'react'
-import { View, RefreshControl } from 'react-native'
+import { View, RefreshControl, Image } from 'react-native'
 // import LoadingItem from '../components/Loading'
 
 import { connect } from 'react-redux'
-import { fnGetOffers } from '../actions/actions'
-// import I18n from '../utils/i18n'
+import { fnGetOffers, fnGetOffersByDayNumber } from '../actions/actions'
+import I18n from '../utils/i18n'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
 import { FlatList } from 'react-native-gesture-handler'
 import DaySelector from '../components/DaySelector'
 import { colors } from '../utils/constants'
+import LoadingItem from '../components/Loading'
 
 class Home extends React.Component {
     componentDidMount() {
-        this.loadOffers()
+        this.loadOffers(new Date().getDay())
     }
 
-    loadOffers() {
-        this.props.fnGetOffers()
+    loadOffers(day, reset) {
+        this.props.fnGetOffersByDayNumber(day, reset)
     }
 
     render() {
         return (
             <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
-                <DaySelector></DaySelector>
+                <DaySelector
+                    loadOffers={day => {
+                        this.loadOffers(day, true)
+                    }}
+                />
+
+                {this.props.isLoading && <LoadingItem />}
+                {!this.props.isLoading && this.props.offers.length == 0 && (
+                    <View style={{ alignItems: 'center' }}>
+                        <Image
+                            resizeMode="contain"
+                            style={{
+                                height: 200,
+                                marginBottom: 25
+                                // alignSelf: 'center'
+                            }}
+                            source={require('../assets/emptyContent.png')}
+                        />
+                        <Txt style={{ fontSize: 20 }}>
+                            {I18n.t('home.noOffers')}
+                        </Txt>
+                    </View>
+                )}
                 <FlatList
                     refreshControl={
                         <RefreshControl
@@ -34,6 +57,7 @@ class Home extends React.Component {
                             }}
                         />
                     }
+                    style={{ flex: 1 }}
                     data={this.props.offers}
                     keyExtractor={(d, i) => i.toString()}
                     renderItem={d => {
@@ -50,9 +74,12 @@ class Home extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { offers: state.dataReducer.homeOffers }
+    return {
+        offers: state.dataReducer.homeOffers,
+        isLoading: state.dataReducer.isLoadingHomeOffers
+    }
 }
 
-const mapDispatchToProps = { fnGetOffers }
+const mapDispatchToProps = { fnGetOffers, fnGetOffersByDayNumber }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

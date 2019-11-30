@@ -56,7 +56,8 @@ const globalStyles = StyleSheet.create({
         paddingVertical: 5,
         borderRadius: 10,
         borderColor: colors.SILVER,
-        borderWidth: 1
+        borderWidth: 1,
+        zIndex: 1
         // shadowOffset: { height: 1 },
         // shadowColor: colors.DARK,
         // shadowOpacity: 1,
@@ -113,15 +114,16 @@ const globalStyles = StyleSheet.create({
         // paddingVertical: 10
     },
     dfMainContainer: {
-        marginHorizontal: 15,
+        // marginHorizontal: 15,
+        // borderBottomLeftRadius: 15,
+        // borderBottomRightRadius: 15,
         paddingVertical: 10,
+        paddingHorizontal: 15,
         backgroundColor: colors.WHITE,
         borderColor: colors.SILVER,
         borderBottomWidth: 1,
         borderLeftWidth: 1,
         borderRightWidth: 1,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
         marginBottom: 15
     },
     dfGenericContainer: {

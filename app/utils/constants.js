@@ -10,7 +10,7 @@ export const colors = {
     SILVER_LIGHT: '#ECECEC',
     DARK: '#454545',
     BLACK: '#000',
-    YELLOW: '#F5CF94',
+    YELLOW: '#fdb714',
     PINK: '#E9A6A0',
     TRANSPARENT: 'rgba(0,0,0,0)'
 }

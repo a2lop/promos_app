@@ -12,7 +12,7 @@ class HeaderMain extends React.Component {
             <SafeAreaView style={gs.barSafeArea}>
                 <View style={gs.headerContainer}>
                     <TouchableOpacity
-                        style={gs.headerIconContainer}
+                        style={{ zIndex: 1 }}
                         onPress={() => {
                             this.props.navigation.toggleDrawer()
                         }}>
