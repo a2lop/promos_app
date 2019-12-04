@@ -10,7 +10,8 @@ import { colors } from '../utils/constants'
 class CategoriySimple extends React.Component {
     openCategory() {
         this.props.navigation.navigate('CategoryOffers', {
-            categoryId: this.props.item.id
+            categoryId: this.props.item.id,
+            viewTitle: this.props.item.name
         })
     }
 
@@ -51,7 +52,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CategoriySimple)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriySimple)

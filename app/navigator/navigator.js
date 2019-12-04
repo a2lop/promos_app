@@ -37,6 +37,7 @@ import CategoryOffers from '../views/CategoryOffers'
 
 import Memberships from '../views/Memberships'
 import MembershipOffers from '../views/MembershipOffers'
+import BirthdayOffers from '../views/BirthdayOffers'
 
 // import { colors } from '../utils/constants'
 import DefaultFooterTabBar from '../components/DefaultFooterTabBar'
@@ -124,7 +125,7 @@ const SearchStack = createMaterialTopTabNavigator(
         }
     },
     {
-        initialRouteName: 'SearchCategories',
+        initialRouteName: 'SearchText',
         tabBarComponent: TabBarDefault
     }
 )
@@ -196,9 +197,9 @@ const SessionStack = createStackNavigator(
             screen: CategoryOffers,
             navigationOptions: ({ navigation }) => ({
                 header: (
-                    <HeaderGeneric
+                    <HeaderCustomText
                         navigation={navigation}
-                        viewTitle={'establishment.viewTitle'}
+                        // viewTitle={'establishment.viewTitle'}
                     />
                 ),
                 gesturesEnabled: false
@@ -227,10 +228,22 @@ const SessionStack = createStackNavigator(
                 ),
                 gesturesEnabled: false
             })
+        },
+        BirthdayOffers: {
+            screen: BirthdayOffers,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderGeneric
+                        navigation={navigation}
+                        viewTitle={'birthdayOffers.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
         }
     },
     {
-        initialRouteName: 'Wizard'
+        initialRouteName: 'Main'
     }
 )
 
@@ -253,13 +266,6 @@ const DrawerNavigator = createDrawerNavigator(
 const RootStack = (hasSession = false) => {
     return createStackNavigator(
         {
-            // Login: {
-            //     screen: LoginView,
-            //     navigationOptions: {
-            //         header: null,
-            //         gesturesEnabled: false,
-            //     },
-            // },
             DrawerNavigator: {
                 screen: DrawerNavigator,
                 navigationOptions: {
@@ -269,7 +275,6 @@ const RootStack = (hasSession = false) => {
             }
         },
         {
-            // initialRouteName: hasSession == '1' ? 'DrawerNavigator' : 'Login',
             initialRouteName: 'DrawerNavigator',
             navigationOptions: {
                 header: { headerMode: 'screen', visible: false }

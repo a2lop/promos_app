@@ -1,4 +1,16 @@
 export default {
+    wizard: {
+        title1: 'Bienvenido a Promos',
+        message1: 'Encuentra los mejores descuentos en todo!!!',
+        title2: '¿La promo del día?',
+        message2:
+            'Encuentra aqui ese descuento que estabas esperando! arma tu plan del dīa aprovechando que tu establecimiento favorito tiene una oferta para tí o simplemente descubre una irrestible oferta!!!',
+        title3: 'Restaurantes, entretenimiento, ropa y mucho más',
+        message3:
+            'Enterante de las ofertas que día a día existen en tu ciudad, suscribete a tu establecimiento y se el primero en recibir las promociones!!!',
+        next: 'Siguiente',
+        begin: 'Empezar'
+    },
     common: {
         tabs: {
             footerHome: 'Inicio',
@@ -24,7 +36,11 @@ export default {
     establishment: { viewTitle: 'Establecimiento', offers: 'Promociones' },
     establishments: { viewTitle: 'Establecimientos' },
 
-    searchText: { viewTitle: 'Busqueda' },
+    searchText: {
+        viewTitle: 'Busqueda',
+        noResults: 'No se encontraron resultados',
+        phSearch: 'Ingresa aqui el texto a buscar'
+    },
     searchCategories: { viewTitle: 'Categorias' },
     profile: {
         phEmail: 'Correo electrónico',
@@ -52,5 +68,8 @@ export default {
     },
     memberships: {
         viewTitle: 'Membresias'
+    },
+    birthdayOffers: {
+        viewTitle: 'Ofertas por tu cumpleaños'
     }
 }

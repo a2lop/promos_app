@@ -10,6 +10,7 @@ const globalStyles = StyleSheet.create({
     f1: {
         flex: 1
     },
+    fw: { width: Dimensions.get('window').width },
     dfSafeArea: { flex: 1 },
     mb5: { marginBottom: 5 },
     mb10: { marginBottom: 10 },
@@ -18,9 +19,9 @@ const globalStyles = StyleSheet.create({
     mr10: { marginRight: 10 },
     mr15: { marginRight: 15 },
     //HEADER
-    barSafeArea: { backgroundColor: colors.RED },
+    barSafeArea: { backgroundColor: colors.YELLOW },
     headerContainer: {
-        backgroundColor: colors.RED,
+        backgroundColor: colors.YELLOW,
         flexDirection: 'row',
         height: 45,
         alignItems: 'center',
@@ -36,7 +37,7 @@ const globalStyles = StyleSheet.create({
     },
     headerTextContainer: { flex: 1, alignItems: 'center' },
     headerText: {
-        color: colors.WHITE,
+        color: colors.PURPLE,
         fontSize: 17,
         fontWeight: 'bold'
     },

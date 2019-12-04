@@ -13,7 +13,7 @@ const TabBarDefault = props => {
             style={{
                 paddingTop: 2,
                 height: 27,
-                backgroundColor: colors.RED,
+                backgroundColor: colors.YELLOW,
                 flexDirection: 'row',
                 justifyContent: 'space-around',
                 alignItems: 'center',
@@ -27,8 +27,8 @@ const TabBarDefault = props => {
                             borderBottomWidth: 5,
                             borderBottomColor:
                                 navigationState.index == index
-                                    ? colors.YELLOW
-                                    : colors.RED,
+                                    ? colors.PURPLE
+                                    : colors.YELLOW,
                             alignItems: 'center',
                             flex: 1
                         }}>
@@ -38,7 +38,14 @@ const TabBarDefault = props => {
                                 navigation.navigate(route.routeName)
                             }>
                             <Txt
-                                style={{ color: colors.WHITE, fontSize: 13 }}
+                                style={{
+                                    color:
+                                        navigationState.index == index
+                                            ? colors.PURPLE
+                                            : colors.WHITE,
+                                    fontSize: 13,
+                                    fontWeight: 'bold'
+                                }}
                                 numberOfLines={1}>
                                 {I18n.t(getLabelText({ route })).toUpperCase()}
                             </Txt>

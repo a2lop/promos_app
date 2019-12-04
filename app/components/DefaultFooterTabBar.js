@@ -1,22 +1,47 @@
 import * as React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Animated } from 'react-native'
 import Txt from './Txt'
 import { colors } from '../utils/constants'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import { connect } from 'react-redux'
 import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
 import SafeAreaView from 'react-native-safe-area-view'
 
 const DefaultFooterTabBar = props => {
     const { navigationState, navigation, getLabelText, iconName } = props
+
+    let bgColor = new Animated.Value(0)
+    componentDidUpdate = (prevProps, prevState) => {
+        if (this.props.screen != prevProps.screen) {
+            if (this.props.screen == 3) {
+                bgColor = new Animated.Value(1)
+                Animated.timing(this.state.bgColor, {
+                    toValue: 100,
+                    duration: 500
+                }).start()
+            } else {
+                this.setState({ bgColor: new Animated.Value(0) }, () => {
+                    Animated.timing(this.state.bgColor, {
+                        toValue: 0,
+                        duration: 500
+                    }).start()
+                })
+            }
+        }
+    }
+
     return (
         <SafeAreaView style={gs.barSafeArea}>
             <View
                 style={{
                     paddingTop: 5,
                     height: 50,
-                    backgroundColor: colors.RED,
+                    backgroundColor: bgColor.interpolate({
+                        inputRange: [0, 100],
+                        outputRange: [colors.YELLOW, colors.PURPLE]
+                    }),
                     flexDirection: 'row'
                 }}>
                 {navigationState.routes.map((route, index) => {
@@ -44,7 +69,7 @@ const DefaultFooterTabBar = props => {
                                     size={20}
                                     color={
                                         navigationState.index == index
-                                            ? colors.YELLOW
+                                            ? colors.PURPLE
                                             : colors.WHITE
                                     }
                                     style={gs.iconFooter}
@@ -53,7 +78,7 @@ const DefaultFooterTabBar = props => {
                                     style={{
                                         color:
                                             navigationState.index == index
-                                                ? colors.YELLOW
+                                                ? colors.PURPLE
                                                 : colors.WHITE,
                                         fontSize: 14
                                     }}>
@@ -68,4 +93,14 @@ const DefaultFooterTabBar = props => {
     )
 }
 
-export default DefaultFooterTabBar
+// export default DefaultFooterTabBar
+
+function mapStateToProps(state) {
+    return {
+        screen: state.dataReducer.mainScreen
+    }
+}
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultFooterTabBar)

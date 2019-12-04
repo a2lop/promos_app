@@ -82,21 +82,21 @@ class Establishment extends React.Component {
 
                     {/* <View style={st.labelContainer}> */}
                     <View style={st.socialIconsContainer}>
-                        {this.props.establishment.facebook && (
+                        {this.props.establishment.facebook != '' && (
                             <View style={st.socialIconButton}>
                                 <TouchableOpacity>
                                     <Icon size={30} name={'facebook-box'} />
                                 </TouchableOpacity>
                             </View>
                         )}
-                        {this.props.establishment.instagram && (
+                        {this.props.establishment.instagram != '' && (
                             <View style={st.socialIconButton}>
                                 <TouchableOpacity>
                                     <Icon size={30} name={'instagram'} />
                                 </TouchableOpacity>
                             </View>
                         )}
-                        {this.props.establishment.email && (
+                        {this.props.establishment.email != '' && (
                             <View style={st.socialIconButton}>
                                 <TouchableOpacity>
                                     <Icon size={30} name={'email'} />

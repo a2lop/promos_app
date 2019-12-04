@@ -1,6 +1,7 @@
 export const colors = {
     RED: '#EA0000',
     WHITE: '#fff',
+    PURPLE: '#52246d',
     // BLUE: '#0465b2',
     // BLUE_TRANSPARENT: 'rgba(50,56,73,0.9)',
     BLUE_FB: '#3a5a99',

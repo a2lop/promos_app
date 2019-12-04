@@ -1,0 +1,63 @@
+import React from 'react'
+import { View, RefreshControl } from 'react-native'
+// import LoadingItem from '../components/Loading'
+
+import { connect } from 'react-redux'
+import { wsGetBirthdayOffers } from '../services/data'
+// import I18n from '../utils/i18n'
+import Txt from '../components/Txt'
+import OfferListItem from '../components/OfferListItem'
+import { FlatList } from 'react-native-gesture-handler'
+import { colors } from '../utils/constants'
+
+class BirthdayOffers extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { offers: [] }
+    }
+
+    componentDidMount() {
+        this.loadOffers()
+    }
+
+    loadOffers() {
+        wsGetBirthdayOffers().then(offers => {
+            this.setState({ offers })
+        })
+    }
+
+    render() {
+        return (
+            <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
+                <FlatList
+                    refreshControl={
+                        <RefreshControl
+                            style={{ backgroundColor: 'transparent' }}
+                            refreshing={this.props.isRefreshing || false}
+                            onRefresh={() => {
+                                this.loadOffers()
+                            }}
+                        />
+                    }
+                    data={this.state.offers}
+                    keyExtractor={(d, i) => i.toString()}
+                    renderItem={d => {
+                        return (
+                            <OfferListItem
+                                item={d.item}
+                                navigation={this.props.navigation}
+                            />
+                        )
+                    }}></FlatList>
+            </View>
+        )
+    }
+}
+
+function mapStateToProps(state) {
+    return { offers: state.dataReducer.homeOffers }
+}
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BirthdayOffers)

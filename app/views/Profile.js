@@ -10,8 +10,17 @@ import { colors } from '../utils/constants'
 import { globalStyles as gs } from '../utils/styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+import { fnSetMainScreen } from '../actions/actions'
+
 class Profile extends React.Component {
-    componentDidMount() {}
+    componentDidMount() {
+        this.props.navigation.addListener('willFocus', route => {
+            this.props.fnSetMainScreen(3)
+        })
+        this.props.navigation.addListener('willBlur', route => {
+            this.props.fnSetMainScreen(2)
+        })
+    }
 
     render() {
         return (
@@ -22,7 +31,7 @@ class Profile extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         height: '100%',
-                        backgroundColor: colors.RED
+                        backgroundColor: colors.PURPLE
                     }
                 ]}>
                 <View style={st.inputContainer}>
@@ -33,7 +42,7 @@ class Profile extends React.Component {
                     <Icon
                         name={'email'}
                         size={22}
-                        color={colors.YELLOW}
+                        color={colors.WHITE}
                         style={st.inputIcon}
                     />
                 </View>
@@ -45,7 +54,7 @@ class Profile extends React.Component {
                     <Icon
                         name={'lock-question'}
                         size={22}
-                        color={colors.YELLOW}
+                        color={colors.WHITE}
                         style={st.inputIcon}
                     />
                 </View>
@@ -62,7 +71,7 @@ class Profile extends React.Component {
                         {I18n.t('profile.noAccount')}
                     </Txt>
                     <TouchableOpacity>
-                        <Txt style={{ color: colors.YELLOW }}>
+                        <Txt style={{ color: colors.WHITE }}>
                             {I18n.t('profile.register')}
                         </Txt>
                     </TouchableOpacity>
@@ -117,7 +126,7 @@ const st = StyleSheet.create({
     inputIcon: { position: 'absolute', top: -3, left: 5 },
     input: {
         borderBottomWidth: 1,
-        borderBottomColor: colors.YELLOW,
+        borderBottomColor: colors.WHITE,
         paddingLeft: 30,
         paddingBottom: 5,
         color: colors.YELLOW
@@ -126,10 +135,12 @@ const st = StyleSheet.create({
     mainButton: {
         paddingHorizontal: 20,
         paddingVertical: 10,
-        backgroundColor: colors.YELLOW,
+        backgroundColor: colors.PURPLE,
+        borderWidth: 1,
+        borderColor: colors.WHITE,
         borderRadius: 10
     },
-    buttonText: { color: colors.DARK },
+    buttonText: { color: colors.WHITE },
     fbButton: {
         paddingHorizontal: 10,
         paddingVertical: 10,
@@ -150,9 +161,6 @@ function mapStateToProps(state) {
     return {}
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { fnSetMainScreen }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

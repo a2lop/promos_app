@@ -33,7 +33,7 @@ class Sidebar extends Component {
         return (
             <SafeAreaView style={[gs.safeArea, st.container]}>
                 <View style={st.userContainer}>
-                    <Icon name={'account'} size={80} color={colors.DARK} />
+                    <Icon name={'account'} size={80} color={colors.WHITE} />
                     <TouchableOpacity>
                         <Txt style={st.userName}>{I18n.t('sidebar.login')}</Txt>
                     </TouchableOpacity>
@@ -133,7 +133,7 @@ class Sidebar extends Component {
                                 NavigationActions.navigate({
                                     routeName: 'DrawerNavigator',
                                     action: NavigationActions.navigate({
-                                        routeName: 'Memberships'
+                                        routeName: 'BirthdayOffers'
                                     })
                                 })
                             ]
@@ -167,6 +167,15 @@ class Sidebar extends Component {
                         source={require('../assets/sidebarImage2.png')}
                     />
                 </View>
+                <Txt
+                    style={{
+                        position: 'absolute',
+                        bottom: 5,
+                        right: 5,
+                        color: colors.WHITE
+                    }}>
+                    v 0.0.02
+                </Txt>
             </SafeAreaView>
         )
     }
@@ -179,7 +188,7 @@ Sidebar.propTypes = {
 let st = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.SILVER
+        backgroundColor: colors.PURPLE
     },
 
     labelContainer: {
@@ -191,11 +200,11 @@ let st = StyleSheet.create({
         // width: 40,
         marginLeft: 15,
         marginRight: 10,
-        color: colors.DARK
+        color: colors.WHITE
     },
     labelText: {
         flex: 1,
-        color: colors.DARK,
+        color: colors.WHITE,
         fontSize: 18
     },
     userContainer: {
@@ -203,7 +212,7 @@ let st = StyleSheet.create({
         marginTop: 10,
         marginBottom: 15
     },
-    userName: { fontSize: 22, color: colors.DARK }
+    userName: { fontSize: 22, color: colors.WHITE }
 })
 
 // export default Sidebar

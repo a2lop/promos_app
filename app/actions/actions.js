@@ -11,6 +11,16 @@ import {
 } from '../services/data'
 
 //#region DATA
+export function fnSetMainScreen(screen) {
+    return dispatch => {
+        dispatch({
+            type: Actions.SET_MAIN_SCREEN,
+            payload: { screen }
+        })
+    }
+}
+
+//#region DATA
 export function fnGetOffers() {
     return dispatch => {
         wsGetOffers().then(d => {

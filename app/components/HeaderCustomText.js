@@ -26,7 +26,7 @@ class HeaderGeneric extends React.Component {
                         }}>
                         <Icon
                             name={'chevron-left'}
-                            size={20}
+                            size={30}
                             color={colors.WHITE}
                         />
                     </TouchableOpacity>

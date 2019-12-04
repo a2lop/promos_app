@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { connect } from 'react-redux'
 import { fnGetOffers } from '../actions/actions'
-// import I18n from '../utils/i18n'
+import I18n from '../utils/i18n'
 import Txt from '../components/Txt'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
@@ -30,58 +30,47 @@ class Home extends React.Component {
             // fbData: -1,
             // isLoading: false,
             views: [
-                { id: 1, img: 'logo.png' },
-                { id: 2, img: 'emptyContent2.png' },
-                { id: 3, img: 'emptyContent4.png' }
+                {
+                    id: 1,
+                    title: I18n.t('wizard.title1'),
+                    description: I18n.t('wizard.message1')
+                },
+                {
+                    id: 2,
+                    title: I18n.t('wizard.title2'),
+                    description: I18n.t('wizard.message2')
+                },
+                {
+                    id: 3,
+                    title: I18n.t('wizard.title3'),
+                    description: I18n.t('wizard.message3')
+                }
             ],
-            currentStep: 1
+            currentStep: 0
         }
     }
 
     componentDidMount() {}
 
     goToNextStep() {
-        this.flatListRef.scrollToIndex({
-            animated: true,
-            index: this.state.currentStep
-        })
-        this.setState({ currentStep: this.state.currentStep + 1 })
-
-        // if (this.state.currentStep == 1) {
-        //     Animated.timing(this.state.op1, {
-        //         toValue: 0,
-        //         duration: 1000
-        //     }).start(() => {})
-
-        //     Animated.timing(this.state.op2, {
-        //         toValue: 1,
-        //         duration: 1000
-        //     }).start(() => {})
-        // } else if (this.state.currentStep == 2) {
-        //     Animated.timing(this.state.op2, {
-        //         toValue: 0,
-        //         duration: 1000
-        //     }).start(() => {})
-
-        //     Animated.timing(this.state.op3, {
-        //         toValue: 1,
-        //         duration: 1000
-        //     }).start(() => {})
-        // } else if (this.state.currentStep == 3) {
-        //     Animated.timing(this.state.op3, {
-        //         toValue: 0,
-        //         duration: 1000
-        //     }).start(() => {})
-
-        //     Animated.timing(this.state.op1, {
-        //         toValue: 1,
-        //         duration: 1000
-        //     }).start(() => {})
-        // }
-        // this.setState({
-        //     currentStep:
-        //         this.state.currentStep == 3 ? 1 : this.state.currentStep + 1
-        // })
+        if (this.state.currentStep == 2) {
+            this.props.navigation.navigate('Home')
+        } else {
+            this.setState(
+                {
+                    currentStep:
+                        this.state.currentStep + 1 == 3
+                            ? 0
+                            : this.state.currentStep + 1
+                },
+                () => {
+                    this.flatListRef.scrollToIndex({
+                        animated: true,
+                        index: this.state.currentStep
+                    })
+                }
+            )
+        }
     }
     loadOffers() {}
 
@@ -89,42 +78,91 @@ class Home extends React.Component {
         return (
             <SafeAreaView
                 style={[gs.dfSafeArea, { backgroundColor: colors.YELLOW }]}>
-                {/* <View style={gs.f1}> */}
                 <FlatList
                     ref={ref => {
                         this.flatListRef = ref
                     }}
-                    style={[gs.f1]}
+                    scrollEnabled={false}
+                    style={gs.f1}
                     horizontal
                     data={this.state.views}
                     renderItem={({ item }) => (
-                        <View
-                            style={[
-                                // gs.f1,
-                                {
-                                    width: Dimensions.get('window').width
-                                }
-                            ]}>
+                        <View style={gs.fw}>
                             <View style={st.imageContainer}>
-                                <Image
-                                    resizeMode={'contain'}
-                                    source={require('../assets/logo.png')}
-                                    style={st.logo}
-                                />
+                                {item.id == 1 && (
+                                    <Image
+                                        resizeMode={'contain'}
+                                        source={require('../assets/logo.png')}
+                                        style={st.logo}
+                                    />
+                                )}
+                                {item.id == 2 && (
+                                    <Image
+                                        resizeMode={'contain'}
+                                        source={require('../assets/wizard2.png')}
+                                        style={st.logo}
+                                    />
+                                )}
+                                {item.id == 3 && (
+                                    <Image
+                                        resizeMode={'contain'}
+                                        source={require('../assets/wizard1.png')}
+                                        style={st.logo}
+                                    />
+                                )}
                             </View>
-                            <View style={gs.f1}>{/* <Txt>Hola</Txt> */}</View>
+                            <View
+                                style={[
+                                    // gs.f1,
+                                    {
+                                        paddingHorizontal: 15,
+                                        alignItems: 'center'
+                                    }
+                                ]}>
+                                <Txt
+                                    style={{
+                                        color: colors.PURPLE,
+                                        fontSize: 25,
+                                        fontWeight: 'bold',
+                                        textAlign: 'center',
+                                        marginBottom: 15
+                                    }}>
+                                    {item.title}
+                                </Txt>
+                                <Txt
+                                    style={{
+                                        color: colors.PURPLE,
+                                        fontSize: 18,
+                                        textAlign: 'center'
+                                    }}>
+                                    {item.description}
+                                </Txt>
+                            </View>
                         </View>
                     )}
                     keyExtractor={item => item.id}
                 />
-                {/* </View> */}
                 <View style={st.footerSection}>
                     <View style={gs.f1}>
-                        <TouchableOpacity style={st.btn}>
+                        <TouchableOpacity
+                            style={st.btn}
+                            onPress={() => {
+                                this.props.navigation.navigate('Home')
+                            }}>
                             <Txt style={st.txtButton}>Omitir</Txt>
                         </TouchableOpacity>
                     </View>
                     <View style={st.dotsContainer}>
+                        <Icon
+                            style={gs.f1}
+                            name={
+                                this.state.currentStep == 0
+                                    ? 'checkbox-blank-circle'
+                                    : 'checkbox-blank-circle-outline'
+                            }
+                            size={20}
+                            color={colors.PURPLE}
+                        />
                         <Icon
                             style={gs.f1}
                             name={
@@ -133,7 +171,7 @@ class Home extends React.Component {
                                     : 'checkbox-blank-circle-outline'
                             }
                             size={20}
-                            color={colors.DARK}
+                            color={colors.PURPLE}
                         />
                         <Icon
                             style={gs.f1}
@@ -143,17 +181,7 @@ class Home extends React.Component {
                                     : 'checkbox-blank-circle-outline'
                             }
                             size={20}
-                            color={colors.DARK}
-                        />
-                        <Icon
-                            style={gs.f1}
-                            name={
-                                this.state.currentStep == 3
-                                    ? 'checkbox-blank-circle'
-                                    : 'checkbox-blank-circle-outline'
-                            }
-                            size={20}
-                            color={colors.DARK}
+                            color={colors.PURPLE}
                         />
                     </View>
                     <View style={gs.f1}>
@@ -162,7 +190,14 @@ class Home extends React.Component {
                             onPress={() => {
                                 this.goToNextStep()
                             }}>
-                            <Txt style={st.txtButton}>Siguiente</Txt>
+                            <Txt style={st.txtButton}>
+                                {I18n.t(
+                                    'wizard.' +
+                                        (this.state.currentStep == 2
+                                            ? 'begin'
+                                            : 'next')
+                                )}
+                            </Txt>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -173,10 +208,11 @@ class Home extends React.Component {
 
 const st = StyleSheet.create({
     imageContainer: {
-        width: '60%',
+        height: '60%',
+        justifyContent: 'center',
         alignSelf: 'center'
     },
-    logo: { width: '100%' },
+    logo: { height: '80%', maxWidth: 300 },
     footerSection: {
         flexDirection: 'row'
     },
@@ -186,7 +222,7 @@ const st = StyleSheet.create({
     },
     txtButton: {
         fontSize: 18,
-        color: colors.DARK,
+        color: colors.PURPLE,
         textAlign: 'center',
         fontWeight: 'bold'
     },

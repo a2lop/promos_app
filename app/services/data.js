@@ -45,3 +45,11 @@ export function wsGetMemberships() {
 export function wsGetMembershipOffers(id) {
     return wsCall('offers/membershipOffers/' + id)
 }
+
+export function wsSearchByText(keyword) {
+    return wsCall('offers/searchByText/' + keyword)
+}
+
+export function wsGetBirthdayOffers() {
+    return wsCall('birthdayOffers')
+}

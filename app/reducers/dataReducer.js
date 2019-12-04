@@ -2,6 +2,7 @@ import { constants } from '../utils/constants'
 import { concat } from 'lodash'
 
 import {
+    SET_MAIN_SCREEN,
     GET_OFFERS,
     GET_OFFERS_SUCCESS,
     SET_OFFER,
@@ -14,6 +15,8 @@ import {
 } from '../actions/actionTypes'
 
 let initialState = {
+    mainScreen: 1,
+
     isLoadingHomeOffers: false,
     homeOffers: [],
     offer: {},
@@ -28,6 +31,11 @@ let initialState = {
 
 const dataReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_MAIN_SCREEN:
+            state = Object.assign({}, state, {
+                mainScreen: action.payload.screen
+            })
+            return state
         case GET_OFFERS:
             state = Object.assign({}, state, {
                 homeOffers: action.payload.reset ? [] : state.homeOffers,

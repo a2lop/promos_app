@@ -1,3 +1,5 @@
+export const SET_MAIN_SCREEN = 'SET_MAIN_SCREEN'
+
 export const GET_OFFERS = 'GET_OFFERS'
 export const GET_OFFERS_SUCCESS = 'GET_OFFERS_SUCCESS'
 export const SET_OFFER = 'SET_OFFER'

@@ -1,16 +1,15 @@
 import React from 'react'
 import { View, RefreshControl, Image } from 'react-native'
-// import LoadingItem from '../components/Loading'
-
-import { connect } from 'react-redux'
-import { fnGetOffers, fnGetOffersByDayNumber } from '../actions/actions'
-import I18n from '../utils/i18n'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
 import { FlatList } from 'react-native-gesture-handler'
 import DaySelector from '../components/DaySelector'
-import { colors } from '../utils/constants'
 import LoadingItem from '../components/Loading'
+
+import { connect } from 'react-redux'
+import { fnGetOffers, fnGetOffersByDayNumber } from '../actions/actions'
+import I18n from '../utils/i18n'
+import { colors } from '../utils/constants'
 
 class Home extends React.Component {
     componentDidMount() {
