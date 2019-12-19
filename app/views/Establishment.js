@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Image, StyleSheet } from 'react-native'
-import LoadingItem from '../components/Loading'
+// import LoadingItem from '../components/Loading'
 import Txt from '../components/Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import TagSimple from '../components/TagSimple'
@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import I18n from '../utils/i18n'
 
 import { globalStyles as gs } from '../utils/styles'
-import { colors } from '../utils/constants'
+import { openUrl, shareContent } from '../utils/utils'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 
 import { fnGetEstablishmentOffers } from '../actions/actions'
@@ -20,6 +20,17 @@ import { fnGetEstablishmentOffers } from '../actions/actions'
 class Establishment extends React.Component {
     componentDidMount() {
         this.props.fnGetEstablishmentOffers(this.props.establishment.id)
+    }
+
+    shareEstablishment() {
+        const title = I18n.t('share.establishmentTitle', {
+            establishmentName: this.props.establishment.name
+        })
+        const description = I18n.t('share.establishmentDescription', {
+            description: this.props.establishment.description
+        })
+        const dialogTitle = I18n.t('share.dialogTitle')
+        shareContent(title, description, null, dialogTitle)
     }
 
     render() {
@@ -46,9 +57,16 @@ class Establishment extends React.Component {
                                     justifyContent: 'center'
                                 }
                             ]}>
-                            {this.props.establishment.categories.map(c => (
-                                <TagSimple item={c} key={c.id}></TagSimple>
-                            ))}
+                            {this.props.establishment.categories.map(c => {
+                                return (
+                                    <TagSimple
+                                        item={c}
+                                        key={c.id}
+                                        isCategory={true}
+                                        navigation={this.props.navigation}
+                                    />
+                                )
+                            })}
                         </View>
                     )}
                 </View>
@@ -59,16 +77,27 @@ class Establishment extends React.Component {
                 </View>
                 <View style={gs.dfGenericContainer}>
                     {/* <Txt style={[gs.dfSectionTitle, gs.mb5]}>Contactos</Txt> */}
-                    {this.props.establishment.phone && (
-                        <TouchableOpacity style={st.labelContainer}>
-                            <View style={st.labelIcon}>
-                                <Icon size={25} name={'cellphone-android'} />
-                            </View>
-                            <Txt style={st.labelText}>
-                                {this.props.establishment.phone}
-                            </Txt>
-                        </TouchableOpacity>
-                    )}
+                    {this.props.establishment.phones &&
+                        this.props.establishment.phones.length > 0 &&
+                        this.props.establishment.phones.map(phone => {
+                            return (
+                                <View style={st.labelContainer} key={phone}>
+                                    <TouchableOpacity
+                                        style={gs.fdRow}
+                                        onPress={() => {
+                                            openUrl('tel:' + phone)
+                                        }}>
+                                        <View style={st.labelIcon}>
+                                            <Icon
+                                                size={25}
+                                                name={'cellphone-android'}
+                                            />
+                                        </View>
+                                        <Txt style={st.labelText}>{phone}</Txt>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        })}
                     {this.props.establishment.address && (
                         <TouchableOpacity style={st.labelContainer}>
                             <View style={st.labelIcon}>
@@ -82,34 +111,60 @@ class Establishment extends React.Component {
 
                     {/* <View style={st.labelContainer}> */}
                     <View style={st.socialIconsContainer}>
-                        {this.props.establishment.facebook != '' && (
+                        {this.props.establishment.facebook && (
                             <View style={st.socialIconButton}>
-                                <TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openUrl(
+                                            this.props.establishment.facebook
+                                        )
+                                    }}>
                                     <Icon size={30} name={'facebook-box'} />
                                 </TouchableOpacity>
                             </View>
                         )}
-                        {this.props.establishment.instagram != '' && (
+                        {this.props.establishment.instagram && (
                             <View style={st.socialIconButton}>
-                                <TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openUrl(
+                                            this.props.establishment.instagram
+                                        )
+                                    }}>
                                     <Icon size={30} name={'instagram'} />
                                 </TouchableOpacity>
                             </View>
                         )}
-                        {this.props.establishment.email != '' && (
+                        {this.props.establishment.email && (
                             <View style={st.socialIconButton}>
-                                <TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openUrl(this.props.establishment.email)
+                                    }}>
                                     <Icon size={30} name={'email'} />
                                 </TouchableOpacity>
                             </View>
                         )}
-                        {this.props.establishment.website != '' && (
+                        {this.props.establishment.website && (
                             <View style={st.socialIconButton}>
-                                <TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        openUrl(
+                                            this.props.establishment.website
+                                        )
+                                    }}>
                                     <Icon size={30} name={'web'} />
                                 </TouchableOpacity>
                             </View>
                         )}
+                        <View style={st.socialIconButton}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.shareEstablishment()
+                                }}>
+                                <Icon size={30} name={'share-variant'} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
                 <View style={gs.dfGenericContainer}>
@@ -128,6 +183,7 @@ class Establishment extends React.Component {
                                     key={d.index}
                                     item={d.item}
                                     navigation={this.props.navigation}
+                                    notLoadEstablishment={true}
                                 />
                             )
                         }}></FlatList>
@@ -178,7 +234,7 @@ let st = StyleSheet.create({
     },
     labelText: {
         flex: 1,
-        fontSize: 13
+        fontSize: 15
     },
     socialIconsContainer: {
         marginTop: 10,

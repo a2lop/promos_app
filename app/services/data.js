@@ -7,6 +7,15 @@ export function wsGetOffers() {
 export function wsGetOffersByDayNumber(dayNumber) {
     return wsCall('offers/offersByDayNumber/' + dayNumber)
 }
+export function wsGetOffersByDayNumberAndCategory(
+    dayNumber,
+    categoryId,
+    lastId
+) {
+    return wsCall(
+        `offers/day/${dayNumber}/category/${categoryId}/startAt/${lastId}`
+    )
+}
 
 export function wsGetOffer(id) {
     // const data = { action: 'popular_books_week' }
@@ -20,6 +29,10 @@ export function wsGetCategories() {
 
 export function wsGetEstablishments() {
     return wsCall('establishments')
+}
+
+export function wsGetEstablishmentsByCategory(categoryId, lastId) {
+    return wsCall(`establishments/byCategory/${categoryId}/startAt/${lastId}`)
 }
 
 export function wsGetEstablishmentDetail(id) {

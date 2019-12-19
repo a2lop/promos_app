@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { View } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import Txt from './Txt'
 import { colors, fonts } from '../utils/constants'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+// import {} from 'react-native-gesture-handler'
 
 import I18n from '../utils/i18n'
 

@@ -80,7 +80,8 @@ const DefaultFooterTabBar = props => {
                                             navigationState.index == index
                                                 ? colors.PURPLE
                                                 : colors.WHITE,
-                                        fontSize: 14
+                                        fontSize: 14,
+                                        fontWeight: 'bold'
                                     }}>
                                     {I18n.t(`common.tabs.footer${label}`)}
                                 </Txt>

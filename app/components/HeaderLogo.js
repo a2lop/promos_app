@@ -43,18 +43,12 @@ class HeaderMain extends React.Component {
             // <SafeAreaView style={gs.barSafeArea}>
             <SafeAreaView
                 style={{
-                    backgroundColor:
-                        this.props.screen == 3 ? colors.PURPLE : colors.YELLOW
+                    backgroundColor: colors.YELLOW
                 }}>
-                <Animated.View
+                <View
                     style={[
                         gs.headerContainer,
-                        {
-                            backgroundColor: this.state.bgColor.interpolate({
-                                inputRange: [0, 100],
-                                outputRange: [colors.YELLOW, colors.PURPLE]
-                            })
-                        }
+                        { backgroundColor: colors.YELLOW }
                     ]}>
                     <TouchableOpacity
                         style={{ zIndex: 1 }}
@@ -76,7 +70,7 @@ class HeaderMain extends React.Component {
                         }}>
                         <Icon name={'magnify'} size={25} color={colors.WHITE} />
                     </TouchableOpacity>
-                </Animated.View>
+                </View>
             </SafeAreaView>
         )
     }

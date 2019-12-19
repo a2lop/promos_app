@@ -140,6 +140,24 @@ const globalStyles = StyleSheet.create({
     },
     dfSimpleSubtitle: {
         fontSize: 15
+    },
+    filterButtonContainer: {
+        alignContent: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 5,
+        zIndex: 2
+    },
+    fullscreenContainer: {
+        position: 'absolute',
+        top: 0,
+        // bottom: 0,
+        height: '100%',
+        left: 0,
+        right: 0,
+        backgroundColor: colors.PURPLE_TRANSPARENT,
+        paddingHorizontal: 15,
+        paddingVertical: 15,
+        zIndex: 10
     }
 })
 

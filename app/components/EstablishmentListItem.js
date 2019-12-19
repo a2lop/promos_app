@@ -24,13 +24,19 @@ class EsteblishmentListItem extends React.Component {
                     }}>
                     <View style={gs.liSquareImageContainer}>
                         <Image
-                            source={{ uri: this.props.item.squareImage }}
-                            style={gs.liSquareImage}
+                            source={{
+                                uri: this.props.item.squareImage,
+                                cache: 'only-if-cached'
+                            }}
+                            style={[
+                                gs.liSquareImage,
+                                { borderTopLeftRadius: 5 }
+                            ]}
                         />
                     </View>
                     <View style={gs.f1}>
                         <Txt style={gs.liTitle}>{this.props.item.name}</Txt>
-                        <Txt style={gs.liDescription} numberOfLines={3}>
+                        <Txt style={gs.liDescription} numberOfLines={4}>
                             {this.props.item.description}
                         </Txt>
                     </View>

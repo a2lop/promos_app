@@ -7,13 +7,17 @@ import { globalStyles as gs } from '../utils/styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 // import { colors } from '../utils/constants'
 import { fnSetOffer } from '../actions/actions'
+import { getDaysString } from '../utils/utils'
 
 class OfferSimple extends React.Component {
     openOffer() {
-        this.props.fnSetOffer(this.props.item)
-        this.props.navigation.navigate('Offer', {
+        this.props.fnSetOffer(this.props.item, this.props.notLoadEstablishment)
+        this.props.navigation.navigate('OfferDetail', {
             viewTitle: this.props.item.name
         })
+        if (this.props.scrollToTop) {
+            this.props.onPressed()
+        }
     }
 
     render() {
@@ -35,7 +39,9 @@ class OfferSimple extends React.Component {
                     />
 
                     <Txt style={gs.dfSimpleTitle}>{this.props.item.name}</Txt>
-                    <Txt style={gs.dfSimpleSubtitle}>Martes</Txt>
+                    <Txt style={gs.dfSimpleSubtitle}>
+                        {getDaysString(this.props.item.days)}
+                    </Txt>
                 </TouchableOpacity>
             </View>
         )

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import { View, YellowBox, Platform } from 'react-native'
 
 import { Provider } from 'react-redux'
@@ -38,14 +38,17 @@ import CategoryOffers from '../views/CategoryOffers'
 import Memberships from '../views/Memberships'
 import MembershipOffers from '../views/MembershipOffers'
 import BirthdayOffers from '../views/BirthdayOffers'
+import OnPromos from '../views/OnPromos'
 
-// import { colors } from '../utils/constants'
 import DefaultFooterTabBar from '../components/DefaultFooterTabBar'
 import HeaderGeneric from '../components/HeaderGeneric'
 import HeaderCustomText from '../components/HeaderCustomText'
 import TabBarDefault from '../components/TabBarDefault'
+
 // import Txt from '../components/Txt'
 // import TabBarDefault from '../components/TabBarDefault'
+
+import SplashScreen from 'react-native-splash-screen'
 
 const reducer = combineReducers({
     dataReducer
@@ -240,10 +243,22 @@ const SessionStack = createStackNavigator(
                 ),
                 gesturesEnabled: false
             })
+        },
+        OnPromos: {
+            screen: OnPromos,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <HeaderLogo
+                        navigation={navigation}
+                        // viewTitle={'birthdayOffers.viewTitle'}
+                    />
+                ),
+                gesturesEnabled: false
+            })
         }
     },
     {
-        initialRouteName: 'Main'
+        initialRouteName: 'Wizard'
     }
 )
 
@@ -286,30 +301,30 @@ const RootStack = (hasSession = false) => {
 // const AppContainer = createAppContainer(RootStack(true))
 
 export default class App extends Component {
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        this.state = {
-            isLoaded: true
-        }
-    }
+    //     this.state = {
+    //         isLoaded: true
+    //     }
+    // }
 
-    componentDidMount() {
-        // SplashScreen.hide()
-    }
+    // componentDidMount() {
+    //     SplashScreen.hide()
+    // }
 
     render() {
-        if (this.state.isLoaded) {
-            const AppContainer = createAppContainer(RootStack(false))
-            return (
-                <Provider store={store}>
-                    <View style={{ flex: 1 }}>
-                        <AppContainer />
-                    </View>
-                </Provider>
-            )
-        } else {
-            return <View></View>
-        }
+        // if (this.state.isLoaded) {
+        const AppContainer = createAppContainer(RootStack(false))
+        return (
+            <Provider store={store}>
+                <View style={{ flex: 1 }}>
+                    <AppContainer />
+                </View>
+            </Provider>
+        )
+        // } else {
+        //     return <View></View>
+        // }
     }
 }

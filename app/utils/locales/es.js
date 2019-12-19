@@ -9,14 +9,25 @@ export default {
         message3:
             'Enterante de las ofertas que día a día existen en tu ciudad, suscribete a tu establecimiento y se el primero en recibir las promociones!!!',
         next: 'Siguiente',
-        begin: 'Empezar'
+        begin: 'Empezar',
+        skip: 'Omitir'
     },
     common: {
         tabs: {
             footerHome: 'Inicio',
             footerDiscover: 'Descubrir',
             footerProfile: 'Perfil'
-        }
+        },
+        days: {
+            monday: 'Lunes',
+            tuesday: 'Martes',
+            wednesday: 'Miércoles',
+            thursday: 'Jueves',
+            friday: 'Viernes',
+            saturday: 'Sábado',
+            sunday: 'Domingo'
+        },
+        and: ' y '
     },
     components: {
         daySelector: {
@@ -34,7 +45,10 @@ export default {
         otherOffersOf: 'Otras promociones en {{establishmentName}}'
     },
     establishment: { viewTitle: 'Establecimiento', offers: 'Promociones' },
-    establishments: { viewTitle: 'Establecimientos' },
+    establishments: {
+        viewTitle: 'Establecimientos',
+        noEstablishments: 'No hay establecimientos 😔'
+    },
 
     searchText: {
         viewTitle: 'Busqueda',
@@ -49,7 +63,14 @@ export default {
         noAccount: '¿No tienes una cuenta? ',
         register: 'Registrate',
         or: ' O ',
-        loginWith: 'Inicia con tus redes sociales:'
+        loginWith: 'Inicia con tus redes sociales:',
+        phRegisterEmail: 'Tu correo electrónico',
+        phRegisterPassword1: 'Ingresa una contraseña',
+        phRegisterPassword2: 'Repite tu contraseña',
+        alreadyAccount: '¿Ya tienes una cuenta?',
+        backToLogin: ' Inicia sesión',
+        confirmRegister: 'Registrarse',
+        registerWithFacebook: 'Registrate con Facebook'
     },
     sidebar: {
         home: 'Inicio',
@@ -58,7 +79,8 @@ export default {
         about: 'Acerca de',
         login: 'Iniciar sesión',
         memberships: 'Tarjetas / Afiliaciones',
-        birthday: '¿Es tu cumpleaños?'
+        birthday: '¿Es tu cumpleaños?',
+        want: '¿Quieres unirte?'
     },
     home: {
         noOffers: 'No hay promociones hoy 😔'
@@ -71,5 +93,21 @@ export default {
     },
     birthdayOffers: {
         viewTitle: 'Ofertas por tu cumpleaños'
+    },
+    filterPopup: { chooseCategory: 'Selecciona una categoria:', all: 'Todas' },
+    onPromos: {
+        title: '¿Tienes una oferta espectacular y quieres aparecer en Promos?',
+        description:
+            'Somos una comunidad que todos los días busca crecer, nos alegraría muchisimo contar con tu establecimiento y oferta en nuestra guía, puedes tanto escribirnos a nuestro correo, llamarnos o simplemente enviarnos un Whatsapp a los siguientes contactos:',
+        socialText: 'O escribenos mediante nuestras redes sociales:'
+    },
+    share: {
+        dialogTitle: 'Compartir este contenido',
+        offerTitle: '{{offerTitle}} en {{establishmentName}}',
+        establishmentTitle: 'Ofertas en {{establishmentName}}',
+        offerDescription:
+            '{{description}}.\n\nEsta y otras promociones encuentras en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/',
+        establishmentDescription:
+            '{{description}}.\nEncuentra las ofertas de este y otros establecimientos en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/'
     }
 }

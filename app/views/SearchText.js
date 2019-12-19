@@ -17,6 +17,7 @@ import { globalStyles as gs } from '../utils/styles'
 import { connect } from 'react-redux'
 import I18n from '../utils/i18n'
 import { colors } from '../utils/constants'
+import { getDaysString } from '../utils/utils'
 
 import { wsSearchByText } from '../services/data'
 
@@ -44,7 +45,7 @@ class SearchText extends React.Component {
                         })
                     })
                 }
-            }, 500)
+            }, 300)
         })
     }
 
@@ -109,6 +110,7 @@ class SearchText extends React.Component {
                             <OfferListItem
                                 item={d.item}
                                 navigation={this.props.navigation}
+                                showDays={true}
                             />
                         )
                     }}></FlatList>

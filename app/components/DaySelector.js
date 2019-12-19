@@ -5,7 +5,7 @@ import Txt from './Txt'
 import I18n from '../utils/i18n'
 
 import { connect } from 'react-redux'
-import { globalStyles as gs } from '../utils/styles'
+// import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
 
 const dayWidth = (Dimensions.get('window').width - 50) / 7
@@ -20,14 +20,35 @@ class DaySelector extends React.Component {
     }
     createDays() {
         const todayTs = new Date().getTime()
+        const todayDay = new Date().getDay()
+
         const days = []
-        days.push({ date: new Date(todayTs - 86400000 * 3), id: 1 })
-        days.push({ date: new Date(todayTs - 86400000 * 2), id: 2 })
-        days.push({ date: new Date(todayTs - 86400000 * 1), id: 3 })
-        days.push({ date: new Date(todayTs), id: 4, isSelected: true })
-        days.push({ date: new Date(todayTs + 86400000 * 1), id: 5 })
-        days.push({ date: new Date(todayTs + 86400000 * 2), id: 6 })
-        days.push({ date: new Date(todayTs + 86400000 * 3), id: 7 })
+        // days.push({ date: new Date(todayTs - 86400000 * 3), id: 1 })
+        // days.push({ date: new Date(todayTs - 86400000 * 2), id: 2 })
+        // days.push({ date: new Date(todayTs - 86400000 * 1), id: 3 })
+        // days.push({ date: new Date(todayTs), id: 4, isSelected: true })
+        // days.push({ date: new Date(todayTs + 86400000 * 1), id: 5 })
+        // days.push({ date: new Date(todayTs + 86400000 * 2), id: 6 })
+        // days.push({ date: new Date(todayTs + 86400000 * 3), id: 7 })
+
+        for (let i = 1; i < new Date().getDay(); i++) {
+            days.push({
+                date: new Date(todayTs - 86400000 * (todayDay - i)),
+                id: i
+            })
+        }
+        days.push({
+            date: new Date(todayTs),
+            id: todayDay,
+            isSelected: true
+        })
+        for (let i = todayDay + 1; i <= 7; i++) {
+            days.push({
+                date: new Date(todayTs + 86400000 * (i - todayDay)),
+                id: i
+            })
+        }
+
         this.setState({ days })
     }
 
@@ -43,14 +64,6 @@ class DaySelector extends React.Component {
     render() {
         return (
             <View style={st.container}>
-                {/* <View style={st.dayContainer}>
-                    <TouchableOpacity>
-                        <Txt style={st.dayName}>
-                            {I18n.t('components.daySelector.monday')}
-                        </Txt>
-                        <Txt style={st.dayDate}>18</Txt>
-                    </TouchableOpacity>
-                </View> */}
                 {this.state.days.map(day => {
                     return (
                         <View
@@ -64,6 +77,12 @@ class DaySelector extends React.Component {
                             ]}
                             key={day.date.getTime()}>
                             <TouchableOpacity
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    alignContent: 'center',
+                                    justifyContent: 'center'
+                                }}
                                 onPress={() => {
                                     this.changeDay(day)
                                 }}>
@@ -71,9 +90,6 @@ class DaySelector extends React.Component {
                                     {I18n.t(
                                         `components.daySelector.${day.date.getDay()}`
                                     )}
-                                </Txt>
-                                <Txt style={st.dayDate}>
-                                    {day.date.getDate()}
                                 </Txt>
                             </TouchableOpacity>
                         </View>
@@ -86,30 +102,32 @@ class DaySelector extends React.Component {
 
 const st = StyleSheet.create({
     container: {
+        flex: 1,
         justifyContent: 'center',
         backgroundColor: colors.TRANSPARENT,
-        paddingVertical: 10,
-        flexDirection: 'row',
-        paddingHorizontal: 15
+        flexDirection: 'row'
     },
     dayContainer: {
         height: dayWidth,
-        width: dayWidth,
-        borderRadius: dayWidth / 2,
+        flex: 1,
+        borderRadius: 10,
+        // borderRadius: dayWidth / 2,
         borderWidth: 1,
-        borderColor: colors.GRAY,
+        borderColor: colors.SILVER,
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 2
     },
     dayName: {
-        fontSize: 10,
+        fontSize: 15,
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: colors.DARK
     },
     dayDate: {
         fontSize: 12,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: colors.DARK
     }
 })
 

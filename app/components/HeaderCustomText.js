@@ -4,15 +4,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Txt from './Txt'
 import { SafeAreaView } from 'react-navigation'
 
-// import I18n from '../utils/i18n'
-
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
 
-class HeaderGeneric extends React.Component {
-    componentDidMount() {
-        console.log('here', this.props.navigation.getParam('viewTitle'))
-    }
+class HeaderCustomText extends React.Component {
     render() {
         return (
             <SafeAreaView
@@ -20,7 +15,7 @@ class HeaderGeneric extends React.Component {
                 forceInset={{ top: 'always', bottom: 'never' }}>
                 <View style={gs.headerContainer}>
                     <TouchableOpacity
-                        style={gs.headerIconContainer}
+                        style={{ width: 40 }}
                         onPress={() => {
                             this.props.navigation.goBack()
                         }}>
@@ -30,7 +25,7 @@ class HeaderGeneric extends React.Component {
                             color={colors.WHITE}
                         />
                     </TouchableOpacity>
-                    <View style={gs.headerTextContainer}>
+                    <View style={[gs.headerTextContainer, { zIndex: 1 }]}>
                         <Txt style={gs.headerText} numberOfLines={1}>
                             {this.props.navigation.getParam('viewTitle')}
                         </Txt>
@@ -42,4 +37,4 @@ class HeaderGeneric extends React.Component {
     }
 }
 
-export default HeaderGeneric
+export default HeaderCustomText

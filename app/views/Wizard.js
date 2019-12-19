@@ -1,34 +1,21 @@
 import React from 'react'
-import {
-    View,
-    StyleSheet,
-    Animated,
-    Image,
-    SafeAreaView,
-    Dimensions
-} from 'react-native'
+import { View, StyleSheet, Image, SafeAreaView } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Txt from '../components/Txt'
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import SplashScreen from 'react-native-splash-screen'
 
 import { connect } from 'react-redux'
 import { fnGetOffers } from '../actions/actions'
 import I18n from '../utils/i18n'
-import Txt from '../components/Txt'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
-// import SafeAreaView from 'react-native-safe-area-view'
-
+import AsyncStorage from '@react-native-community/async-storage'
 import { globalStyles as gs } from '../utils/styles'
 
 class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // formShowed: 1,
-            // op1: new Animated.Value(1),
-            // op2: new Animated.Value(0),
-            // op3: new Animated.Value(0),
-            // fbData: -1,
-            // isLoading: false,
             views: [
                 {
                     id: 1,
@@ -49,12 +36,24 @@ class Home extends React.Component {
             currentStep: 0
         }
     }
+    async componentDidMount() {
+        setTimeout(() => {
+            SplashScreen.hide()
+        }, 1000)
+        const hideWizard = await AsyncStorage.getItem('hideWizard')
+        if (hideWizard && hideWizard == '1') {
+            this.goToHome()
+        }
+    }
 
-    componentDidMount() {}
+    goToHome() {
+        AsyncStorage.setItem('hideWizard', '1')
+        this.props.navigation.navigate('Home')
+    }
 
     goToNextStep() {
         if (this.state.currentStep == 2) {
-            this.props.navigation.navigate('Home')
+            this.goToHome()
         } else {
             this.setState(
                 {
@@ -147,9 +146,11 @@ class Home extends React.Component {
                         <TouchableOpacity
                             style={st.btn}
                             onPress={() => {
-                                this.props.navigation.navigate('Home')
+                                this.goToHome()
                             }}>
-                            <Txt style={st.txtButton}>Omitir</Txt>
+                            <Txt style={st.txtButton}>
+                                {I18n.t('wizard.skip')}
+                            </Txt>
                         </TouchableOpacity>
                     </View>
                     <View style={st.dotsContainer}>
@@ -212,7 +213,7 @@ const st = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center'
     },
-    logo: { height: '80%', maxWidth: 300 },
+    logo: { height: '80%', maxWidth: '60%' },
     footerSection: {
         flexDirection: 'row'
     },

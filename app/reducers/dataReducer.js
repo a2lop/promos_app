@@ -19,6 +19,8 @@ let initialState = {
 
     isLoadingHomeOffers: false,
     homeOffers: [],
+    homeStillLoadingMore: true,
+
     offer: {},
     categories: [],
     categoriesParents: [],
@@ -39,18 +41,22 @@ const dataReducer = (state = initialState, action) => {
         case GET_OFFERS:
             state = Object.assign({}, state, {
                 homeOffers: action.payload.reset ? [] : state.homeOffers,
-                isLoadingHomeOffers: true
+                isLoadingHomeOffers: true,
+                homeStillLoadingMore: true
             })
             return state
         case GET_OFFERS_SUCCESS:
             state = Object.assign({}, state, {
-                homeOffers: action.payload.offers,
-                isLoadingHomeOffers: false
+                homeOffers: concat(state.homeOffers, action.payload.offers),
+                isLoadingHomeOffers: false,
+                homeStillLoadingMore: action.payload.offers.length > 0
             })
             return state
         case SET_OFFER:
+            let offer = action.payload.offer
+
             state = Object.assign({}, state, {
-                offer: action.payload.offer
+                offer
             })
             return state
         case GET_CATEGORIES:
@@ -76,6 +82,12 @@ const dataReducer = (state = initialState, action) => {
                 }
             } catch (error) {}
             establishment.locations = locations
+
+            let phones = []
+            if (establishment.phone) {
+                phones = establishment.phone.split(',')
+            }
+            establishment.phones = phones
 
             state = Object.assign({}, state, {
                 establishment: action.payload.establishment,

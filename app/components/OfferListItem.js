@@ -5,6 +5,7 @@ import Txt from './Txt'
 import { globalStyles as gs } from '../utils/styles'
 import I18n from '../utils/i18n'
 
+import { getDaysString } from '../utils/utils'
 import { connect } from 'react-redux'
 import { fnSetOffer } from '../actions/actions'
 
@@ -25,14 +26,30 @@ class OfferListItem extends React.Component {
                     }}>
                     <View style={gs.liSquareImageContainer}>
                         <Image
-                            source={{ uri: this.props.item.establishmentLogo }}
+                            source={{
+                                uri: this.props.item.establishmentLogo,
+                                cache: 'only-if-cached'
+                            }}
                             style={gs.liSquareImage}
                         />
                     </View>
                     <View style={gs.f1}>
                         <Txt style={gs.liTitle}>{this.props.item.name}</Txt>
-                        <Txt style={gs.liSubitle}>
-                            {this.props.item.establishmentName}
+                        <Txt>
+                            {this.props.showDays && (
+                                // <Txt style={gs.liSubitle}>
+                                //     {this.props.item.daysString.toUpperCase() +
+                                //         ' - '}
+                                // </Txt>
+                                <Txt style={gs.liSubitle}>
+                                    {getDaysString(
+                                        this.props.item.days
+                                    ).toUpperCase() + ' - '}
+                                </Txt>
+                            )}
+                            <Txt style={gs.liSubitle}>
+                                {this.props.item.establishmentName}
+                            </Txt>
                         </Txt>
                         <Txt style={gs.liDescription} numberOfLines={3}>
                             {this.props.item.description}

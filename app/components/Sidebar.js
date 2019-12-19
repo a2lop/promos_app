@@ -5,12 +5,13 @@ import { SafeAreaView } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Txt from './Txt'
 
+import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-
+import { openUrl } from '../utils/utils'
 import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
-import { StackActions, NavigationActions } from 'react-navigation'
+// import { StackActions, NavigationActions } from 'react-navigation'
 
 class Sidebar extends Component {
     constructor(props) {
@@ -19,7 +20,8 @@ class Sidebar extends Component {
         this.state = {
             userPicture: '',
             username: '',
-            usesNumber: 0
+            usesNumber: 0,
+            version: '0.0.4'
         }
     }
 
@@ -32,28 +34,29 @@ class Sidebar extends Component {
     render() {
         return (
             <SafeAreaView style={[gs.safeArea, st.container]}>
-                <View style={st.userContainer}>
+                {/* <View style={st.userContainer}>
                     <Icon name={'account'} size={80} color={colors.WHITE} />
                     <TouchableOpacity>
                         <Txt style={st.userName}>{I18n.t('sidebar.login')}</Txt>
                     </TouchableOpacity>
+                </View> */}
+                <View
+                    style={{
+                        alignItems: 'center',
+                        marginBottom: 15,
+                        marginTop: 15
+                    }}>
+                    <Image
+                        resizeMode="contain"
+                        style={{
+                            height: 150
+                        }}
+                        source={require('../assets/sidebar.png')}
+                    />
                 </View>
                 <TouchableOpacity
                     onPress={() => {
-                        this.props.navigation.navigate('Home')
-                        const resetAction = StackActions.reset({
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({
-                                    routeName: 'DrawerNavigator',
-                                    action: NavigationActions.navigate({
-                                        routeName: 'Main'
-                                    })
-                                })
-                            ]
-                        })
-                        this.props.navigation.dispatch(resetAction)
-                        // this.props.navigation.dispatch(resetAction)
+                        this.props.navigation.navigate('Main')
                     }}>
                     <View style={st.labelContainer}>
                         <Icon name={'home'} size={22} style={st.labelIcon} />
@@ -64,18 +67,7 @@ class Sidebar extends Component {
                 <TouchableOpacity
                     style={st.labelContainer}
                     onPress={() => {
-                        const resetAction = StackActions.reset({
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({
-                                    routeName: 'DrawerNavigator',
-                                    action: NavigationActions.navigate({
-                                        routeName: 'Establishments'
-                                    })
-                                })
-                            ]
-                        })
-                        this.props.navigation.dispatch(resetAction)
+                        this.props.navigation.navigate('Establishments')
                     }}>
                     <Icon name={'domain'} size={22} style={st.labelIcon} />
                     <Txt style={st.labelText}>
@@ -85,18 +77,7 @@ class Sidebar extends Component {
                 <TouchableOpacity
                     style={st.labelContainer}
                     onPress={() => {
-                        const resetAction = StackActions.reset({
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({
-                                    routeName: 'DrawerNavigator',
-                                    action: NavigationActions.navigate({
-                                        routeName: 'Search'
-                                    })
-                                })
-                            ]
-                        })
-                        this.props.navigation.dispatch(resetAction)
+                        this.props.navigation.navigate('SearchCategories')
                     }}>
                     <Icon name={'shape'} size={22} style={st.labelIcon} />
                     <Txt style={st.labelText}>
@@ -106,18 +87,7 @@ class Sidebar extends Component {
                 <TouchableOpacity
                     style={st.labelContainer}
                     onPress={() => {
-                        const resetAction = StackActions.reset({
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({
-                                    routeName: 'DrawerNavigator',
-                                    action: NavigationActions.navigate({
-                                        routeName: 'Memberships'
-                                    })
-                                })
-                            ]
-                        })
-                        this.props.navigation.dispatch(resetAction)
+                        this.props.navigation.navigate('Memberships')
                     }}>
                     <Icon name={'credit-card'} size={22} style={st.labelIcon} />
                     <Txt style={st.labelText}>
@@ -127,18 +97,7 @@ class Sidebar extends Component {
                 <TouchableOpacity
                     style={st.labelContainer}
                     onPress={() => {
-                        const resetAction = StackActions.reset({
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({
-                                    routeName: 'DrawerNavigator',
-                                    action: NavigationActions.navigate({
-                                        routeName: 'BirthdayOffers'
-                                    })
-                                })
-                            ]
-                        })
-                        this.props.navigation.dispatch(resetAction)
+                        this.props.navigation.navigate('BirthdayOffers')
                     }}>
                     <Icon
                         name={'cake-variant'}
@@ -147,35 +106,71 @@ class Sidebar extends Component {
                     />
                     <Txt style={st.labelText}>{I18n.t('sidebar.birthday')}</Txt>
                 </TouchableOpacity>
-                <View style={st.labelContainer}>
+                <TouchableOpacity
+                    style={st.labelContainer}
+                    onPress={() => {
+                        this.props.navigation.navigate('OnPromos')
+                    }}>
+                    <Icon name={'sale'} size={22} style={st.labelIcon} />
+                    <Txt style={st.labelText}>{I18n.t('sidebar.want')}</Txt>
+                </TouchableOpacity>
+                {/* <View style={st.labelContainer}>
                     <Icon
                         name={'information-outline'}
                         size={22}
                         style={st.labelIcon}
                     />
                     <Txt style={st.labelText}>{I18n.t('sidebar.about')}</Txt>
-                </View>
+                </View> */}
 
-                <View style={{ alignItems: 'center' }}>
-                    <Image
-                        resizeMode="contain"
-                        style={{
-                            height: 140,
-                            marginBottom: 25
-                            // alignSelf: 'center'
-                        }}
-                        source={require('../assets/sidebarImage2.png')}
-                    />
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        marginTop: 15,
+                        paddingHorizontal: 15
+                    }}>
+                    <TouchableOpacity
+                        style={st.socialButton}
+                        onPress={() => {
+                            openUrl('https://www.facebook.com/promos.ecu')
+                        }}>
+                        <Icon
+                            size={40}
+                            name={'facebook-box'}
+                            color={colors.YELLOW}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={st.socialButton}
+                        onPress={() => {
+                            openUrl('https://www.instagram.com/promos.ec/')
+                        }}>
+                        <Icon
+                            size={40}
+                            name={'instagram'}
+                            color={colors.YELLOW}
+                        />
+                    </TouchableOpacity>
                 </View>
-                <Txt
+                <View
                     style={{
                         position: 'absolute',
                         bottom: 5,
-                        right: 5,
-                        color: colors.WHITE
+                        right: 5
                     }}>
-                    v 0.0.02
-                </Txt>
+                    <TouchableOpacity
+                        onPress={() => {
+                            AsyncStorage.removeItem('hideWizard')
+                        }}>
+                        <Txt
+                            style={{
+                                color: colors.WHITE
+                            }}>
+                            {this.state.version}
+                        </Txt>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView>
         )
     }
@@ -200,7 +195,7 @@ let st = StyleSheet.create({
         // width: 40,
         marginLeft: 15,
         marginRight: 10,
-        color: colors.WHITE
+        color: colors.YELLOW
     },
     labelText: {
         flex: 1,
@@ -212,7 +207,11 @@ let st = StyleSheet.create({
         marginTop: 10,
         marginBottom: 15
     },
-    userName: { fontSize: 22, color: colors.WHITE }
+    userName: { fontSize: 22, color: colors.WHITE },
+    socialButton: {
+        flex: 1,
+        alignItems: 'center'
+    }
 })
 
 // export default Sidebar

@@ -7,7 +7,8 @@ import {
     wsGetEstablishmentOffers,
     wsGetDiscoverOffers,
     wsGetMemberships,
-    wsGetOffersByDayNumber
+    wsGetOffersByDayNumber,
+    wsGetOffersByDayNumberAndCategory
 } from '../services/data'
 
 //#region DATA
@@ -49,19 +50,44 @@ export function fnGetOffersByDayNumber(day, reset) {
     }
 }
 
-export function fnSetOffer(offer) {
+export function fnGetOffersByDayNumberAndCategory(
+    day,
+    categoryId,
+    lastId,
+    reset
+) {
+    return dispatch => {
+        dispatch({
+            type: Actions.GET_OFFERS,
+            payload: {
+                lastId,
+                reset
+            }
+        })
+        wsGetOffersByDayNumberAndCategory(day, categoryId, lastId).then(d => {
+            dispatch({
+                type: Actions.GET_OFFERS_SUCCESS,
+                payload: { offers: d }
+            })
+        })
+    }
+}
+
+export function fnSetOffer(offer, notLoadEstablishment) {
     return dispatch => {
         dispatch({
             type: Actions.SET_OFFER,
             payload: { offer }
         })
         dispatch(fnGetOffer(offer.id))
-        dispatch(
-            fnSetEstablishment({
-                id: offer.establishmentId,
-                name: offer.establishmentName
-            })
-        )
+        if (!notLoadEstablishment) {
+            dispatch(
+                fnSetEstablishment({
+                    id: offer.establishmentId,
+                    name: offer.establishmentName
+                })
+            )
+        }
     }
 }
 

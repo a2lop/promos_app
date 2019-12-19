@@ -1,15 +1,21 @@
 import React from 'react'
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, StyleSheet } from 'react-native'
 import Txt from './Txt'
 
 import { globalStyles as gs } from '../utils/styles'
-import { colors } from '../utils/constants'
+// import { colors } from '../utils/constants'
 
-export default class TagSimple extends React.PureComponent {
+export default class TagSimple extends React.Component {
+    // constructor(props) {
+    //     super(props)
+    // }
     openContent() {
-        // this.props.navigation.navigate('CategoryOffers', {
-        //     categoryId: this.props.item.id
-        // })
+        if (this.props.isCategory) {
+            this.props.navigation.navigate('CategoryOffers', {
+                categoryId: this.props.item.id,
+                viewTitle: this.props.item.name
+            })
+        }
     }
 
     render() {

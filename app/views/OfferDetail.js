@@ -13,13 +13,26 @@ import { colors } from '../utils/constants'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import OfferSimple from '../components/OfferSimple'
 import TagSimple from '../components/TagSimple'
+import { shareContent } from '../utils/utils'
 
 class OfferDetail extends React.Component {
     componentDidMount() {}
 
+    shareOffer() {
+        const title = I18n.t('share.offerTitle', {
+            offerTitle: this.props.offer.name,
+            establishmentName: this.props.establishment.name
+        })
+        const description = I18n.t('share.offerDescription', {
+            description: this.props.offer.description
+        })
+        const dialogTitle = I18n.t('share.dialogTitle')
+        shareContent(title, description, null, dialogTitle)
+    }
+
     render() {
         return (
-            <ScrollView style={gs.dfPageContainer}>
+            <ScrollView style={gs.dfPageContainer} ref="_scrollView">
                 {/* <View style={gs.mainImageContainer}> */}
                 <Image
                     source={{ uri: this.props.offer.logoBanner }}
@@ -49,7 +62,12 @@ class OfferDetail extends React.Component {
                             { marginHorizontal: 15, justifyContent: 'center' }
                         ]}>
                         {this.props.offer.categories.map(c => (
-                            <TagSimple item={c} key={c.id}></TagSimple>
+                            <TagSimple
+                                item={c}
+                                key={c.id}
+                                navigation={this.props.navigation}
+                                isCategory={true}
+                            />
                         ))}
                     </View>
                     {/* </View>
@@ -68,7 +86,10 @@ class OfferDetail extends React.Component {
                             </TouchableOpacity>
                         </View>
                         <View style={st.socialIconButtonContainer}>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.shareOffer()
+                                }}>
                                 <Icon size={30} name={'share-variant'}></Icon>
                             </TouchableOpacity>
                         </View>
@@ -81,7 +102,9 @@ class OfferDetail extends React.Component {
                         })}
                     </Txt>
                     <FlatList
-                        data={this.props.establishmentOffers}
+                        data={this.props.establishmentOffers.filter(
+                            eo => eo.id != this.props.offer.id
+                        )}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={d => {
@@ -90,6 +113,14 @@ class OfferDetail extends React.Component {
                                     key={d.index}
                                     item={d.item}
                                     navigation={this.props.navigation}
+                                    notLoadEstablishment={true}
+                                    scrollToTop={true}
+                                    onPressed={() => {
+                                        this.refs._scrollView.scrollTo({
+                                            y: 0,
+                                            animated: true
+                                        })
+                                    }}
                                 />
                             )
                         }}></FlatList>

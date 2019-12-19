@@ -41,6 +41,7 @@ class CategoryOffers extends React.Component {
                             <OfferListItem
                                 item={d.item}
                                 navigation={this.props.navigation}
+                                showDays={true}
                             />
                         )
                     }}></FlatList>
@@ -55,7 +56,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {}
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CategoryOffers)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryOffers)
