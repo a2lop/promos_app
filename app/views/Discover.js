@@ -15,7 +15,6 @@ import OfferListItem from '../components/OfferListItem'
 import { globalStyles as gs } from '../utils/styles'
 
 import { connect } from 'react-redux'
-import I18n from '../utils/i18n'
 import { fnGetDiscoverOffers, fnSetOffer } from '../actions/actions'
 import { colors } from '../utils/constants'
 
@@ -39,7 +38,6 @@ class Discover extends React.Component {
         return (
             <ScrollView
                 style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
-                {/* <View ></View> */}
                 <Carousel
                     autoplay={true}
                     autoplayDelay={3000}

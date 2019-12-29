@@ -36,17 +36,15 @@ class OfferListItem extends React.Component {
                     <View style={gs.f1}>
                         <Txt style={gs.liTitle}>{this.props.item.name}</Txt>
                         <Txt>
-                            {this.props.showDays && (
-                                // <Txt style={gs.liSubitle}>
-                                //     {this.props.item.daysString.toUpperCase() +
-                                //         ' - '}
-                                // </Txt>
-                                <Txt style={gs.liSubitle}>
-                                    {getDaysString(
-                                        this.props.item.days
-                                    ).toUpperCase() + ' - '}
-                                </Txt>
-                            )}
+                            {this.props.showDays &&
+                                this.props.item.days &&
+                                this.props.item.days.length > 0 && (
+                                    <Txt style={gs.liSubitle}>
+                                        {getDaysString(
+                                            this.props.item.days
+                                        ).toUpperCase() + ' - '}
+                                    </Txt>
+                                )}
                             <Txt style={gs.liSubitle}>
                                 {this.props.item.establishmentName}
                             </Txt>

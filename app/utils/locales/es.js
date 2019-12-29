@@ -60,17 +60,34 @@ export default {
         phEmail: 'Correo electrónico',
         phPassword: 'Contraseña',
         login: 'Iniciar sesión',
+        loginFacebook: 'Iniciar sesión con Facebook',
         noAccount: '¿No tienes una cuenta? ',
         register: 'Registrate',
         or: ' O ',
         loginWith: 'Inicia con tus redes sociales:',
+        phRegisterName: 'Tus nombres',
         phRegisterEmail: 'Tu correo electrónico',
         phRegisterPassword1: 'Ingresa una contraseña',
         phRegisterPassword2: 'Repite tu contraseña',
         alreadyAccount: '¿Ya tienes una cuenta?',
         backToLogin: ' Inicia sesión',
         confirmRegister: 'Registrarse',
-        registerWithFacebook: 'Registrate con Facebook'
+        registerWithFacebook: 'Registrate con Facebook',
+        //with session
+        welcome: 'Bienvenido/a {{name}}',
+        yourCategories: 'Tus categorías favoritas:',
+        emptyFavoriteCategories: 'No tienes categorias favoritas aún',
+        yourMemberships: 'Tus membresias y afiliaciones:',
+        emptyMemberships: 'No has añadido ninguna afiliación aún',
+        errorInvalidEmail: 'El correo ingresado es incorrecto',
+        errorInvalidPasswordRegex:
+            'La contraseña debe tener al menos 6 caracteres, entre números y letras',
+        errorEmptyFields: 'Llena correctamente todos los campos',
+        errorDifferentPasswords: 'Las contraseñas deben coincidir',
+        errorInexistentUser: 'No existe un usuario con ese correo electrónico',
+        errorInvalidPassword: 'Contraseña incorrecta',
+        errorUsedEmail: 'Correo ya esta siendo usado por otra cuenta',
+        errorGeneral: 'Algo salió mal, por favor vuelve a intentarlo más tarde'
     },
     sidebar: {
         home: 'Inicio',
@@ -80,7 +97,10 @@ export default {
         login: 'Iniciar sesión',
         memberships: 'Tarjetas / Afiliaciones',
         birthday: '¿Es tu cumpleaños?',
-        want: '¿Quieres unirte?'
+        want: '¿Quieres unirte?',
+        profile: 'Tu perfil',
+        login: 'Iniciar sesión',
+        logout: 'Cerrar sesión'
     },
     home: {
         noOffers: 'No hay promociones hoy 😔'
@@ -94,7 +114,14 @@ export default {
     birthdayOffers: {
         viewTitle: 'Ofertas por tu cumpleaños'
     },
-    filterPopup: { chooseCategory: 'Selecciona una categoria:', all: 'Todas' },
+    popupFilter: { chooseCategory: 'Selecciona una categoria:', all: 'Todas' },
+    popupMemberships: {
+        chooseMembership: 'Selecciona las membresias que dispones:'
+    },
+    popupMyCategories: {
+        chooseCategory: 'Selecciona tus categorías favoritas'
+    },
+
     onPromos: {
         title: '¿Tienes una oferta espectacular y quieres aparecer en Promos?',
         description:

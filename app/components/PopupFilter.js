@@ -6,9 +6,9 @@ import {
     FlatList,
     Image
 } from 'react-native'
-import Txt from '../components/Txt'
+import Txt from './Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import CategorySimple from '../components/CategorySimple'
+import CategorySimple from './CategorySimple'
 
 import { connect } from 'react-redux'
 import { fnGetCategories } from '../actions/actions'
@@ -17,7 +17,7 @@ import { colors } from '../utils/constants'
 import { globalStyles as gs } from '../utils/styles'
 // import SplashScreen from 'react-native-splash-screen'
 
-class FilterPopup extends React.Component {
+class PopupFilter extends React.Component {
     componentDidMount() {
         if (this.props.categories.length == 0) {
             this.props.fnGetCategories()
@@ -33,7 +33,7 @@ class FilterPopup extends React.Component {
             <View style={[gs.fullscreenContainer, { flex: 1 }]}>
                 <View style={[gs.fdRow, { marginBottom: 15 }]}>
                     <Txt style={[gs.f1, st.mainText]}>
-                        {I18n.t('filterPopup.chooseCategory')}
+                        {I18n.t('popupFilter.chooseCategory')}
                     </Txt>
                     <View style={gs.filterButtonContainer}>
                         <TouchableOpacity
@@ -69,7 +69,7 @@ class FilterPopup extends React.Component {
                             }}
                         />
                         <Txt style={st.categoryName} numberOfLines={1}>
-                            {I18n.t('filterPopup.all')}
+                            {I18n.t('popupFilter.all')}
                         </Txt>
                     </TouchableOpacity>
                 </View>
@@ -152,4 +152,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = { fnGetCategories }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterPopup)
+export default connect(mapStateToProps, mapDispatchToProps)(PopupFilter)

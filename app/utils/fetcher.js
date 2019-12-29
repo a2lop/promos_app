@@ -14,9 +14,9 @@ export default wsCall = async (service, data, options = {}) => {
         method: options.method || 'GET',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'multipart/form-data; charset=UTF-8'
-        }
-        // body: formData,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     })
         .then(response => {
             return response.json()

@@ -11,7 +11,15 @@ import {
     wsGetOffersByDayNumberAndCategory
 } from '../services/data'
 
-//#region DATA
+import {
+    wsGetUserInfo,
+    wsPutUserCategory,
+    wsDeleteUserCategory,
+    wsDeleteUserMembership,
+    wsPutUserMembership
+} from '../services/users'
+import AsyncStorage from '@react-native-community/async-storage'
+
 export function fnSetMainScreen(screen) {
     return dispatch => {
         dispatch({
@@ -103,8 +111,17 @@ export function fnGetOffer(id) {
 }
 
 export function fnGetCategories() {
-    return dispatch => {
+    return async dispatch => {
+        const categories = await AsyncStorage.getItem('categories')
+        if (categories) {
+            dispatch({
+                type: Actions.GET_CATEGORIES,
+                payload: { categories: JSON.parse(categories) }
+            })
+        }
+
         wsGetCategories().then(d => {
+            AsyncStorage.setItem('categories', JSON.stringify(d))
             dispatch({
                 type: Actions.GET_CATEGORIES,
                 payload: { categories: d }
@@ -160,8 +177,16 @@ export function fnGetDiscoverOffers(d) {
 }
 
 export function fnGetMemberships() {
-    return dispatch => {
+    return async dispatch => {
+        const memberships = await AsyncStorage.getItem('memberships')
+        if (memberships) {
+            dispatch({
+                type: Actions.GET_MEMBERSHIPS,
+                payload: { memberships: JSON.parse(memberships) }
+            })
+        }
         wsGetMemberships().then(d => {
+            AsyncStorage.setItem('memberships', JSON.stringify(d))
             dispatch({
                 type: Actions.GET_MEMBERSHIPS,
                 payload: { memberships: d }
@@ -170,4 +195,73 @@ export function fnGetMemberships() {
     }
 }
 
+//#endregion
+
+//#region USER
+
+//FROM FIREBASE
+export function fnSetUser(user) {
+    return dispatch => {
+        dispatch({
+            type: Actions.SET_USER,
+            payload: { user }
+        })
+    }
+}
+
+//FROM DATABASE
+export function fnGetUserInfo(userId) {
+    return dispatch => {
+        wsGetUserInfo(userId).then(response => {
+            dispatch({
+                type: Actions.GET_USER_INFO,
+                payload: { userData: response }
+            })
+        })
+    }
+}
+
+export function fnAddUserCategory(userId, category) {
+    return dispatch => {
+        wsPutUserCategory(userId, category.id).then(response => {
+            dispatch({
+                type: Actions.ADD_USER_CATEGORY,
+                payload: { category }
+            })
+        })
+    }
+}
+
+export function fnRemoveUserCategory(userId, category) {
+    return dispatch => {
+        wsDeleteUserCategory(userId, category.id).then(response => {
+            dispatch({
+                type: Actions.REMOVE_USER_CATEGORY,
+                payload: { category }
+            })
+        })
+    }
+}
+
+export function fnAddUserMembership(userId, membership) {
+    return dispatch => {
+        wsPutUserMembership(userId, membership.id).then(() => {
+            dispatch({
+                type: Actions.ADD_USER_MEMBERSHIP,
+                payload: { membership }
+            })
+        })
+    }
+}
+
+export function fnRemoveUserMembership(userId, membership) {
+    return dispatch => {
+        wsDeleteUserMembership(userId, membership.id).then(() => {
+            dispatch({
+                type: Actions.REMOVE_USER_MEMBERSHIP,
+                payload: { membership }
+            })
+        })
+    }
+}
 //#endregion

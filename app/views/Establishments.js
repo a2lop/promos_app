@@ -10,7 +10,7 @@ import {
 import LoadingItem from '../components/Loading'
 import EstablishmentListItem from '../components/EstablishmentListItem'
 import Txt from '../components/Txt'
-import FilterPopup from '../components/FilterPopup'
+import FilterPopup from '../components/PopupFilter'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { connect } from 'react-redux'

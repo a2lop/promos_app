@@ -87,7 +87,8 @@ const MainStack = createMaterialTopTabNavigator(
             tabStyle: {
                 height: 40
             }
-        }
+        },
+        lazy: true
     }
 )
 
@@ -258,7 +259,7 @@ const SessionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Wizard'
+        initialRouteName: 'Establishments'
     }
 )
 
@@ -278,7 +279,7 @@ const DrawerNavigator = createDrawerNavigator(
     }
 )
 
-const RootStack = (hasSession = false) => {
+const RootStack = () => {
     return createStackNavigator(
         {
             DrawerNavigator: {
@@ -298,23 +299,12 @@ const RootStack = (hasSession = false) => {
     )
 }
 
-// const AppContainer = createAppContainer(RootStack(true))
-
 export default class App extends Component {
-    // constructor(props) {
-    //     super(props)
-
-    //     this.state = {
-    //         isLoaded: true
-    //     }
-    // }
-
-    // componentDidMount() {
-    //     SplashScreen.hide()
-    // }
+    componentDidMount() {
+        SplashScreen.hide()
+    }
 
     render() {
-        // if (this.state.isLoaded) {
         const AppContainer = createAppContainer(RootStack(false))
         return (
             <Provider store={store}>
@@ -323,8 +313,5 @@ export default class App extends Component {
                 </View>
             </Provider>
         )
-        // } else {
-        //     return <View></View>
-        // }
     }
 }

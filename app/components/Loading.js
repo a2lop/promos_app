@@ -1,14 +1,9 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { ActivityIndicator } from 'react-native'
+import { colors } from '../utils/constants'
 
 export default class LoadingItem extends React.Component {
     render() {
-        return (
-            <Image
-                resizeMode="contain"
-                style={{ height: 40, alignSelf: 'center', marginTop: 10 }}
-                source={require('../assets/loading.gif')}
-            />
-        )
+        return <ActivityIndicator size="large" color={colors.PURPLE} />
     }
 }

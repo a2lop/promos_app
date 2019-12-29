@@ -37,7 +37,9 @@ class MembershipSimple extends React.Component {
                         style={[gs.mb5, { width: '100%', aspectRatio: 2 }]}
                     />
 
-                    <Txt style={[gs.dfSimpleTitle, { textAlign: 'center' }]}>
+                    <Txt
+                        style={[gs.dfSimpleTitle, { textAlign: 'center' }]}
+                        numberOfLines={1}>
                         {this.props.item.name}
                     </Txt>
                 </TouchableOpacity>

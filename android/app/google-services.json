@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "380238783677",
+    "firebase_url": "https://promos-233704.firebaseio.com",
+    "project_id": "promos-233704",
+    "storage_bucket": "promos-233704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380238783677:android:26f4590b97966485b643d4",
+        "android_client_info": {
+          "package_name": "com.promos.promos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380238783677-t96ue6jh1m2cbl31stacj2fmq8d87g1p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbWOMnzhhfWX-ZeLrcB1DZCdKycpClkMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380238783677-t96ue6jh1m2cbl31stacj2fmq8d87g1p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

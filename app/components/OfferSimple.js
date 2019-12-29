@@ -39,9 +39,12 @@ class OfferSimple extends React.Component {
                     />
 
                     <Txt style={gs.dfSimpleTitle}>{this.props.item.name}</Txt>
-                    <Txt style={gs.dfSimpleSubtitle}>
-                        {getDaysString(this.props.item.days)}
-                    </Txt>
+                    {this.props.item.days &&
+                        this.props.item.days.length > 0 && (
+                            <Txt style={gs.dfSimpleSubtitle}>
+                                {getDaysString(this.props.item.days)}
+                            </Txt>
+                        )}
                 </TouchableOpacity>
             </View>
         )

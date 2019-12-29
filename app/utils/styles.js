@@ -102,7 +102,7 @@ const globalStyles = StyleSheet.create({
         fontWeight: 'bold'
     },
     dfSectionTitle: {
-        fontSize: 20
+        fontSize: 18
     },
 
     dfSubtitle: { fontSize: 18, textAlign: 'center' },

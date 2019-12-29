@@ -11,19 +11,22 @@ import OfferListItem from '../components/OfferListItem'
 import { FlatList } from 'react-native-gesture-handler'
 import DaySelector from '../components/DaySelector'
 import LoadingItem from '../components/Loading'
-import FilterPopup from '../components/FilterPopup'
+import PopupFilter from '../components/PopupFilter'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { connect } from 'react-redux'
 import {
-    fnGetOffers,
-    fnGetOffersByDayNumberAndCategory
+    fnGetOffersByDayNumberAndCategory,
+    fnSetUser,
+    fnGetUserInfo,
+    fnGetCategories,
+    fnGetMemberships
 } from '../actions/actions'
 import I18n from '../utils/i18n'
 import { colors } from '../utils/constants'
 import { globalStyles as gs } from '../utils/styles'
 import { bottomReached } from '../utils/utils'
-// import SplashScreen from 'react-native-splash-screen'
+import firebase from 'react-native-firebase'
 
 class Home extends React.Component {
     constructor(props) {
@@ -36,7 +39,27 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.loadOffers(new Date().getDay(), 'all', -1)
+        if (this.props.offers.length == 0) {
+            this.loadOffers(new Date().getDay(), 'all', -1)
+        }
+        if (this.props.categories.length == 0) {
+            this.props.fnGetCategories()
+        }
+        if (this.props.memberships.length == 0) {
+            this.props.fnGetMemberships()
+        }
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.props.fnSetUser({
+                    name: user._user.displayName,
+                    email: user._user.email,
+                    id: user._user.uid
+                })
+                this.props.fnGetUserInfo(user._user.uid)
+            } else {
+                this.props.fnSetUser(undefined)
+            }
+        })
     }
 
     loadOffers(day, categoryId, lastId, reset) {
@@ -88,6 +111,7 @@ class Home extends React.Component {
                             resizeMode="contain"
                             style={{
                                 height: 200,
+                                marginTop: 15,
                                 marginBottom: 25
                                 // alignSelf: 'center'
                             }}
@@ -151,7 +175,7 @@ class Home extends React.Component {
                     {this.props.stillLoadingMore && <LoadingItem />}
                 </ScrollView>
                 {this.state.showPopupFilter && (
-                    <FilterPopup
+                    <PopupFilter
                         closePopup={() => {
                             this.setState({ showPopupFilter: false })
                         }}
@@ -179,10 +203,18 @@ function mapStateToProps(state) {
     return {
         offers: state.dataReducer.homeOffers,
         isLoading: state.dataReducer.isLoadingHomeOffers,
-        stillLoadingMore: state.dataReducer.homeStillLoadingMore
+        stillLoadingMore: state.dataReducer.homeStillLoadingMore,
+        categories: state.dataReducer.categoriesParents,
+        memberships: state.dataReducer.memberships
     }
 }
 
-const mapDispatchToProps = { fnGetOffers, fnGetOffersByDayNumberAndCategory }
+const mapDispatchToProps = {
+    fnGetOffersByDayNumberAndCategory,
+    fnSetUser,
+    fnGetUserInfo,
+    fnGetCategories,
+    fnGetMemberships
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

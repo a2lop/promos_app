@@ -70,10 +70,8 @@ class OfferDetail extends React.Component {
                             />
                         ))}
                     </View>
-                    {/* </View>
-                <View style={gs.dfGenericContainer}> */}
                     <View style={[gs.fdRow, { marginTop: 10 }]}>
-                        <View style={st.socialIconButtonContainer}>
+                        {/* <View style={st.socialIconButtonContainer}>
                             <TouchableOpacity>
                                 <Icon
                                     size={30}
@@ -84,7 +82,7 @@ class OfferDetail extends React.Component {
                             <TouchableOpacity>
                                 <Icon size={30} name={'star-outline'}></Icon>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
                         <View style={st.socialIconButtonContainer}>
                             <TouchableOpacity
                                 onPress={() => {

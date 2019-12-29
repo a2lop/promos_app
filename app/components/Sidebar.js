@@ -11,7 +11,8 @@ import { openUrl } from '../utils/utils'
 import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
-// import { StackActions, NavigationActions } from 'react-navigation'
+import firebase from 'react-native-firebase'
+import { fnSetUser } from '../actions/actions'
 
 class Sidebar extends Component {
     constructor(props) {
@@ -27,23 +28,20 @@ class Sidebar extends Component {
 
     componentDidMount() {}
 
-    logout() {}
+    logout() {
+        firebase.auth().signOut()
+        this.props.fnSetUser()
+    }
 
     shareApp() {}
 
     render() {
         return (
             <SafeAreaView style={[gs.safeArea, st.container]}>
-                {/* <View style={st.userContainer}>
-                    <Icon name={'account'} size={80} color={colors.WHITE} />
-                    <TouchableOpacity>
-                        <Txt style={st.userName}>{I18n.t('sidebar.login')}</Txt>
-                    </TouchableOpacity>
-                </View> */}
                 <View
                     style={{
                         alignItems: 'center',
-                        marginBottom: 15,
+                        // marginBottom: 15,
                         marginTop: 15
                     }}>
                     <Image
@@ -54,6 +52,17 @@ class Sidebar extends Component {
                         source={require('../assets/sidebar.png')}
                     />
                 </View>
+
+                <View style={st.userContainer}>
+                    {this.props.user && (
+                        <TouchableOpacity>
+                            <Txt style={st.userName}>
+                                {this.props.user.name}
+                            </Txt>
+                        </TouchableOpacity>
+                    )}
+                </View>
+
                 <TouchableOpacity
                     onPress={() => {
                         this.props.navigation.navigate('Main')
@@ -109,20 +118,35 @@ class Sidebar extends Component {
                 <TouchableOpacity
                     style={st.labelContainer}
                     onPress={() => {
+                        this.props.navigation.navigate('Profile')
+                    }}>
+                    <Icon name={'account'} size={22} style={st.labelIcon} />
+                    <Txt style={st.labelText}>
+                        {I18n.t(
+                            `sidebar.${this.props.user ? 'profile' : 'login'}`
+                        )}
+                    </Txt>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={st.labelContainer}
+                    onPress={() => {
                         this.props.navigation.navigate('OnPromos')
                     }}>
                     <Icon name={'sale'} size={22} style={st.labelIcon} />
                     <Txt style={st.labelText}>{I18n.t('sidebar.want')}</Txt>
                 </TouchableOpacity>
-                {/* <View style={st.labelContainer}>
-                    <Icon
-                        name={'information-outline'}
-                        size={22}
-                        style={st.labelIcon}
-                    />
-                    <Txt style={st.labelText}>{I18n.t('sidebar.about')}</Txt>
-                </View> */}
-
+                {this.props.user && (
+                    <TouchableOpacity
+                        style={st.labelContainer}
+                        onPress={() => {
+                            this.logout()
+                        }}>
+                        <Icon name={'logout'} size={22} style={st.labelIcon} />
+                        <Txt style={st.labelText}>
+                            {I18n.t('sidebar.logout')}
+                        </Txt>
+                    </TouchableOpacity>
+                )}
                 <View
                     style={{
                         flexDirection: 'row',
@@ -204,8 +228,7 @@ let st = StyleSheet.create({
     },
     userContainer: {
         alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 15
+        marginBottom: 10
     },
     userName: { fontSize: 22, color: colors.WHITE },
     socialButton: {
@@ -217,9 +240,9 @@ let st = StyleSheet.create({
 // export default Sidebar
 
 function mapStateToProps(state) {
-    return {}
+    return { user: state.dataReducer.user }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { fnSetUser }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)

@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.promos">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.promos.promos">
 
   <uses-permission android:name="android.permission.INTERNET" />
 

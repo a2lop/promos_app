@@ -76,7 +76,6 @@ class Establishment extends React.Component {
                     </Txt>
                 </View>
                 <View style={gs.dfGenericContainer}>
-                    {/* <Txt style={[gs.dfSectionTitle, gs.mb5]}>Contactos</Txt> */}
                     {this.props.establishment.phones &&
                         this.props.establishment.phones.length > 0 &&
                         this.props.establishment.phones.map(phone => {
@@ -88,12 +87,13 @@ class Establishment extends React.Component {
                                             openUrl('tel:' + phone)
                                         }}>
                                         <View style={st.labelIcon}>
-                                            <Icon
-                                                size={25}
-                                                name={'cellphone-android'}
-                                            />
+                                            <Icon size={25} name={'phone'} />
                                         </View>
-                                        <Txt style={st.labelText}>{phone}</Txt>
+                                        <View>
+                                            <Txt style={st.labelText}>
+                                                {phone}
+                                            </Txt>
+                                        </View>
                                     </TouchableOpacity>
                                 </View>
                             )
@@ -189,16 +189,10 @@ class Establishment extends React.Component {
                         }}></FlatList>
                 </View>
 
-                {this.props.establishment.locations &&
+                {/* {this.props.establishment.locations &&
                     this.props.establishment.locations.length > 0 && (
                         <View style={{ height: 200 }}>
                             <MapView
-                                // initialRegion={{
-                                //     latitude: 37.78825,
-                                //     longitude: -122.4324,
-                                //     latitudeDelta: 0.0922,
-                                //     longitudeDelta: 0.0421
-                                // }}
                                 style={{ height: '100%' }}>
                                 {this.props.establishment.locations.map(
                                     marker => (
@@ -215,7 +209,7 @@ class Establishment extends React.Component {
                                 )}
                             </MapView>
                         </View>
-                    )}
+                    )} */}
             </ScrollView>
         )
     }

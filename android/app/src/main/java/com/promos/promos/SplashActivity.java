@@ -1,4 +1,4 @@
-package com.promos;
+package com.promos.promos;
 
 import android.content.Intent;
 import android.os.Bundle;
