@@ -246,7 +246,7 @@ class Profile extends React.Component {
                                         <View style={st.inputContainer}>
                                             <TextInput
                                                 autoCompleteType={'email'}
-                                                autoCapitalize={false}
+                                                autoCapitalize={'none'}
                                                 autoCorrect={false}
                                                 style={st.input}
                                                 placeholder={I18n.t(

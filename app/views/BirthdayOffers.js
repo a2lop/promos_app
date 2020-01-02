@@ -5,15 +5,17 @@ import { View, RefreshControl } from 'react-native'
 import { connect } from 'react-redux'
 import { wsGetBirthdayOffers } from '../services/data'
 // import I18n from '../utils/i18n'
-import Txt from '../components/Txt'
+// import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
 import { FlatList } from 'react-native-gesture-handler'
+import LoadingItem from '../components/Loading'
+
 import { colors } from '../utils/constants'
 
 class BirthdayOffers extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { offers: [] }
+        this.state = { offers: [], isLoading: true }
     }
 
     componentDidMount() {
@@ -21,14 +23,17 @@ class BirthdayOffers extends React.Component {
     }
 
     loadOffers() {
-        wsGetBirthdayOffers().then(offers => {
-            this.setState({ offers })
+        this.setState({ isLoading: true }, () => {
+            wsGetBirthdayOffers().then(offers => {
+                this.setState({ offers, isLoading: false })
+            })
         })
     }
 
     render() {
         return (
             <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
+                {this.state.isLoading && <LoadingItem />}
                 <FlatList
                     refreshControl={
                         <RefreshControl

@@ -259,7 +259,7 @@ const SessionStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Establishments'
+        initialRouteName: 'Wizard'
     }
 )
 
@@ -300,9 +300,9 @@ const RootStack = () => {
 }
 
 export default class App extends Component {
-    componentDidMount() {
-        SplashScreen.hide()
-    }
+    // componentDidMount() {
+    //     SplashScreen.hide()
+    // }
 
     render() {
         const AppContainer = createAppContainer(RootStack(false))

@@ -136,5 +136,8 @@ export default {
             '{{description}}.\n\nEsta y otras promociones encuentras en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/',
         establishmentDescription:
             '{{description}}.\nEncuentra las ofertas de este y otros establecimientos en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/'
+    },
+    membershipOffers: {
+        noOffers: 'No hay ofertas con {{membership}}, aún...'
     }
 }

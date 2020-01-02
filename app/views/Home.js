@@ -1,14 +1,8 @@
 import React from 'react'
-import {
-    View,
-    RefreshControl,
-    Image,
-    TouchableOpacity,
-    ScrollView
-} from 'react-native'
+import { View, RefreshControl, Image, TouchableOpacity } from 'react-native'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import DaySelector from '../components/DaySelector'
 import LoadingItem from '../components/Loading'
 import PopupFilter from '../components/PopupFilter'
@@ -140,25 +134,23 @@ class Home extends React.Component {
                             }
                         }
                     }}
-                    scrollEventThrottle={20}>
+                    scrollEventThrottle={20}
+                    refreshControl={
+                        <RefreshControl
+                            style={{ backgroundColor: 'transparent' }}
+                            refreshing={this.props.isRefreshing || false}
+                            onRefresh={() => {
+                                this.loadOffers(
+                                    this.state.selectedDay,
+                                    this.state.selectedCategory,
+                                    -1,
+                                    true
+                                )
+                            }}
+                        />
+                    }>
                     {this.props.offers.length > 0 && (
                         <FlatList
-                            refreshControl={
-                                <RefreshControl
-                                    style={{ backgroundColor: 'transparent' }}
-                                    refreshing={
-                                        this.props.isRefreshing || false
-                                    }
-                                    onRefresh={() => {
-                                        this.loadOffers(
-                                            this.state.selectedDay,
-                                            this.state.selectedCategory,
-                                            -1,
-                                            true
-                                        )
-                                    }}
-                                />
-                            }
                             data={this.props.offers}
                             keyExtractor={(d, i) => i.toString()}
                             renderItem={d => {
