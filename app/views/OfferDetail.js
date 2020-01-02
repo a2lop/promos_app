@@ -24,6 +24,7 @@ class OfferDetail extends React.Component {
             establishmentName: this.props.establishment.name
         })
         const description = I18n.t('share.offerDescription', {
+            establishmentName: this.props.establishment.name,
             description: this.props.offer.description
         })
         const dialogTitle = I18n.t('share.dialogTitle')
@@ -33,7 +34,6 @@ class OfferDetail extends React.Component {
     render() {
         return (
             <ScrollView style={gs.dfPageContainer} ref="_scrollView">
-                {/* <View style={gs.mainImageContainer}> */}
                 <Image
                     source={{ uri: this.props.offer.logoBanner }}
                     resizeMode={'stretch'}

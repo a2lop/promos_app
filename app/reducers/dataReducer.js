@@ -11,6 +11,7 @@ import {
     SET_ESTABLISHMENT,
     GET_ESTABLISHMENT_OFFERS,
     GET_DISCOVER_OFFERS,
+    GET_DISCOVER_OFFERS_SUCCESS,
     GET_MEMBERSHIPS,
     SET_USER,
     GET_USER_INFO,
@@ -235,10 +236,16 @@ const dataReducer = (state = initialState, action) => {
             })
             return state
         case GET_DISCOVER_OFFERS:
+            state = Object.assign({}, state, {
+                isLoadingDiscover: true
+            })
+            return state
+        case GET_DISCOVER_OFFERS_SUCCESS:
             const offers = action.payload.offers
             state = Object.assign({}, state, {
                 discoverBannerOffers: offers.filter(o => o.isDiscoverBanner),
-                discoverOffers: offers.filter(o => o.isDiscoverOffer)
+                discoverOffers: offers.filter(o => o.isDiscoverOffer),
+                isLoadingDiscover: false
             })
             return state
         case GET_MEMBERSHIPS:

@@ -165,11 +165,14 @@ export function fnGetEstablishmentOffers(id) {
     }
 }
 
-export function fnGetDiscoverOffers(d) {
+export function fnGetDiscoverOffers() {
     return dispatch => {
+        dispatch({
+            type: Actions.GET_DISCOVER_OFFERS
+        })
         wsGetDiscoverOffers().then(d => {
             dispatch({
-                type: Actions.GET_DISCOVER_OFFERS,
+                type: Actions.GET_DISCOVER_OFFERS_SUCCESS,
                 payload: { offers: d }
             })
         })

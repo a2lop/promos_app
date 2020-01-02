@@ -42,7 +42,6 @@ class MembershipOffers extends React.Component {
                                 height: 200,
                                 marginTop: 15,
                                 marginBottom: 25
-                                // alignSelf: 'center'
                             }}
                             source={require('../assets/emptyContent6.png')}
                         />

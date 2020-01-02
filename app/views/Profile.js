@@ -63,111 +63,129 @@ class Profile extends React.Component {
     }
 
     login() {
-        this.setState({ msgError: '' }, () => {
-            let msgError = ''
-            if (this.state.txtEmail == '' || this.state.txtPassword == '') {
-                msgError = I18n.t('profile.errorEmptyFields')
-            } else if (!validateEmail(this.state.txtEmail)) {
-                msgError = I18n.t('profile.errorInvalidEmail')
-            } else if (!validatePassword(this.state.txtPassword)) {
-                msgError = I18n.t('profile.errorInvalidPasswordRegex')
-            }
-            if (msgError != '') {
-                this.setState({ msgError })
-                return
-            }
+        this.setState(
+            {
+                msgError: '',
+                txtEmail: this.state.txtEmail.trim(),
+                txtPassword: this.state.txtPassword.trim()
+            },
+            () => {
+                let msgError = ''
+                if (this.state.txtEmail == '' || this.state.txtPassword == '') {
+                    msgError = I18n.t('profile.errorEmptyFields')
+                } else if (!validateEmail(this.state.txtEmail)) {
+                    msgError = I18n.t('profile.errorInvalidEmail')
+                } else if (!validatePassword(this.state.txtPassword)) {
+                    msgError = I18n.t('profile.errorInvalidPasswordRegex')
+                }
+                if (msgError != '') {
+                    this.setState({ msgError })
+                    return
+                }
 
-            this.setState({ isLoading: true }, () => {
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword(
-                        this.state.txtEmail,
-                        this.state.txtPassword
-                    )
-                    .then(() => {})
-                    .catch(error => {
-                        this.setState({
-                            msgError: I18n.t(
-                                'profile.error' +
-                                    (error.code == 'auth/user-not-found'
-                                        ? 'InexistentUser'
-                                        : error.code == 'auth/wrong-password'
-                                        ? 'InvalidPassword'
-                                        : 'General')
-                            )
+                this.setState({ isLoading: true }, () => {
+                    firebase
+                        .auth()
+                        .signInWithEmailAndPassword(
+                            this.state.txtEmail,
+                            this.state.txtPassword
+                        )
+                        .then(() => {})
+                        .catch(error => {
+                            this.setState({
+                                msgError: I18n.t(
+                                    'profile.error' +
+                                        (error.code == 'auth/user-not-found'
+                                            ? 'InexistentUser'
+                                            : error.code ==
+                                              'auth/wrong-password'
+                                            ? 'InvalidPassword'
+                                            : 'General')
+                                )
+                            })
                         })
-                    })
-                    .finally(() => {
-                        this.setState({ isLoading: false })
-                    })
-            })
-        })
+                        .finally(() => {
+                            this.setState({ isLoading: false })
+                        })
+                })
+            }
+        )
     }
 
     register() {
-        this.setState({ msgError: '' }, () => {
-            let msgError = ''
-            if (
-                this.state.txtRegisterNames == '' ||
-                this.state.txtRegisterEmail == '' ||
-                this.state.txtRegisterPassword1 == '' ||
-                this.state.txtRegisterPassword2 == ''
-            ) {
-                msgError = I18n.t('profile.errorEmptyFields')
-            } else if (!validateEmail(this.state.txtRegisterEmail)) {
-                msgError = I18n.t('profile.errorInvalidEmail')
-            } else if (
-                !validatePassword(this.state.txtRegisterPassword1) ||
-                !validatePassword(this.state.txtRegisterPassword2)
-            ) {
-                msgError = I18n.t('profile.errorInvalidPasswordRegex')
-            } else if (
-                this.state.txtRegisterPassword1 !=
-                this.state.txtRegisterPassword2
-            ) {
-                msgError = I18n.t('profile.errorDifferentPasswords')
-            }
-            if (msgError != '') {
-                this.setState({ msgError })
-                return
-            }
-            this.setState({ isLoading: true }, () => {
-                firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(
-                        this.state.txtRegisterEmail,
-                        this.state.txtRegisterPassword1
-                    )
-                    .then(user => {
-                        if (user) {
-                            let newUser = {
-                                name: this.state.txtRegisterNames,
-                                email: user.user.email,
-                                id: user.user.uid
+        this.setState(
+            {
+                msgError: '',
+                txtRegisterNames: this.state.txtRegisterNames.trim(),
+                txtRegisterEmail: this.state.txtRegisterEmail.trim(),
+                txtRegisterPassword1: this.state.txtRegisterPassword1.trim(),
+                txtRegisterPassword2: this.state.txtRegisterPassword2.trim()
+            },
+            () => {
+                let msgError = ''
+                if (
+                    this.state.txtRegisterNames == '' ||
+                    this.state.txtRegisterEmail == '' ||
+                    this.state.txtRegisterPassword1 == '' ||
+                    this.state.txtRegisterPassword2 == ''
+                ) {
+                    msgError = I18n.t('profile.errorEmptyFields')
+                } else if (!validateEmail(this.state.txtRegisterEmail)) {
+                    msgError = I18n.t('profile.errorInvalidEmail')
+                } else if (
+                    !validatePassword(this.state.txtRegisterPassword1) ||
+                    !validatePassword(this.state.txtRegisterPassword2)
+                ) {
+                    msgError = I18n.t('profile.errorInvalidPasswordRegex')
+                } else if (
+                    this.state.txtRegisterPassword1 !=
+                    this.state.txtRegisterPassword2
+                ) {
+                    msgError = I18n.t('profile.errorDifferentPasswords')
+                }
+                if (msgError != '') {
+                    this.setState({ msgError })
+                    return
+                }
+                this.setState({ isLoading: true }, () => {
+                    firebase
+                        .auth()
+                        .createUserWithEmailAndPassword(
+                            this.state.txtRegisterEmail,
+                            this.state.txtRegisterPassword1
+                        )
+                        .then(user => {
+                            if (user) {
+                                let newUser = {
+                                    name: this.state.txtRegisterNames,
+                                    email: user.user.email,
+                                    id: user.user.uid
+                                }
+                                this.props.fnSetUser(newUser)
+                                user.user
+                                    .updateProfile({
+                                        displayName: this.state.txtRegisterNames
+                                    })
+                                    .then(user => {})
                             }
-                            this.props.fnSetUser(newUser)
-                            user.user
-                                .updateProfile({
-                                    displayName: this.state.txtRegisterNames
-                                })
-                                .then(user => {})
-                        }
-                    })
-                    .catch(error => {
-                        this.setState({
-                            msgError: I18n.t(
-                                'profile.error' +
-                                    (error.code == 'auth/email-already-in-use'
-                                        ? 'UsedEmail'
-                                        : 'General')
-                            )
                         })
-                    })
-                    .finally(() => {
-                        this.setState({ isLoading: false })
-                    })
-            })
-        })
+                        .catch(error => {
+                            this.setState({
+                                msgError: I18n.t(
+                                    'profile.error' +
+                                        (error.code ==
+                                        'auth/email-already-in-use'
+                                            ? 'UsedEmail'
+                                            : 'General')
+                                )
+                            })
+                        })
+                        .finally(() => {
+                            this.setState({ isLoading: false })
+                        })
+                })
+            }
+        )
     }
 
     addCategory(category) {
@@ -227,11 +245,12 @@ class Profile extends React.Component {
                                 {this.state.msgError != '' && (
                                     <Txt
                                         style={{
-                                            color: colors.PURPLE,
+                                            color: colors.RED,
                                             marginBottom: 15,
                                             marginHorizontal: 15,
                                             textAlign: 'center',
-                                            fontSize: 15
+                                            fontSize: 16,
+                                            fontWeight: 'bold'
                                         }}>
                                         {this.state.msgError}
                                     </Txt>

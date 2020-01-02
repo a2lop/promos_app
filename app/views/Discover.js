@@ -7,8 +7,8 @@ import {
     Dimensions,
     FlatList
 } from 'react-native'
-import Txt from '../components/Txt'
-// import LoadingItem from '../components/Loading'
+// import Txt from '../components/Txt'
+import LoadingItem from '../components/Loading'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import OfferListItem from '../components/OfferListItem'
 
@@ -26,7 +26,9 @@ class Discover extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.fnGetDiscoverOffers()
+        if (this.props.bannerOffers.length == 0) {
+            this.props.fnGetDiscoverOffers()
+        }
     }
 
     openOffer(offer) {
@@ -38,6 +40,8 @@ class Discover extends React.Component {
         return (
             <ScrollView
                 style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
+                {this.props.isLoading && <LoadingItem />}
+
                 <Carousel
                     autoplay={true}
                     autoplayDelay={3000}
@@ -82,10 +86,6 @@ class Discover extends React.Component {
                     inactiveDotOpacity={0.4}
                     inactiveDotScale={0.6}
                 />
-                {/* <View style={gs.dfGenericContainer}> */}
-                {/* <Txt style={[gs.dfSectionTitle, gs.mb5]}>
-                    {I18n.t('discover.outstandingOffers')}
-                </Txt> */}
                 <FlatList
                     data={this.props.offers}
                     keyExtractor={(d, i) => i.toString()}
@@ -97,7 +97,6 @@ class Discover extends React.Component {
                             />
                         )
                     }}></FlatList>
-                {/* </View> */}
             </ScrollView>
         )
     }
@@ -106,7 +105,8 @@ class Discover extends React.Component {
 function mapStateToProps(state) {
     return {
         bannerOffers: state.dataReducer.discoverBannerOffers,
-        offers: state.dataReducer.discoverOffers
+        offers: state.dataReducer.discoverOffers,
+        isLoading: state.dataReducer.isLoadingDiscover
     }
 }
 

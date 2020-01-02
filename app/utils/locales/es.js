@@ -133,7 +133,7 @@ export default {
         offerTitle: '{{offerTitle}} en {{establishmentName}}',
         establishmentTitle: 'Ofertas en {{establishmentName}}',
         offerDescription:
-            '{{description}}.\n\nEsta y otras promociones encuentras en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/',
+            '{{establishmentName}}\n\n{{description}}.\n\nEsta y otras promociones encuentras en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/',
         establishmentDescription:
             '{{description}}.\nEncuentra las ofertas de este y otros establecimientos en:\nhttps://www.facebook.com/promos.ecu\nhttps://www.instagram.com/promos.ec/'
     },
