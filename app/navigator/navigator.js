@@ -14,8 +14,6 @@ import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 
-// import I18n from '../utils/i18n'
-
 import HeaderLogo from '../components/HeaderLogo'
 import dataReducer from '../reducers/dataReducer'
 
