@@ -45,10 +45,12 @@ import HeaderGeneric from '../components/HeaderGeneric'
 import HeaderCustomText from '../components/HeaderCustomText'
 import TabBarDefault from '../components/TabBarDefault'
 
-// import Txt from '../components/Txt'
-// import TabBarDefault from '../components/TabBarDefault'
+import PushNotification from 'react-native-push-notification'
 
 import SplashScreen from 'react-native-splash-screen'
+import AsyncStorage from '@react-native-community/async-storage'
+
+import { wsPostPushToken } from '../services/users'
 
 const reducer = combineReducers({
     dataReducer
@@ -188,12 +190,7 @@ const SessionStack = createStackNavigator(
         EstablishmentDetail: {
             screen: Establishment,
             navigationOptions: ({ navigation }) => ({
-                header: (
-                    <HeaderGeneric
-                        navigation={navigation}
-                        viewTitle={'establishment.viewTitle'}
-                    />
-                ),
+                header: <HeaderCustomText navigation={navigation} />,
                 gesturesEnabled: false
             })
         },
@@ -300,9 +297,20 @@ const RootStack = () => {
 }
 
 export default class App extends Component {
-    // componentDidMount() {
-    //     SplashScreen.hide()
-    // }
+    async componentDidMount() {
+        const pushToken = await AsyncStorage.getItem('pushToken')
+        if (!pushToken) {
+            PushNotification.configure({
+                largeIcon: 'ic_launcher',
+                smallIcon: 'ic_launcher',
+                onRegister: async function(token) {
+                    AsyncStorage.setItem('pushToken', token.token)
+                    wsPostPushToken(token.token, 'android', 'quito_general')
+                },
+                senderID: '380238783677'
+            })
+        }
+    }
 
     render() {
         const AppContainer = createAppContainer(RootStack(false))

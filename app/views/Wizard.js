@@ -1,16 +1,17 @@
 import React from 'react'
-import { View, StyleSheet, Image, SafeAreaView } from 'react-native'
+import { View, StyleSheet, Image, SafeAreaView, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Txt from '../components/Txt'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import SplashScreen from 'react-native-splash-screen'
 
 import { connect } from 'react-redux'
-import { fnGetOffers } from '../actions/actions'
+import { fnSetOffer, fnSetEstablishment } from '../actions/actions'
 import I18n from '../utils/i18n'
 import { colors } from '../utils/constants'
 import AsyncStorage from '@react-native-community/async-storage'
 import { globalStyles as gs } from '../utils/styles'
+import PushNotification from 'react-native-push-notification'
 
 class Home extends React.Component {
     constructor(props) {
@@ -37,6 +38,41 @@ class Home extends React.Component {
         }
     }
     async componentDidMount() {
+        PushNotification.configure({
+            onNotification: function(notification) {
+                if (!notification.foreground && notification.notificationType) {
+                    if (notification.notificationType == 'establishment') {
+                        this.props.fnSetEstablishment({
+                            id: notification.notificationValue
+                        })
+                        setTimeout(() => {
+                            this.props.navigation.navigate(
+                                'EstablishmentDetail',
+                                { viewTitle: notification.notificationTitle }
+                            )
+                        }, 1000)
+                    } else if (notification.notificationType == 'offer') {
+                        this.props.fnSetOffer({
+                            id: notification.notificationValue,
+                            establishmentId:
+                                notification.notificationEstablishmentId
+                        })
+
+                        setTimeout(() => {
+                            this.props.navigation.navigate('Offer', {
+                                viewTitle:
+                                    notification.notificationTitle || 'Oferta'
+                            })
+                        }, 1000)
+                    }
+                }
+                setTimeout(() => {
+                    SplashScreen.hide()
+                }, 1000)
+            }.bind(this),
+            senderID: '380238783677'
+        })
+
         setTimeout(() => {
             SplashScreen.hide()
         }, 1000)
@@ -85,7 +121,8 @@ class Home extends React.Component {
                     style={gs.f1}
                     horizontal
                     data={this.state.views}
-                    renderItem={({ item }) => (
+                    keyExtractor={item => item.id + ''}
+                    renderItem={({ item, index }) => (
                         <View style={gs.fw}>
                             <View style={st.imageContainer}>
                                 {item.id == 1 && (
@@ -139,7 +176,6 @@ class Home extends React.Component {
                             </View>
                         </View>
                     )}
-                    keyExtractor={item => item.id}
                 />
                 <View style={st.footerSection}>
                     <View style={gs.f1}>
@@ -239,6 +275,6 @@ function mapStateToProps(state) {
     return { offers: state.dataReducer.homeOffers }
 }
 
-const mapDispatchToProps = { fnGetOffers }
+const mapDispatchToProps = { fnSetOffer, fnSetEstablishment }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

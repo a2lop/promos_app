@@ -31,3 +31,11 @@ export function wsDeleteUserMembership(userId, membership) {
         { method: 'DELETE' }
     )
 }
+
+export function wsPostPushToken(token, os, topic) {
+    return wsCall(`tokens`, { token, os, topic }, { method: 'POST' })
+}
+
+export function wsDeletePushToken(token, os, topic) {
+    return wsCall(`tokens`, { token, os, topic }, { method: 'DELETE' })
+}

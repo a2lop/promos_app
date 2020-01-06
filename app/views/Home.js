@@ -89,12 +89,24 @@ class Home extends React.Component {
                             })
                         }}
                     />
-                    <View style={gs.filterButtonContainer}>
+                    <View
+                        style={[
+                            gs.filterButtonContainer,
+                            {
+                                backgroundColor: colors.PURPLE,
+                                borderRadius: 10,
+                                marginLeft: 5,
+                                marginVertical: 2
+                            }
+                        ]}>
                         <TouchableOpacity
                             onPress={() => {
                                 this.setState({ showPopupFilter: true })
                             }}>
-                            <Icon name={'filter-outline'} size={25}></Icon>
+                            <Icon
+                                name={'filter-outline'}
+                                size={30}
+                                color={colors.WHITE}></Icon>
                         </TouchableOpacity>
                     </View>
                 </View>
