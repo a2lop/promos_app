@@ -169,9 +169,7 @@ class Establishment extends React.Component {
                 </View>
                 <View style={gs.dfGenericContainer}>
                     <Txt style={[gs.dfSectionTitle, gs.mb5]}>
-                        {I18n.t('establishment.offers', {
-                            establishmentName: 'Campo4'
-                        })}
+                        {I18n.t('establishment.offers')}
                     </Txt>
                     <FlatList
                         data={this.props.establishmentOffers}

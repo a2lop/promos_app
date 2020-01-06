@@ -35,96 +35,12 @@ let initialState = {
 
     offer: {},
     categories: [],
-    categoriesParents: [
-        {
-            id: '1OPczZm4PO6D4l0rLCBq',
-            name: 'Compras',
-            iconImage:
-                'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/categories%2F1OPczZm4PO6D4l0rLCBq?alt=media&token=9dc4472b-63be-4f79-bdbb-4516b142ebea',
-            parent: -1,
-            searchName: 'compras'
-        },
-        {
-            id: 'Nu7ETyJEIDh184Dy705O',
-            searchName: 'entretenimiento',
-            name: 'Entretenimiento',
-            iconImage:
-                'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/categories%2FNu7ETyJEIDh184Dy705O?alt=media&token=c38e49cd-cae3-4a29-906f-b7979c6bf2ad',
-            parent: -1
-        },
-        {
-            id: 'RRfDFGcNa7BeKlYOxGxJ',
-            searchName: 'viajes',
-            name: 'Viajes',
-            iconImage:
-                'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/categories%2FRRfDFGcNa7BeKlYOxGxJ?alt=media&token=70281df9-71f3-4f0c-a348-9c84c4cc33a9',
-            parent: -1
-        },
-        {
-            id: 'gkoWxhgtAN7Ph636fuDp',
-            iconImage:
-                'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/categories%2FgkoWxhgtAN7Ph636fuDp?alt=media&token=1ccb131b-6363-4749-b331-494a53609f49',
-            parent: -1,
-            searchName: 'deportes',
-            name: 'Deportes'
-        },
-        {
-            id: 'zsCubJ9UEq1TFYWGNARG',
-            searchName: 'comida',
-            name: 'Comida',
-            iconImage:
-                'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/categories%2FzsCubJ9UEq1TFYWGNARG?alt=media&token=85ebbbaf-459e-4506-a072-67d20102e75e',
-            parent: -1
-        }
-    ],
+    categoriesParents: [],
     establishment: {},
     establishmentOffers: [],
     discoverBannerOffers: [],
     discoverOffers: [],
-    memberships: [
-        // {
-        //     id: '8CxUCGVkwyCnIfPLbNl1',
-        //     image:
-        //         'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/memberships%2F8CxUCGVkwyCnIfPLbNl1?alt=media&token=8b67d6f2-c1e3-49de-8af1-6b264418dbf2',
-        //     searchName: 'supermaxi',
-        //     name: 'Supermaxi'
-        // },
-        // {
-        //     id: '9KR59VSq3jQT8MA2P2cd',
-        //     name: 'Banco Pichincha',
-        //     image:
-        //         'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/memberships%2F9KR59VSq3jQT8MA2P2cd?alt=media&token=9216808e-d1b8-4c46-9d90-44fe3c747bed',
-        //     searchName: 'banco pichincha'
-        // },
-        // {
-        //     id: 'gigCZw7fo7tq2p7DFsrz',
-        //     image:
-        //         'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/memberships%2FgigCZw7fo7tq2p7DFsrz?alt=media&token=c8e7f0e4-a243-4ab8-bdbd-dc63ddd85d73',
-        //     searchName: 'multicines ',
-        //     name: 'Multicines '
-        // },
-        // {
-        //     id: 'wY5maOuicbGXgQh8zkNz',
-        //     image:
-        //         'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/memberships%2FwY5maOuicbGXgQh8zkNz?alt=media&token=7d05bc3f-21d6-465e-9eb6-82e7154189e9',
-        //     searchName: 'diners club',
-        //     name: 'Diners Club'
-        // },
-        // {
-        //     id: 'yL7MgvnnzzngUTZl8izz',
-        //     image:
-        //         'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/memberships%2FyL7MgvnnzzngUTZl8izz?alt=media&token=be77be4a-c1b1-45e3-9a10-2e9c399bb65a',
-        //     searchName: 'produbanco',
-        //     name: 'Produbanco'
-        // },
-        // {
-        //     id: 'zxWaX8xCpsDMtamiRuAR',
-        //     name: 'Banco del Pacifico',
-        //     image:
-        //         'https://firebasestorage.googleapis.com/v0/b/promos-233704.appspot.com/o/memberships%2FzxWaX8xCpsDMtamiRuAR?alt=media&token=1be38449-e413-42ef-aeda-a2327b08f2ea',
-        //     searchName: 'banco del pacifico'
-        // }
-    ]
+    memberships: []
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -151,7 +67,7 @@ const dataReducer = (state = initialState, action) => {
             state = Object.assign({}, state, {
                 homeOffers: concat(state.homeOffers, action.payload.offers),
                 isLoadingHomeOffers: false,
-                homeStillLoadingMore: action.payload.offers.length > 0
+                homeStillLoadingMore: action.payload.offers.length == 10
             })
             return state
         case SET_OFFER:

@@ -29,6 +29,10 @@ import {
     fnAddUserMembership,
     fnRemoveUserMembership
 } from '../actions/actions'
+
+import { wsPostPushToken, wsDeletePushToken } from '../services/users'
+import AsyncStorage from '@react-native-community/async-storage'
+
 // import {
 //     wsGetUserInfo,
 //     wsPutUserCategory,
@@ -53,14 +57,7 @@ class Profile extends React.Component {
             showPopupCategories: false
         }
     }
-    componentDidMount() {
-        // this.props.navigation.addListener('willFocus', route => {
-        //     this.props.fnSetMainScreen(3)
-        // })
-        // this.props.navigation.addListener('willBlur', route => {
-        //     this.props.fnSetMainScreen(2)
-        // })
-    }
+    componentDidMount() {}
 
     login() {
         this.setState(
@@ -194,11 +191,29 @@ class Profile extends React.Component {
             0
         ) {
             this.props.fnAddUserCategory(this.props.user.id, category)
+            AsyncStorage.getItem('pushToken').then(pushToken => {
+                if (pushToken) {
+                    wsPostPushToken(
+                        pushToken,
+                        'android',
+                        'quito_category_' + category.id
+                    )
+                }
+            })
         }
     }
 
     removeCategory(category) {
         this.props.fnRemoveUserCategory(this.props.user.id, category)
+        AsyncStorage.getItem('pushToken').then(pushToken => {
+            if (pushToken) {
+                wsDeletePushToken(
+                    pushToken,
+                    'android',
+                    'quito_category_' + category.id
+                )
+            }
+        })
     }
 
     addMembership(membership) {
@@ -207,11 +222,29 @@ class Profile extends React.Component {
                 .length == 0
         ) {
             this.props.fnAddUserMembership(this.props.user.id, membership)
+            AsyncStorage.getItem('pushToken').then(pushToken => {
+                if (pushToken) {
+                    wsPostPushToken(
+                        pushToken,
+                        'android',
+                        'quito_membership_' + membership.id
+                    )
+                }
+            })
         }
     }
 
     removeMembership(membership) {
         this.props.fnRemoveUserMembership(this.props.user.id, membership)
+        AsyncStorage.getItem('pushToken').then(pushToken => {
+            if (pushToken) {
+                wsDeletePushToken(
+                    pushToken,
+                    'android',
+                    'quito_membership_' + membership.id
+                )
+            }
+        })
     }
 
     render() {

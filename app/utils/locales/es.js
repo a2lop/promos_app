@@ -1,13 +1,13 @@
 export default {
     wizard: {
         title1: 'Bienvenido a Promos',
-        message1: 'Encuentra los mejores descuentos en todo!!!',
+        message1: 'Encuentra los mejores descuentos en todo',
         title2: '¿La promo del día?',
         message2:
-            'Encuentra aqui ese descuento que estabas esperando! arma tu plan del dīa aprovechando que tu establecimiento favorito tiene una oferta para tí o simplemente descubre una irrestible oferta!!!',
-        title3: 'Restaurantes, entretenimiento, ropa y mucho más',
+            'Encuentra el descuento que estabas buscando, descubre nuevas ofertas o aprovecha las promociones de tu establecimiento favorito.',
+        title3: 'Restaurantes, entretenimiento, ropa y mucho más.',
         message3:
-            'Enterante de las ofertas que día a día existen en tu ciudad, suscribete a tu establecimiento y se el primero en recibir las promociones!!!',
+            'Suscribete a tu establecimiento favorito, recibe las ultimas ofertas y disfruta ahorrandozzz ',
         next: 'Siguiente',
         begin: 'Empezar',
         skip: 'Omitir'
@@ -106,7 +106,7 @@ export default {
         noOffers: 'No hay promociones hoy 😔'
     },
     discover: {
-        outstandingOffers: 'Promos destacadas'
+        outstandingOffers: 'Nuestras recomendaciones'
     },
     memberships: {
         viewTitle: 'Membresias'

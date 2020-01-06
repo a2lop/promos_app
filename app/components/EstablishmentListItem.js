@@ -12,7 +12,9 @@ import { fnSetEstablishment } from '../actions/actions'
 class EsteblishmentListItem extends React.Component {
     openEstablishment() {
         this.props.fnSetEstablishment(this.props.item)
-        this.props.navigation.navigate('EstablishmentDetail')
+        this.props.navigation.navigate('EstablishmentDetail', {
+            viewTitle: this.props.item.name
+        })
     }
     render() {
         return (

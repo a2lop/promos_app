@@ -22,7 +22,7 @@ class Sidebar extends Component {
             userPicture: '',
             username: '',
             usesNumber: 0,
-            version: '0.0.5'
+            version: '0.0.6'
         }
     }
 
@@ -186,6 +186,7 @@ class Sidebar extends Component {
                     <TouchableOpacity
                         onPress={() => {
                             AsyncStorage.removeItem('hideWizard')
+                            AsyncStorage.removeItem('pushToken')
                         }}>
                         <Txt
                             style={{

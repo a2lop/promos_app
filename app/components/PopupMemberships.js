@@ -31,17 +31,18 @@ class PopupMemberships extends React.Component {
     }
 
     loadMemberships() {
-        let memberships = []
+        let memberships = JSON.parse(JSON.stringify(this.props.memberships))
         if (this.props.userMemberships.length > 0) {
-            this.props.memberships.forEach(c => {
+            memberships.forEach(c => {
                 c.isSelected =
                     this.props.userMemberships.filter(cat => cat.id == c.id)
                         .length > 0
-                memberships.push(c)
+                // memberships.push(c)
             })
-        } else {
-            memberships = this.props.memberships
         }
+        // else {
+        //     memberships = JSON.parse(JSON.stringify(this.props.memberships))
+        // }
         this.setState({ memberships })
     }
 

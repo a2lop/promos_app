@@ -31,17 +31,18 @@ class PopupMyCategories extends React.Component {
     }
 
     loadCategories() {
-        let categories = []
+        let categories = JSON.parse(JSON.stringify(this.props.categories))
         if (this.props.userCategories.length > 0) {
-            this.props.categories.forEach(c => {
+            categories.forEach(c => {
                 c.isSelected =
                     this.props.userCategories.filter(cat => cat.id == c.id)
                         .length > 0
-                categories.push(c)
+                // categories.push(c)
             })
-        } else {
-            categories = this.props.categories
         }
+        // else {
+        //     categories = JSON.parse(JSON.stringify(this.props.categories))
+        // }
         this.setState({ categories })
     }
 

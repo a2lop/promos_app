@@ -11,8 +11,10 @@ import {
 import LoadingItem from '../components/Loading'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import OfferListItem from '../components/OfferListItem'
+import Txt from '../components/Txt'
 
 import { globalStyles as gs } from '../utils/styles'
+import I18n from '../utils/i18n'
 
 import { connect } from 'react-redux'
 import { fnGetDiscoverOffers, fnSetOffer } from '../actions/actions'
@@ -86,6 +88,17 @@ class Discover extends React.Component {
                     inactiveDotOpacity={0.4}
                     inactiveDotScale={0.6}
                 />
+
+                <Txt
+                    style={{
+                        fontSize: 18,
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        marginBottom: 5
+                    }}>
+                    {I18n.t('discover.outstandingOffers')}
+                </Txt>
+
                 <FlatList
                     data={this.props.offers}
                     keyExtractor={(d, i) => i.toString()}

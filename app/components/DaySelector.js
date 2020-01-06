@@ -20,18 +20,11 @@ class DaySelector extends React.Component {
     }
     createDays() {
         const todayTs = new Date().getTime()
-        const todayDay = new Date().getDay()
+        const todayDay = new Date().getDay() == 0 ? 7 : new Date().getDay()
 
         const days = []
-        // days.push({ date: new Date(todayTs - 86400000 * 3), id: 1 })
-        // days.push({ date: new Date(todayTs - 86400000 * 2), id: 2 })
-        // days.push({ date: new Date(todayTs - 86400000 * 1), id: 3 })
-        // days.push({ date: new Date(todayTs), id: 4, isSelected: true })
-        // days.push({ date: new Date(todayTs + 86400000 * 1), id: 5 })
-        // days.push({ date: new Date(todayTs + 86400000 * 2), id: 6 })
-        // days.push({ date: new Date(todayTs + 86400000 * 3), id: 7 })
 
-        for (let i = 1; i < new Date().getDay(); i++) {
+        for (let i = 1; i < todayDay; i++) {
             days.push({
                 date: new Date(todayTs - 86400000 * (todayDay - i)),
                 id: i
