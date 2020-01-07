@@ -118,6 +118,7 @@ class Home extends React.Component {
                         this.flatListRef = ref
                     }}
                     scrollEnabled={false}
+                    showsHorizontalScrollIndicator={false}
                     style={gs.f1}
                     horizontal
                     data={this.state.views}
@@ -151,7 +152,7 @@ class Home extends React.Component {
                                 style={[
                                     // gs.f1,
                                     {
-                                        paddingHorizontal: 15,
+                                        paddingHorizontal: 30,
                                         alignItems: 'center'
                                     }
                                 ]}>
@@ -168,7 +169,7 @@ class Home extends React.Component {
                                 <Txt
                                     style={{
                                         color: colors.PURPLE,
-                                        fontSize: 18,
+                                        fontSize: 19,
                                         textAlign: 'center'
                                     }}>
                                     {item.description}

@@ -1,13 +1,13 @@
 export default {
     wizard: {
-        title1: 'Bienvenido a Promos',
-        message1: 'Encuentra los mejores descuentos en todo',
+        title1: '¡Bienvenido a Promos!',
+        message1: 'La mejor guía de promociones de la ciudad.',
         title2: '¿La promo del día?',
         message2:
             'Encuentra el descuento que estabas buscando, descubre nuevas ofertas o aprovecha las promociones de tu establecimiento favorito.',
         title3: 'Restaurantes, entretenimiento, ropa y mucho más.',
         message3:
-            'Suscribete a tu establecimiento favorito, recibe las ultimas ofertas y disfruta ahorrandozzz ',
+            'Suscribete a tu establecimiento favorito, recibe las ultimas ofertas y disfruta ahorrando.',
         next: 'Siguiente',
         begin: 'Empezar',
         skip: 'Omitir'
@@ -125,8 +125,8 @@ export default {
     onPromos: {
         title: '¿Tienes una oferta espectacular y quieres aparecer en Promos?',
         description:
-            'Somos una comunidad que todos los días busca crecer, nos alegraría muchisimo contar con tu establecimiento y oferta en nuestra guía, puedes tanto escribirnos a nuestro correo, llamarnos o simplemente enviarnos un Whatsapp a los siguientes contactos:',
-        socialText: 'O escribenos mediante nuestras redes sociales:'
+            'Somos una comunidad que todos los días busca crecer, nos alegraría muchísimo contar con tu establecimiento y oferta en nuestra guía. Escríbenos a nuestro correo, llámanos o envíanos un whatsapp a los siguientes contactos:',
+        socialText: 'Síguenos en nuestras redes sociales:'
     },
     share: {
         dialogTitle: 'Compartir este contenido',
