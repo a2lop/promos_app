@@ -35,7 +35,7 @@ class Discover extends React.Component {
 
     openOffer(offer) {
         this.props.fnSetOffer(offer)
-        this.props.navigation.navigate('OfferDetail')
+        this.props.navigation.navigate('Offer', { viewTitle: offer.name })
     }
 
     render() {

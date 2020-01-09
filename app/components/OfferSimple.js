@@ -12,7 +12,7 @@ import { getDaysString } from '../utils/utils'
 class OfferSimple extends React.Component {
     openOffer() {
         this.props.fnSetOffer(this.props.item, this.props.notLoadEstablishment)
-        this.props.navigation.navigate('OfferDetail', {
+        this.props.navigation.navigate('Offer', {
             viewTitle: this.props.item.name
         })
         if (this.props.scrollToTop) {

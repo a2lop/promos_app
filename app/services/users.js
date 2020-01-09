@@ -36,6 +36,10 @@ export function wsPostPushToken(token, os, topic) {
     return wsCall(`tokens`, { token, os, topic }, { method: 'POST' })
 }
 
+export function wsAddUserToToken(token, user) {
+    return wsCall(`tokens/users`, { token, user }, { method: 'POST' })
+}
+
 export function wsDeletePushToken(token, os, topic) {
     return wsCall(`tokens`, { token, os, topic }, { method: 'DELETE' })
 }

@@ -4,6 +4,8 @@ import moment from 'moment'
 import 'moment/locale/fr'
 import I18n from '../utils/i18n'
 import { constants } from '../utils/constants'
+import { wsPostPushToken, wsDeletePushToken } from '../services/users'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export const formatDateYy = function(d) {
     try {
@@ -36,6 +38,12 @@ export const bottomReached = ({
         layoutMeasurement.height + contentOffset.y >=
         contentSize.height - paddingToBottom
     )
+}
+
+export const openExternalApp = (scheme, url, alternative) => {
+    Linking.canOpenURL(scheme + url).then(canOpen => {
+        openUrl(canOpen ? scheme + url : alternative + url)
+    })
 }
 
 export const openUrl = url => {
@@ -104,4 +112,20 @@ export const validatePassword = password => {
     }
     const re = /^([A-Za-z]|[0-9]|_)+$/
     return re.test(String(password))
+}
+
+export const addPushTopic = (platform, topic, subtopic) => {
+    AsyncStorage.getItem('pushToken').then(pushToken => {
+        if (pushToken) {
+            wsPostPushToken(pushToken, platform, `quito_${topic}_${subtopic}`)
+        }
+    })
+}
+
+export const removePushTopic = (platform, topic, subtopic) => {
+    AsyncStorage.getItem('pushToken').then(pushToken => {
+        if (pushToken) {
+            wsDeletePushToken(pushToken, platform, `quito_${topic}_${subtopic}`)
+        }
+    })
 }

@@ -16,7 +16,12 @@ import PopupMyCategories from '../components/PopupMyCategories'
 
 import { connect } from 'react-redux'
 import I18n from '../utils/i18n'
-import { validateEmail, validatePassword } from '../utils/utils'
+import {
+    validateEmail,
+    validatePassword,
+    addPushTopic,
+    removePushTopic
+} from '../utils/utils'
 // import { concat } from 'lodash'
 
 import { colors } from '../utils/constants'
@@ -30,7 +35,7 @@ import {
     fnRemoveUserMembership
 } from '../actions/actions'
 
-import { wsPostPushToken, wsDeletePushToken } from '../services/users'
+import { wsAddUserToToken } from '../services/users'
 import AsyncStorage from '@react-native-community/async-storage'
 
 // import {
@@ -87,7 +92,22 @@ class Profile extends React.Component {
                             this.state.txtEmail,
                             this.state.txtPassword
                         )
-                        .then(() => {})
+                        .then(response => {
+                            AsyncStorage.getItem('pushToken').then(
+                                pushToken => {
+                                    if (pushToken) {
+                                        wsAddUserToToken(
+                                            pushToken,
+                                            this.state.txtEmail
+                                        )
+                                    }
+                                    this.setState({
+                                        txtEmail: '',
+                                        txtPassword: ''
+                                    })
+                                }
+                            )
+                        })
                         .catch(error => {
                             this.setState({
                                 msgError: I18n.t(
@@ -159,6 +179,16 @@ class Profile extends React.Component {
                                     id: user.user.uid
                                 }
                                 this.props.fnSetUser(newUser)
+                                AsyncStorage.getItem('pushToken').then(
+                                    pushToken => {
+                                        if (pushToken) {
+                                            wsAddUserToToken(
+                                                pushToken,
+                                                this.state.txtRegisterEmail
+                                            )
+                                        }
+                                    }
+                                )
                                 user.user
                                     .updateProfile({
                                         displayName: this.state.txtRegisterNames
@@ -191,29 +221,31 @@ class Profile extends React.Component {
             0
         ) {
             this.props.fnAddUserCategory(this.props.user.id, category)
-            AsyncStorage.getItem('pushToken').then(pushToken => {
-                if (pushToken) {
-                    wsPostPushToken(
-                        pushToken,
-                        'android',
-                        'quito_category_' + category.id
-                    )
-                }
-            })
+            addPushTopic('android', 'category', category.id)
+            // AsyncStorage.getItem('pushToken').then(pushToken => {
+            //     if (pushToken) {
+            //         wsPostPushToken(
+            //             pushToken,
+            //             'android',
+            //             'quito_category_' + category.id
+            //         )
+            //     }
+            // })
         }
     }
 
     removeCategory(category) {
         this.props.fnRemoveUserCategory(this.props.user.id, category)
-        AsyncStorage.getItem('pushToken').then(pushToken => {
-            if (pushToken) {
-                wsDeletePushToken(
-                    pushToken,
-                    'android',
-                    'quito_category_' + category.id
-                )
-            }
-        })
+        removePushTopic('android', 'category', category.id)
+        // AsyncStorage.getItem('pushToken').then(pushToken => {
+        //     if (pushToken) {
+        //         wsDeletePushToken(
+        //             pushToken,
+        //             'android',
+        //             'quito_category_' + category.id
+        //         )
+        //     }
+        // })
     }
 
     addMembership(membership) {
@@ -222,29 +254,31 @@ class Profile extends React.Component {
                 .length == 0
         ) {
             this.props.fnAddUserMembership(this.props.user.id, membership)
-            AsyncStorage.getItem('pushToken').then(pushToken => {
-                if (pushToken) {
-                    wsPostPushToken(
-                        pushToken,
-                        'android',
-                        'quito_membership_' + membership.id
-                    )
-                }
-            })
+            addPushTopic('android', 'membership', membership.id)
+            // AsyncStorage.getItem('pushToken').then(pushToken => {
+            //     if (pushToken) {
+            //         wsPostPushToken(
+            //             pushToken,
+            //             'android',
+            //             'quito_membership_' + membership.id
+            //         )
+            //     }
+            // })
         }
     }
 
     removeMembership(membership) {
         this.props.fnRemoveUserMembership(this.props.user.id, membership)
-        AsyncStorage.getItem('pushToken').then(pushToken => {
-            if (pushToken) {
-                wsDeletePushToken(
-                    pushToken,
-                    'android',
-                    'quito_membership_' + membership.id
-                )
-            }
-        })
+        removePushTopic('android', 'membership', membership.id)
+        // AsyncStorage.getItem('pushToken').then(pushToken => {
+        //     if (pushToken) {
+        //         wsDeletePushToken(
+        //             pushToken,
+        //             'android',
+        //             'quito_membership_' + membership.id
+        //         )
+        //     }
+        // })
     }
 
     render() {

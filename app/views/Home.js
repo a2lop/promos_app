@@ -28,7 +28,7 @@ class Home extends React.Component {
         this.state = {
             showPopupFilter: false,
             selectedDay: new Date().getDay(),
-            selectedCategory: 'all'
+            selectedCategory: { id: 'all' }
         }
     }
 
@@ -82,7 +82,7 @@ class Home extends React.Component {
                             this.setState({ selectedDay }, () => {
                                 this.loadOffers(
                                     selectedDay,
-                                    this.state.selectedCategory,
+                                    this.state.selectedCategory.id,
                                     -1,
                                     true
                                 )
@@ -93,8 +93,13 @@ class Home extends React.Component {
                         style={[
                             gs.filterButtonContainer,
                             {
-                                backgroundColor: colors.PURPLE,
+                                backgroundColor:
+                                    this.state.selectedCategory.id == 'all'
+                                        ? colors.WHITE
+                                        : colors.PURPLE,
                                 borderRadius: 10,
+                                borderWidth: 1,
+                                borderColor: colors.SILVER,
                                 marginLeft: 5,
                                 marginVertical: 2
                             }
@@ -106,10 +111,28 @@ class Home extends React.Component {
                             <Icon
                                 name={'filter-outline'}
                                 size={30}
-                                color={colors.WHITE}></Icon>
+                                color={
+                                    this.state.selectedCategory.id == 'all'
+                                        ? colors.DARK
+                                        : colors.WHITE
+                                }></Icon>
                         </TouchableOpacity>
                     </View>
                 </View>
+                {this.state.selectedCategory.id != 'all' && (
+                    <View style={{ paddingHorizontal: 15, marginVertical: 5 }}>
+                        <Txt
+                            style={{
+                                fontSize: 18,
+                                textAlign: 'center',
+                                fontWeight: 'bold'
+                            }}>
+                            {I18n.t('home.selectedCategory', {
+                                categoryName: this.state.selectedCategory.name
+                            })}
+                        </Txt>
+                    </View>
+                )}
 
                 {!this.props.isLoading && this.props.offers.length == 0 && (
                     <View style={{ alignItems: 'center' }}>
@@ -119,7 +142,6 @@ class Home extends React.Component {
                                 height: 200,
                                 marginTop: 15,
                                 marginBottom: 25
-                                // alignSelf: 'center'
                             }}
                             source={require('../assets/emptyContent.png')}
                         />
@@ -140,7 +162,7 @@ class Home extends React.Component {
                                           ].id
                                 this.loadOffers(
                                     this.state.selectedDay,
-                                    this.state.selectedCategory,
+                                    this.state.selectedCategory.id,
                                     lastId
                                 )
                             }
@@ -154,7 +176,7 @@ class Home extends React.Component {
                             onRefresh={() => {
                                 this.loadOffers(
                                     this.state.selectedDay,
-                                    this.state.selectedCategory,
+                                    this.state.selectedCategory.id,
                                     -1,
                                     true
                                 )
@@ -189,7 +211,7 @@ class Home extends React.Component {
                                 () => {
                                     this.loadOffers(
                                         this.state.selectedDay,
-                                        selectedCategory,
+                                        selectedCategory.id,
                                         -1,
                                         true
                                     )

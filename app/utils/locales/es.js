@@ -47,7 +47,8 @@ export default {
     establishment: { viewTitle: 'Establecimiento', offers: 'Promociones' },
     establishments: {
         viewTitle: 'Establecimientos',
-        noEstablishments: 'No hay establecimientos 😔'
+        noEstablishments: 'No hay establecimientos 😔',
+        selectedCategory: 'Establecimientos de {{categoryName}}'
     },
 
     searchText: {
@@ -103,7 +104,8 @@ export default {
         logout: 'Cerrar sesión'
     },
     home: {
-        noOffers: 'No hay promociones hoy 😔'
+        noOffers: 'No hay promociones hoy 😔',
+        selectedCategory: 'Promociones en {{categoryName}}'
     },
     discover: {
         outstandingOffers: 'Nuestras recomendaciones'

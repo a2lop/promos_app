@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import I18n from '../utils/i18n'
 
 import { globalStyles as gs } from '../utils/styles'
-import { openUrl, shareContent } from '../utils/utils'
+import { openUrl, shareContent, openExternalApp } from '../utils/utils'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 
 import { fnGetEstablishmentOffers } from '../actions/actions'
@@ -115,8 +115,15 @@ class Establishment extends React.Component {
                             <View style={st.socialIconButton}>
                                 <TouchableOpacity
                                     onPress={() => {
+                                        // openExternalApp(
+                                        //     'fb://page/',
+                                        //     this.props.establishment.facebook,
+                                        //     'https://www.facebook.com/'
+                                        // )
                                         openUrl(
-                                            this.props.establishment.facebook
+                                            'https://www.facebook.com/' +
+                                                this.props.establishment
+                                                    .facebook
                                         )
                                     }}>
                                     <Icon size={30} name={'facebook-box'} />
@@ -127,8 +134,10 @@ class Establishment extends React.Component {
                             <View style={st.socialIconButton}>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        openUrl(
-                                            this.props.establishment.instagram
+                                        openExternalApp(
+                                            'instagram://user?username=',
+                                            this.props.establishment.instagram,
+                                            'https://www.instagram.com/'
                                         )
                                     }}>
                                     <Icon size={30} name={'instagram'} />
@@ -139,7 +148,10 @@ class Establishment extends React.Component {
                             <View style={st.socialIconButton}>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        openUrl(this.props.establishment.email)
+                                        openUrl(
+                                            'mailto:' +
+                                                this.props.establishment.email
+                                        )
                                     }}>
                                     <Icon size={30} name={'email'} />
                                 </TouchableOpacity>

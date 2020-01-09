@@ -27,7 +27,7 @@ class Establishment extends React.Component {
         super(props)
         this.state = {
             establishments: [],
-            selectedCategory: 'all',
+            selectedCategory: { id: 'all' },
             showPopupFilter: false,
             isLoading: false,
             stillLoadingMore: true
@@ -39,21 +39,29 @@ class Establishment extends React.Component {
     }
 
     loadEstablishments(categoryId, lastId, reset) {
-        this.setState(
-            {
-                isLoading: true,
-                establishments: reset ? [] : this.state.establishments
-            },
-            () => {
-                wsGetEstablishmentsByCategory(categoryId, lastId).then(d => {
-                    this.setState({
-                        establishments: concat(this.state.establishments, d),
-                        isLoading: false,
-                        stillLoadingMore: d.length > 0
-                    })
-                })
-            }
-        )
+        if (!this.state.isLoading) {
+            this.setState(
+                {
+                    isLoading: true,
+                    establishments: reset ? [] : this.state.establishments,
+                    stillLoadingMore: true
+                },
+                () => {
+                    wsGetEstablishmentsByCategory(categoryId, lastId).then(
+                        d => {
+                            this.setState({
+                                establishments: concat(
+                                    this.state.establishments,
+                                    d
+                                ),
+                                isLoading: false,
+                                stillLoadingMore: d.length == 10
+                            })
+                        }
+                    )
+                }
+            )
+        }
     }
 
     render() {
@@ -69,7 +77,7 @@ class Establishment extends React.Component {
                                 { showPopupFilter: false, selectedCategory },
                                 () => {
                                     this.loadEstablishments(
-                                        selectedCategory,
+                                        selectedCategory.id,
                                         '-1',
                                         true
                                     )
@@ -90,7 +98,7 @@ class Establishment extends React.Component {
                                                   1
                                           ].id
                                 this.loadEstablishments(
-                                    this.state.selectedCategory,
+                                    this.state.selectedCategory.id,
                                     lastId
                                 )
                             }
@@ -100,19 +108,60 @@ class Establishment extends React.Component {
                     <View
                         style={{
                             flexDirection: 'row',
-                            paddingTop: 10,
+                            paddingTop: 5,
                             paddingHorizontal: 15,
                             justifyContent: 'flex-end'
                         }}>
-                        <View style={[gs.filterButtonContainer, {}]}>
+                        <View
+                            style={[
+                                gs.filterButtonContainer,
+                                {
+                                    backgroundColor:
+                                        this.state.selectedCategory.id == 'all'
+                                            ? colors.WHITE
+                                            : colors.PURPLE,
+                                    borderRadius: 10,
+                                    borderWidth: 1,
+                                    borderColor: colors.SILVER,
+                                    marginLeft: 5,
+                                    paddingVertical: 5
+                                }
+                            ]}>
                             <TouchableOpacity
                                 onPress={() => {
                                     this.setState({ showPopupFilter: true })
                                 }}>
-                                <Icon name={'filter-outline'} size={25}></Icon>
+                                <Icon
+                                    name={'filter-outline'}
+                                    size={30}
+                                    color={
+                                        this.state.selectedCategory.id == 'all'
+                                            ? colors.DARK
+                                            : colors.WHITE
+                                    }></Icon>
                             </TouchableOpacity>
                         </View>
                     </View>
+
+                    {this.state.selectedCategory.id != 'all' && (
+                        <View
+                            style={{
+                                paddingHorizontal: 15,
+                                marginVertical: 5
+                            }}>
+                            <Txt
+                                style={{
+                                    fontSize: 18,
+                                    textAlign: 'center',
+                                    fontWeight: 'bold'
+                                }}>
+                                {I18n.t('establishments.selectedCategory', {
+                                    categoryName: this.state.selectedCategory
+                                        .name
+                                })}
+                            </Txt>
+                        </View>
+                    )}
 
                     {!this.state.isLoading &&
                         this.state.establishments.length == 0 && (

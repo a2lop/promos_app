@@ -57,7 +57,10 @@ class PopupFilter extends React.Component {
                     ]}>
                     <TouchableOpacity
                         onPress={() => {
-                            this.props.onCategorySelected('all')
+                            this.props.onCategorySelected({
+                                name: 'all',
+                                id: 'all'
+                            })
                         }}>
                         <Image
                             source={require('../assets/logo_square.png')}
@@ -92,7 +95,7 @@ class PopupFilter extends React.Component {
                                     <TouchableOpacity
                                         onPress={() => {
                                             this.props.onCategorySelected(
-                                                d.item.id
+                                                d.item
                                             )
                                         }}>
                                         <Image
