@@ -15,7 +15,7 @@ class HeaderCustomText extends React.Component {
                 forceInset={{ top: 'always', bottom: 'never' }}>
                 <View style={gs.headerContainer}>
                     <TouchableOpacity
-                        style={{ width: 40 }}
+                        style={{ width: 40, backgroundColor: 'red' }}
                         onPress={() => {
                             this.props.navigation.goBack()
                         }}>

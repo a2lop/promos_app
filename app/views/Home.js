@@ -1,8 +1,14 @@
 import React from 'react'
-import { View, RefreshControl, Image, TouchableOpacity } from 'react-native'
+import {
+    View,
+    RefreshControl,
+    Image,
+    TouchableOpacity,
+    ScrollView,
+    FlatList
+} from 'react-native'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
-import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import DaySelector from '../components/DaySelector'
 import LoadingItem from '../components/Loading'
 import PopupFilter from '../components/PopupFilter'
@@ -20,7 +26,8 @@ import I18n from '../utils/i18n'
 import { colors } from '../utils/constants'
 import { globalStyles as gs } from '../utils/styles'
 import { bottomReached } from '../utils/utils'
-import firebase from 'react-native-firebase'
+import { SafeAreaView } from 'react-navigation'
+// import firebase from 'react-native-firebase'
 
 class Home extends React.Component {
     constructor(props) {
@@ -42,18 +49,18 @@ class Home extends React.Component {
         if (this.props.memberships.length == 0) {
             this.props.fnGetMemberships()
         }
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.props.fnSetUser({
-                    name: user._user.displayName,
-                    email: user._user.email,
-                    id: user._user.uid
-                })
-                this.props.fnGetUserInfo(user._user.uid)
-            } else {
-                this.props.fnSetUser(undefined)
-            }
-        })
+        // firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         this.props.fnSetUser({
+        //             name: user._user.displayName,
+        //             email: user._user.email,
+        //             id: user._user.uid
+        //         })
+        //         this.props.fnGetUserInfo(user._user.uid)
+        //     } else {
+        //         this.props.fnSetUser(undefined)
+        //     }
+        // })
     }
 
     loadOffers(day, categoryId, lastId, reset) {
@@ -69,7 +76,8 @@ class Home extends React.Component {
 
     render() {
         return (
-            <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
+            <SafeAreaView
+                style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
                 <View
                     style={{
                         flexDirection: 'row',
@@ -220,7 +228,7 @@ class Home extends React.Component {
                         }}
                     />
                 )}
-            </View>
+            </SafeAreaView>
         )
     }
 }

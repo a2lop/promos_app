@@ -24,6 +24,7 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.YELLOW,
         flexDirection: 'row',
         height: 45,
+        zIndex: 9,
         alignItems: 'center',
         paddingHorizontal: 15
     },

@@ -11,7 +11,7 @@ import { openUrl } from '../utils/utils'
 import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
-import firebase from 'react-native-firebase'
+// import firebase from 'react-native-firebase'
 import { fnSetUser } from '../actions/actions'
 
 class Sidebar extends Component {
@@ -29,7 +29,7 @@ class Sidebar extends Component {
     componentDidMount() {}
 
     logout() {
-        firebase.auth().signOut()
+        // firebase.auth().signOut()
         this.props.fnSetUser()
     }
 

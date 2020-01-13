@@ -26,7 +26,7 @@ import {
 
 import { colors } from '../utils/constants'
 import { globalStyles as gs } from '../utils/styles'
-import firebase from 'react-native-firebase'
+// import firebase from 'react-native-firebase'
 import {
     fnSetUser,
     fnAddUserCategory,
@@ -85,46 +85,46 @@ class Profile extends React.Component {
                     return
                 }
 
-                this.setState({ isLoading: true }, () => {
-                    firebase
-                        .auth()
-                        .signInWithEmailAndPassword(
-                            this.state.txtEmail,
-                            this.state.txtPassword
-                        )
-                        .then(response => {
-                            AsyncStorage.getItem('pushToken').then(
-                                pushToken => {
-                                    if (pushToken) {
-                                        wsAddUserToToken(
-                                            pushToken,
-                                            this.state.txtEmail
-                                        )
-                                    }
-                                    this.setState({
-                                        txtEmail: '',
-                                        txtPassword: ''
-                                    })
-                                }
-                            )
-                        })
-                        .catch(error => {
-                            this.setState({
-                                msgError: I18n.t(
-                                    'profile.error' +
-                                        (error.code == 'auth/user-not-found'
-                                            ? 'InexistentUser'
-                                            : error.code ==
-                                              'auth/wrong-password'
-                                            ? 'InvalidPassword'
-                                            : 'General')
-                                )
-                            })
-                        })
-                        .finally(() => {
-                            this.setState({ isLoading: false })
-                        })
-                })
+                // this.setState({ isLoading: true }, () => {
+                //     firebase
+                //         .auth()
+                //         .signInWithEmailAndPassword(
+                //             this.state.txtEmail,
+                //             this.state.txtPassword
+                //         )
+                //         .then(response => {
+                //             AsyncStorage.getItem('pushToken').then(
+                //                 pushToken => {
+                //                     if (pushToken) {
+                //                         wsAddUserToToken(
+                //                             pushToken,
+                //                             this.state.txtEmail
+                //                         )
+                //                     }
+                //                     this.setState({
+                //                         txtEmail: '',
+                //                         txtPassword: ''
+                //                     })
+                //                 }
+                //             )
+                //         })
+                //         .catch(error => {
+                //             this.setState({
+                //                 msgError: I18n.t(
+                //                     'profile.error' +
+                //                         (error.code == 'auth/user-not-found'
+                //                             ? 'InexistentUser'
+                //                             : error.code ==
+                //                               'auth/wrong-password'
+                //                             ? 'InvalidPassword'
+                //                             : 'General')
+                //                 )
+                //             })
+                //         })
+                //         .finally(() => {
+                //             this.setState({ isLoading: false })
+                //         })
+                // })
             }
         )
     }
@@ -164,53 +164,53 @@ class Profile extends React.Component {
                     this.setState({ msgError })
                     return
                 }
-                this.setState({ isLoading: true }, () => {
-                    firebase
-                        .auth()
-                        .createUserWithEmailAndPassword(
-                            this.state.txtRegisterEmail,
-                            this.state.txtRegisterPassword1
-                        )
-                        .then(user => {
-                            if (user) {
-                                let newUser = {
-                                    name: this.state.txtRegisterNames,
-                                    email: user.user.email,
-                                    id: user.user.uid
-                                }
-                                this.props.fnSetUser(newUser)
-                                AsyncStorage.getItem('pushToken').then(
-                                    pushToken => {
-                                        if (pushToken) {
-                                            wsAddUserToToken(
-                                                pushToken,
-                                                this.state.txtRegisterEmail
-                                            )
-                                        }
-                                    }
-                                )
-                                user.user
-                                    .updateProfile({
-                                        displayName: this.state.txtRegisterNames
-                                    })
-                                    .then(user => {})
-                            }
-                        })
-                        .catch(error => {
-                            this.setState({
-                                msgError: I18n.t(
-                                    'profile.error' +
-                                        (error.code ==
-                                        'auth/email-already-in-use'
-                                            ? 'UsedEmail'
-                                            : 'General')
-                                )
-                            })
-                        })
-                        .finally(() => {
-                            this.setState({ isLoading: false })
-                        })
-                })
+                // this.setState({ isLoading: true }, () => {
+                //     firebase
+                //         .auth()
+                //         .createUserWithEmailAndPassword(
+                //             this.state.txtRegisterEmail,
+                //             this.state.txtRegisterPassword1
+                //         )
+                //         .then(user => {
+                //             if (user) {
+                //                 let newUser = {
+                //                     name: this.state.txtRegisterNames,
+                //                     email: user.user.email,
+                //                     id: user.user.uid
+                //                 }
+                //                 this.props.fnSetUser(newUser)
+                //                 AsyncStorage.getItem('pushToken').then(
+                //                     pushToken => {
+                //                         if (pushToken) {
+                //                             wsAddUserToToken(
+                //                                 pushToken,
+                //                                 this.state.txtRegisterEmail
+                //                             )
+                //                         }
+                //                     }
+                //                 )
+                //                 user.user
+                //                     .updateProfile({
+                //                         displayName: this.state.txtRegisterNames
+                //                     })
+                //                     .then(user => {})
+                //             }
+                //         })
+                //         .catch(error => {
+                //             this.setState({
+                //                 msgError: I18n.t(
+                //                     'profile.error' +
+                //                         (error.code ==
+                //                         'auth/email-already-in-use'
+                //                             ? 'UsedEmail'
+                //                             : 'General')
+                //                 )
+                //             })
+                //         })
+                //         .finally(() => {
+                //             this.setState({ isLoading: false })
+                //         })
+                // })
             }
         )
     }

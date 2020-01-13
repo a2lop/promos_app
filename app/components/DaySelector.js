@@ -71,10 +71,16 @@ class DaySelector extends React.Component {
                             key={day.date.getTime()}>
                             <TouchableOpacity
                                 style={{
-                                    width: '100%',
-                                    height: '100%',
+                                    // width: '100%',
+                                    // height: '100%',
                                     alignContent: 'center',
                                     justifyContent: 'center'
+                                }}
+                                hitSlop={{
+                                    top: 20,
+                                    bottom: 20,
+                                    left: 50,
+                                    right: 50
                                 }}
                                 onPress={() => {
                                     this.changeDay(day)
