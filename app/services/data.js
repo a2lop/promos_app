@@ -43,8 +43,8 @@ export function wsGetEstablishmentOffers(id) {
     return wsCall('offers/establishmentOffers/' + id)
 }
 
-export function wsGetCategoryOffers(id) {
-    return wsCall('offers/categoryOffers/' + id)
+export function wsGetCategoryOffers(id, lastId) {
+    return wsCall(`offers/categoryOffers/${id}/startAt/${lastId}`)
 }
 
 export function wsGetDiscoverOffers(id) {

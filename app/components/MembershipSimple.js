@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Image, Dimensions } from 'react-native'
+import { View, Image, Dimensions, TouchableOpacity } from 'react-native'
 import Txt from './Txt'
 
 import { connect } from 'react-redux'
 import { globalStyles as gs } from '../utils/styles'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
 
 class MembershipSimple extends React.Component {
@@ -24,7 +23,9 @@ class MembershipSimple extends React.Component {
                     marginHorizontal: 10,
                     borderRadius: 15,
                     paddingHorizontal: 10,
-                    paddingVertical: 5
+                    paddingVertical: 5,
+                    maxWidth: Dimensions.get('window').width / 2 - 30,
+                    zIndex: 9999
                     // borderColor: colors.SILVER
                 }}>
                 <TouchableOpacity

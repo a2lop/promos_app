@@ -105,6 +105,7 @@ class Discover extends React.Component {
                     renderItem={d => {
                         return (
                             <OfferListItem
+                                showDays={true}
                                 item={d.item}
                                 navigation={this.props.navigation}
                             />

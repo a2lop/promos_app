@@ -35,7 +35,8 @@ class MembershipOffers extends React.Component {
             <View style={{ backgroundColor: colors.SILVER_LIGHT, flex: 1 }}>
                 {this.state.isLoading && <LoadingItem />}
                 {!this.state.isLoading && this.state.offers.length == 0 && (
-                    <View style={{ alignItems: 'center' }}>
+                    <View
+                        style={{ alignItems: 'center', paddingHorizontal: 15 }}>
                         <Image
                             resizeMode="contain"
                             style={{
@@ -45,7 +46,7 @@ class MembershipOffers extends React.Component {
                             }}
                             source={require('../assets/emptyContent6.png')}
                         />
-                        <Txt style={{ fontSize: 20 }}>
+                        <Txt style={{ fontSize: 20, textAlign: 'center' }}>
                             {I18n.t('membershipOffers.noOffers', {
                                 membership: this.props.navigation.getParam(
                                     'viewTitle'

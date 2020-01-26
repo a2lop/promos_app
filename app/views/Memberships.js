@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, View, RefreshControl } from 'react-native'
+import { ScrollView, View, RefreshControl, FlatList } from 'react-native'
 import MembershipSimple from '../components/MembershipSimple'
 import LoadingItem from '../components/Loading'
 
@@ -9,7 +9,6 @@ import Txt from '../components/Txt'
 
 import { globalStyles as gs } from '../utils/styles'
 import { fnGetMemberships } from '../actions/actions'
-import { FlatList } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
 
 class Memberships extends React.Component {
@@ -21,39 +20,34 @@ class Memberships extends React.Component {
 
     render() {
         return (
-            // <ScrollView
-            //     style={[
-            //         gs.dfPageContainer,
-            //         { paddingVertical: 15, paddingHorizontal: 15 }
-            //     ]}>
+            // <View style={gs.f1}>
+            //     <ScrollView
+            //         style={[
+            //             gs.dfPageContainer,
+            //             { paddingVertical: 15, paddingHorizontal: 15 }
+            //         ]}>
             <FlatList
-                refreshControl={
-                    <RefreshControl
-                        style={{ backgroundColor: 'transparent' }}
-                        refreshing={this.props.isRefreshing || false}
-                        onRefresh={() => {
-                            this.props.fnGetMemberships()
-                        }}
-                    />
-                }
                 data={this.props.memberships}
                 keyExtractor={(d, i) => i.toString()}
                 numColumns={2}
+                columnWrapperStyle={{ justifyContent: 'center' }}
                 style={{
                     flexDirection: 'column',
-                    backgroundColor: colors.SILVER_LIGHT
+                    backgroundColor: colors.SILVER_LIGHT,
+                    alignContent: 'center',
+                    paddingTop: 10,
+                    zIndex: 10
                 }}
                 renderItem={d => {
                     return (
-                        <View style={gs.f1}>
-                            <MembershipSimple
-                                item={d.item}
-                                navigation={this.props.navigation}
-                            />
-                        </View>
+                        <MembershipSimple
+                            item={d.item}
+                            navigation={this.props.navigation}
+                        />
                     )
                 }}></FlatList>
-            // </ScrollView>
+            //     </ScrollView>
+            // </View>
         )
     }
 }

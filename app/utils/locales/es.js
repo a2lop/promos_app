@@ -50,6 +50,10 @@ export default {
         noEstablishments: 'No hay establecimientos 😔',
         selectedCategory: 'Establecimientos de {{categoryName}}'
     },
+    categoryOffers: {
+        // viewTitle: 'Establecimientos',
+        noOffers: 'No hay ofertas en esta categoría 😔'
+    },
 
     searchText: {
         viewTitle: 'Busqueda',

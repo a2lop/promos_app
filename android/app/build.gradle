@@ -60,8 +60,8 @@ android {
         applicationId "com.promos.promos"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "0.0.4"
+        versionCode 6
+        versionName "0.0.2"
     }
     splits {
         abi {

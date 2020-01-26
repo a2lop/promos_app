@@ -7,7 +7,7 @@ import Txt from './Txt'
 
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-import { openUrl } from '../utils/utils'
+import { openUrl, openExternalApp } from '../utils/utils'
 import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
@@ -22,7 +22,7 @@ class Sidebar extends Component {
             userPicture: '',
             username: '',
             usesNumber: 0,
-            version: '0.0.8'
+            version: '0.0.10'
         }
     }
 
@@ -118,6 +118,7 @@ class Sidebar extends Component {
                 <TouchableOpacity
                     style={st.labelContainer}
                     onPress={() => {
+                        this.props.navigation.navigate('DrawerClose')
                         this.props.navigation.navigate('Profile')
                     }}>
                     <Icon name={'account'} size={22} style={st.labelIcon} />
@@ -139,6 +140,7 @@ class Sidebar extends Component {
                     <TouchableOpacity
                         style={st.labelContainer}
                         onPress={() => {
+                            this.props.navigation.navigate('DrawerClose')
                             this.logout()
                         }}>
                         <Icon name={'logout'} size={22} style={st.labelIcon} />
@@ -168,7 +170,11 @@ class Sidebar extends Component {
                     <TouchableOpacity
                         style={st.socialButton}
                         onPress={() => {
-                            openUrl('https://www.instagram.com/promos.ec/')
+                            openExternalApp(
+                                'instagram://user?username=',
+                                'promos.ec',
+                                'https://www.instagram.com/'
+                            )
                         }}>
                         <Icon
                             size={40}
