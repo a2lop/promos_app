@@ -87,7 +87,7 @@ const MainStack = createMaterialTopTabNavigator(
         tabBarComponent: DefaultFooterTabBar,
         tabBarOptions: {
             tabStyle: {
-                height: 40
+                height: 50
             }
         },
         lazy: true
@@ -142,7 +142,8 @@ const SessionStack = createStackNavigator(
             screen: MainStack,
             navigationOptions: ({ navigation }) => ({
                 swipeEnabled: true,
-                header: <HeaderLogo navigation={navigation} />
+                header: <HeaderLogo navigation={navigation} />,
+                gesturesEnabled: false
             })
         },
         Offer: {
@@ -290,7 +291,8 @@ const RootStack = () => {
         {
             initialRouteName: 'DrawerNavigator',
             navigationOptions: {
-                header: { headerMode: 'screen', visible: false }
+                header: { headerMode: 'screen', visible: false },
+                gesturesEnabled: false
             }
         }
     )

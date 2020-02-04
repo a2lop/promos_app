@@ -20,7 +20,9 @@
 		7C9D0CC9880C694AD60236F4 /* libPods-promos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A1FA56063B5327BEE341AA /* libPods-promos.a */; };
 		7DD5EAC58D015B9D774F7C49 /* libPods-promosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF7A02A4955B89F443EC1121 /* libPods-promosTests.a */; };
 		8C59F330F8CEE53B8E7F59D9 /* libPods-promos-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA46FBBF540A1C6D82A41ED6 /* libPods-promos-tvOSTests.a */; };
-		AC976941233AC5AF00913D62 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC976940233AC5AF00913D62 /* MaterialCommunityIcons.ttf */; };
+		AC4EBFFE23DE0FC00078FB57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC4EBFFD23DE0FC00078FB57 /* GoogleService-Info.plist */; };
+		AC4EC00123DE36880078FB57 /* NunitoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC4EBFFF23DE36880078FB57 /* NunitoSans-Bold.ttf */; };
+		AC4EC00223DE36880078FB57 /* NunitoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC4EC00023DE36880078FB57 /* NunitoSans-Regular.ttf */; };
 		F2447C2A2B803910D105200C /* libPods-promos-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57776E8D5C53C170FF5556FA /* libPods-promos-tvOS.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,9 @@
 		867B6B63237E417FB53951A6 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		8F256BD4853B49658888AAFD /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		99C54DFEC0D042F581A42358 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		AC4EBFFD23DE0FC00078FB57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AC4EBFFF23DE36880078FB57 /* NunitoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NunitoSans-Bold.ttf"; path = "../../android/app/src/main/assets/fonts/NunitoSans-Bold.ttf"; sourceTree = "<group>"; };
+		AC4EC00023DE36880078FB57 /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NunitoSans-Regular.ttf"; path = "../../android/app/src/main/assets/fonts/NunitoSans-Regular.ttf"; sourceTree = "<group>"; };
 		AC976940233AC5AF00913D62 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
 		B4F2000754514E14ABE05042 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		BA46FBBF540A1C6D82A41ED6 /* libPods-promos-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-promos-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +186,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AC4EBFFD23DE0FC00078FB57 /* GoogleService-Info.plist */,
 				AC976942233AC5C200913D62 /* Resources */,
 				13B07FAE1A68108700A75B9A /* promos */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -208,6 +214,8 @@
 		AC976942233AC5C200913D62 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AC4EBFFF23DE36880078FB57 /* NunitoSans-Bold.ttf */,
+				AC4EC00023DE36880078FB57 /* NunitoSans-Regular.ttf */,
 				AC976940233AC5AF00913D62 /* MaterialCommunityIcons.ttf */,
 				32ABCAC991A242B7B4A9F733 /* AntDesign.ttf */,
 				2BC905C46B5E43DEBCD98C82 /* Entypo.ttf */,
@@ -338,6 +346,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = WBQE237G4S;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -389,8 +398,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				AC976941233AC5AF00913D62 /* MaterialCommunityIcons.ttf in Resources */,
+				AC4EBFFE23DE0FC00078FB57 /* GoogleService-Info.plist in Resources */,
+				AC4EC00223DE36880078FB57 /* NunitoSans-Regular.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				AC4EC00123DE36880078FB57 /* NunitoSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +478,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
@@ -486,6 +498,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
@@ -698,6 +711,7 @@
 			baseConfigurationReference = 40FD693FB4A684932119FEF5 /* Pods-promosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = WBQE237G4S;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -722,6 +736,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = WBQE237G4S;
 				INFOPLIST_FILE = promosTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -741,17 +756,18 @@
 			baseConfigurationReference = 22C621E58B55C2E1FE205C27 /* Pods-promos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = WBQE237G4S;
 				INFOPLIST_FILE = promos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.promos.promos;
 				PRODUCT_NAME = promos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -762,16 +778,17 @@
 			baseConfigurationReference = 5BAB8443513F9E7E6B5B98F2 /* Pods-promos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.2;
 				DEVELOPMENT_TEAM = WBQE237G4S;
 				INFOPLIST_FILE = promos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.promos.promos;
 				PRODUCT_NAME = promos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

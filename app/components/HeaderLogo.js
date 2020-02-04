@@ -3,7 +3,7 @@ import {
     View,
     Image,
     TouchableOpacity,
-    SafeAreaView,
+    // SafeAreaView,
     Animated
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { connect } from 'react-redux'
 import { globalStyles as gs } from '../utils/styles'
 import { colors } from '../utils/constants'
+import { SafeAreaView } from 'react-navigation'
 
 class HeaderMain extends React.Component {
     constructor(props) {
@@ -42,9 +43,8 @@ class HeaderMain extends React.Component {
         return (
             // <SafeAreaView style={gs.barSafeArea}>
             <SafeAreaView
-                style={{
-                    backgroundColor: colors.YELLOW
-                }}>
+                style={{ backgroundColor: colors.YELLOW }}
+                forceInset={{ top: 'always', bottom: 'never' }}>
                 <View
                     style={[
                         gs.headerContainer,

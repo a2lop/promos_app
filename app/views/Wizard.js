@@ -1,8 +1,14 @@
 import React from 'react'
-import { View, StyleSheet, Image, SafeAreaView, Alert } from 'react-native'
+import {
+    View,
+    StyleSheet,
+    Image,
+    SafeAreaView,
+    FlatList,
+    TouchableOpacity
+} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Txt from '../components/Txt'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import SplashScreen from 'react-native-splash-screen'
 
 import { connect } from 'react-redux'
@@ -12,6 +18,7 @@ import { colors } from '../utils/constants'
 import AsyncStorage from '@react-native-community/async-storage'
 import { globalStyles as gs } from '../utils/styles'
 import PushNotification from 'react-native-push-notification'
+import { StackActions, NavigationActions } from 'react-navigation'
 
 class Home extends React.Component {
     constructor(props) {
@@ -85,6 +92,19 @@ class Home extends React.Component {
     goToHome() {
         AsyncStorage.setItem('hideWizard', '1')
         this.props.navigation.navigate('Home')
+        // const resetAction = StackActions.reset({
+        //     index: 0,
+        //     actions: [
+        //         NavigationActions.navigate({
+        //             routeName: 'DrawerNavigator',
+        //             action: NavigationActions.navigate({
+        //                 routeName: 'Home'
+        //             })
+        //         })
+        //     ]
+        // })
+
+        // this.props.navigation.dispatch(resetAction)
     }
 
     goToNextStep() {
