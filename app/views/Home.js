@@ -1,8 +1,14 @@
 import React from 'react'
-import { View, RefreshControl, Image, TouchableOpacity } from 'react-native'
+import {
+    View,
+    RefreshControl,
+    Image,
+    TouchableOpacity,
+    FlatList,
+    ScrollView
+} from 'react-native'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
-import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import DaySelector from '../components/DaySelector'
 import LoadingItem from '../components/Loading'
 import PopupFilter from '../components/PopupFilter'

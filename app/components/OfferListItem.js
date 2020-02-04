@@ -28,7 +28,7 @@ class OfferListItem extends React.Component {
                         <Image
                             source={{
                                 uri: this.props.item.establishmentLogo,
-                                cache: 'only-if-cached'
+                                cache: 'force-cache'
                             }}
                             style={gs.liSquareImage}
                         />

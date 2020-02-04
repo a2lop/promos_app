@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, RefreshControl } from 'react-native'
+import { View, RefreshControl, FlatList } from 'react-native'
 // import LoadingItem from '../components/Loading'
 
 import { connect } from 'react-redux'
@@ -7,7 +7,6 @@ import { wsGetBirthdayOffers } from '../services/data'
 // import I18n from '../utils/i18n'
 // import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
-import { FlatList } from 'react-native-gesture-handler'
 import LoadingItem from '../components/Loading'
 
 import { colors } from '../utils/constants'

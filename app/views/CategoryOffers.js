@@ -1,13 +1,11 @@
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, FlatList, ScrollView } from 'react-native'
 import LoadingItem from '../components/Loading'
 
 import { connect } from 'react-redux'
-import { fnGetOffers } from '../actions/actions'
 import I18n from '../utils/i18n'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
-import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
 
 import { wsGetCategoryOffers } from '../services/data'

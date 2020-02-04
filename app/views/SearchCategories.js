@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, View } from 'react-native'
+import { ScrollView, View, FlatList } from 'react-native'
 import CategorySimple from '../components/CategorySimple'
 
 import { connect } from 'react-redux'
@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 
 import { globalStyles as gs } from '../utils/styles'
 import { fnGetCategories } from '../actions/actions'
-import { FlatList } from 'react-native-gesture-handler'
 // import { colors } from '../utils/constants'
 
 class SearchCategories extends React.Component {

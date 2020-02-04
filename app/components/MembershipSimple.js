@@ -33,7 +33,10 @@ class MembershipSimple extends React.Component {
                         this.openMembershipOffers()
                     }}>
                     <Image
-                        source={{ uri: this.props.item.image }}
+                        source={{
+                            uri: this.props.item.image,
+                            cache: 'force-cache'
+                        }}
                         resizeMode={'stretch'}
                         style={[gs.mb5, { width: '100%', aspectRatio: 2 }]}
                     />

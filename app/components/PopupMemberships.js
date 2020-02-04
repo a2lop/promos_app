@@ -100,7 +100,7 @@ class PopupMemberships extends React.Component {
                                         <Image
                                             source={{
                                                 uri: d.item.image,
-                                                cache: 'only-if-cached'
+                                                cache: 'force-cache'
                                             }}
                                             style={{
                                                 // aspectRatio: 1

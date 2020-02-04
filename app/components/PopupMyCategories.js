@@ -100,7 +100,7 @@ class PopupMyCategories extends React.Component {
                                         <Image
                                             source={{
                                                 uri: d.item.iconImage,
-                                                cache: 'only-if-cached'
+                                                cache: 'force-cache'
                                             }}
                                             style={{
                                                 aspectRatio: 1

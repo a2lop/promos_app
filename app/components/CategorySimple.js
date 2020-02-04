@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Image, Dimensions } from 'react-native'
+import { View, Image, Dimensions, TouchableOpacity } from 'react-native'
 import Txt from './Txt'
 
 import { connect } from 'react-redux'
 import { globalStyles as gs } from '../utils/styles'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../utils/constants'
 
 class CategoriySimple extends React.Component {

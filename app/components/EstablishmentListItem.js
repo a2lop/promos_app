@@ -28,7 +28,7 @@ class EsteblishmentListItem extends React.Component {
                         <Image
                             source={{
                                 uri: this.props.item.squareImage,
-                                cache: 'only-if-cached'
+                                cache: 'force-cache'
                             }}
                             style={[
                                 gs.liSquareImage,

@@ -7,7 +7,8 @@ import {
     ScrollView,
     TouchableOpacity,
     ActivityIndicator,
-    FlatList
+    FlatList,
+    Platform
 } from 'react-native'
 import Txt from '../components/Txt'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -718,8 +719,7 @@ class Profile extends React.Component {
                                                             uri:
                                                                 d.item
                                                                     .iconImage,
-                                                            cache:
-                                                                'only-if-cached'
+                                                            cache: 'force-cache'
                                                         }}
                                                         style={{
                                                             aspectRatio: 1
@@ -820,7 +820,7 @@ class Profile extends React.Component {
                                                 <Image
                                                     source={{
                                                         uri: d.item.image,
-                                                        cache: 'only-if-cached'
+                                                        cache: 'force-cache'
                                                     }}
                                                     style={{
                                                         // aspectRatio: 1
@@ -916,7 +916,7 @@ const st = StyleSheet.create({
         borderBottomColor: colors.PURPLE,
         paddingLeft: 35,
         paddingTop: 0,
-        paddingBottom: 0,
+        paddingBottom: Platform.OS == 'ios' ? 5 : 0,
         color: colors.PURPLE,
         fontSize: 16
     },

@@ -45,9 +45,10 @@ class Sidebar extends Component {
                         marginTop: 15
                     }}>
                     <Image
-                        resizeMode="contain"
+                        resizeMode="cover"
                         style={{
-                            height: 150
+                            height: 150,
+                            width: '80%'
                         }}
                         source={require('../assets/sidebar.png')}
                     />
