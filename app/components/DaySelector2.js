@@ -5,7 +5,7 @@ import Txt from './Txt'
 import I18n from '../utils/i18n'
 
 import { connect } from 'react-redux'
-// import { globalStyles as gs } from '../utils/styles'
+
 import { colors } from '../utils/constants'
 
 const dayWidth = (Dimensions.get('window').width - 50) / 7
@@ -90,7 +90,6 @@ const st = StyleSheet.create({
         height: dayWidth,
         flex: 1,
         borderRadius: 10,
-        // borderRadius: dayWidth / 2,
         borderWidth: 1,
         borderColor: colors.SILVER,
         alignItems: 'center',
@@ -116,4 +115,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DaySelector2)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(DaySelector2)
+

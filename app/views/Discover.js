@@ -7,7 +7,6 @@ import {
     Dimensions,
     FlatList
 } from 'react-native'
-// import Txt from '../components/Txt'
 import LoadingItem from '../components/Loading'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import OfferListItem from '../components/OfferListItem'
@@ -167,4 +166,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = { fnGetDiscoverOffers, fnSetOffer }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Discover)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Discover)
