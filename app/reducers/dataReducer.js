@@ -18,7 +18,8 @@ import {
     ADD_USER_CATEGORY,
     REMOVE_USER_CATEGORY,
     ADD_USER_MEMBERSHIP,
-    REMOVE_USER_MEMBERSHIP
+    REMOVE_USER_MEMBERSHIP,
+    GET_LAST_ADDED_ESTABLISHMENTS
 } from '../actions/actionTypes'
 
 let initialState = {
@@ -40,7 +41,9 @@ let initialState = {
     establishmentOffers: [],
     discoverBannerOffers: [],
     discoverOffers: [],
-    memberships: []
+    memberships: [],
+
+    lastAddedEstablishments: []
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -232,7 +235,11 @@ const dataReducer = (state = initialState, action) => {
                 )
             })
             return state
-
+        case GET_LAST_ADDED_ESTABLISHMENTS:
+            state = Object.assign({}, state, {
+                lastAddedEstablishments: action.payload.establishments
+            })
+            return state
         default:
             return state
     }

@@ -8,7 +8,8 @@ import {
     wsGetDiscoverOffers,
     wsGetMemberships,
     wsGetOffersByDayNumber,
-    wsGetOffersByDayNumberAndCategory
+    wsGetOffersByDayNumberAndCategory,
+    wsGetLastAddedEstablishments
 } from '../services/data'
 
 import {
@@ -174,6 +175,18 @@ export function fnGetDiscoverOffers() {
             dispatch({
                 type: Actions.GET_DISCOVER_OFFERS_SUCCESS,
                 payload: { offers: d }
+            })
+            dispatch(fnGetLastAddedEstablishments())
+        })
+    }
+}
+
+export function fnGetLastAddedEstablishments() {
+    return dispatch => {
+        wsGetLastAddedEstablishments().then(d => {
+            dispatch({
+                type: Actions.GET_LAST_ADDED_ESTABLISHMENTS,
+                payload: { establishments: d }
             })
         })
     }

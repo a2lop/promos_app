@@ -37,7 +37,9 @@ export default {
             4: 'Ju',
             5: 'Vi',
             6: 'Sa',
-            0: 'Do'
+            0: 'Do',
+            today: 'Hoy',
+            tomorrow: 'Mañana'
         }
     },
     offerDetail: {
@@ -112,7 +114,8 @@ export default {
         selectedCategory: 'Promociones en {{categoryName}}'
     },
     discover: {
-        outstandingOffers: 'Nuestras recomendaciones'
+        outstandingOffers: 'Nuestras recomendaciones',
+        lastAddedEstablishments: 'Ultimos establecimientos'
     },
     memberships: {
         viewTitle: 'Membresias'
