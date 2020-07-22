@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import Txt from './Txt'
 import { colors } from '../utils/constants'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { connect } from 'react-redux'
 import I18n from '../utils/i18n'
 import { globalStyles as gs } from '../utils/styles'
+import { SafeAreaView } from 'react-navigation'
 
 const DefaultFooterTabBar = props => {
     const { navigationState, navigation, getLabelText } = props
