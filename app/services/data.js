@@ -66,3 +66,7 @@ export function wsSearchByText(keyword) {
 export function wsGetBirthdayOffers() {
     return wsCall('birthdayOffers')
 }
+
+export function wsGetLastAddedEstablishments(id) {
+    return wsCall('establishments/lastAdded/all')
+}

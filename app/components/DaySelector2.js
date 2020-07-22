@@ -5,6 +5,7 @@ import Txt from './Txt'
 import I18n from '../utils/i18n'
 
 import { connect } from 'react-redux'
+
 import { colors } from '../utils/constants'
 
 const dayWidth = (Dimensions.get('window').width - 50) / 7
@@ -118,3 +119,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(DaySelector2)
+

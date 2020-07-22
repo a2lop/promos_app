@@ -35,21 +35,28 @@ class OfferListItem extends React.Component {
                     </View>
                     <View style={gs.f1}>
                         <Txt style={gs.liTitle}>{this.props.item.name}</Txt>
-                        <Txt>
-                            {this.props.showDays &&
-                                this.props.item.days &&
-                                this.props.item.days.length > 0 && (
+                        {(this.props.showDays ||
+                            this.props.showEstablishment) && (
+                            <Txt>
+                                {this.props.showDays &&
+                                    this.props.item.days &&
+                                    this.props.item.days.length > 0 && (
+                                        <Txt style={gs.liSubitle}>
+                                            {getDaysString(
+                                                this.props.item.days
+                                            ).toUpperCase() + ' - '}
+                                        </Txt>
+                                    )}
+                                {this.props.showEstablishment && (
                                     <Txt style={gs.liSubitle}>
-                                        {getDaysString(
-                                            this.props.item.days
-                                        ).toUpperCase() + ' - '}
+                                        {this.props.item.establishmentName}
                                     </Txt>
                                 )}
-                            <Txt style={gs.liSubitle}>
-                                {this.props.item.establishmentName}
                             </Txt>
-                        </Txt>
-                        <Txt style={gs.liDescription} numberOfLines={3}>
+                        )}
+                        <Txt
+                            style={[gs.liDescription, { lineHeight: 19 }]}
+                            numberOfLines={3}>
                             {this.props.item.description}
                         </Txt>
                     </View>

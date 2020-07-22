@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import Txt from '../components/Txt'
 import OfferListItem from '../components/OfferListItem'
-import DaySelector from '../components/DaySelector'
+import DaySelector2 from '../components/DaySelector2'
 import LoadingItem from '../components/Loading'
 import PopupFilter from '../components/PopupFilter'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -82,7 +82,7 @@ class Home extends React.Component {
                         paddingTop: 10,
                         paddingHorizontal: 15
                     }}>
-                    <DaySelector
+                    <DaySelector2
                         style={{ flex: 1 }}
                         loadOffers={selectedDay => {
                             this.setState({ selectedDay }, () => {
@@ -198,7 +198,7 @@ class Home extends React.Component {
                                     <OfferListItem
                                         item={d.item}
                                         navigation={this.props.navigation}
-                                        showDays={true}
+                                        // showDays={true}
                                     />
                                 )
                             }}
